@@ -1,0 +1,27 @@
+
+
+.Faq-container{
+    width: 100%;
+    .faq-search{
+        // background-color: whitesmoke;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        padding: 100px 200px 100px 200px;
+        .input{
+            display: flex;
+            justify-content: center;
+            background-color: white;
+            align-items: center;
+            width: 100%;
+            padding: 12px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            input{
+                width: 100%;
+            padding: 12px;
+            }
+        }
+    }
+}

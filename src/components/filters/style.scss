@@ -1,0 +1,135 @@
+.filter-container {
+  display: flex;
+  // flex-wrap: wrap;
+  // gap: 6; 
+
+  @media (max-width: 768px) {
+    flex-direction: column;  
+    align-items: center;     
+  }
+
+  width: 100%;
+  padding-bottom: 24px;
+  padding-top: 12px;
+  border-bottom: 1px solid grey;
+
+  .fees, .date-range, .duration, .type, .status {
+    flex: 1;  
+   
+    @media (max-width: 768px) {
+      width: 100%;  
+      margin-bottom: 16px;  
+    }
+  }
+  // edited
+  .css-1aznpnh-MuiSlider-root{
+   width: 90%;
+  }
+  // edited
+  .css-187mznn-MuiSlider-root{
+   width: 90%;
+  }
+
+  .fees {
+    p {
+      font-weight: 600;
+      padding-bottom: 6px;
+      font-size:12px;
+    }
+
+    .values {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      font-size: var(--fs-sm);
+      font-weight: 600;
+    }
+  }
+
+  .date-range, .duration, .type, .status {
+    p {
+      font-weight: 600;
+      padding-bottom: 6px;
+      font-size:12px;    }
+  }
+  .duration {
+    p {
+      font-weight: 600;
+      padding-bottom: 6px;
+      font-size:12px;   }
+  }
+  .type {
+    p {
+      font-weight: 600;
+      padding-bottom: 6px;
+      font-size:12px;    }
+    select{
+      border: none;
+       // edited
+      padding: 7px;
+      width: 70%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      font-size: 12px;
+    }
+  }
+  .status {
+    p {
+      font-weight: 600;
+      padding-bottom: 6px;
+     font-size: 12px;    }
+    select{
+      border: none;
+       // edited
+      padding: 7px;
+      width: 80%;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      font-size: 12px
+    }
+  }
+
+  // write new css for filters here 
+  /* Assuming the input tag has the provided class names */
+.MuiInputBase-input.MuiOutlinedInput-input.Mui-readOnly.MuiInputBase-readOnly.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+  width: 100%; /* Responsive width */
+  font-size: 0.9em; /* Responsive font size */
+  padding: 0.5em; /* Responsive padding */
+}
+
+}
+
+@media only screen
+and (max-width : 760px) {
+  .filter-container {
+  flex-direction: column;
+  gap: 2em;
+  padding: 1em;
+  transition: all 1s ease;
+  border-bottom: none;
+    .MuiInputBase-input.MuiOutlinedInput-input.Mui-readOnly.MuiInputBase-readOnly.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+    font-size: 0.7em;
+    }
+    .css-1domaf0{
+      width: 96%;
+    }
+    .MuiFormLabel-root.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiInputLabel-sizeMedium.MuiInputLabel-outlined.MuiFormLabel-colorPrimary.MuiFormLabel-filled.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiInputLabel-sizeMedium.MuiInputLabel-outlined.css-1jy569b-MuiFormLabel-root-MuiInputLabel-root {
+      font-size: 1em; /* Responsive font size */
+    }
+    .css-1hskriy{
+      width: 96%;
+      
+    }
+    .css-1eoe787-MuiSlider-markLabel, .css-yafthl-MuiSlider-markLabel{
+      font-size: 0.55em;
+    }
+  }
+}
+
+@media only screen
+and (max-width : 380px) {
+  .filter-container {
+      .MuiInputBase-input.MuiOutlinedInput-input.Mui-readOnly.MuiInputBase-readOnly.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input {
+      font-size: 0.6em;
+      }
+  }
+
+}

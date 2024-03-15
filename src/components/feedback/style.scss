@@ -1,0 +1,33 @@
+.Feedback-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 24px;
+  background-color: var(--background-light);
+  border-radius: 10px;
+  border: 1px solid #1111111c;
+  .top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    .left {
+      width: 50px;
+      img {
+        width: 100%;
+        border-radius: 50%;
+        -webkit-user-drag: none;
+      }
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+      .rating {
+      }
+    }
+  }
+  .bottom {
+    p {
+    }
+  }
+}

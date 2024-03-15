@@ -1,0 +1,17 @@
+.Feeds-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  overflow-y: auto;
+  padding: 24px;
+  background-color: var(--primary-light);
+  .feeds {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 54px;
+    width: 50vw;
+  }
+}

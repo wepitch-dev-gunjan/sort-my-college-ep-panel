@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-y: auto;
+    height: 100%;
+    background-color: var(--primary-light);
+}
+
+.courses-heading {
+    padding-bottom: 20px;
+    font-size: 30px;
+}
+
+.card-parent {
+    display: flex;
+    flex-wrap: wrap; /* Allow cards to wrap to the next line */
+    gap: 20px; /* Add some spacing between cards */
+    justify-content: flex-start;
+}
+
+/* Card styles */
+.card {
+    flex: 1 0 300px; /* Set a flexible width to ensure cards take up space evenly */
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    margin-bottom: 20px; /* Add some spacing between rows */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 9px;
+    // height: 360px;
+    width: 100%;
+    img{
+     border-radius: 10px;
+    }
+    .icons {
+     display: flex;
+     justify-content: flex-end;
+     padding: 8px;
+     font-size: 15px;
+     gap: 10px;
+     .edit_btn{
+      border: 1px solid #1f0a68;
+      color: black;
+      padding: 8px;
+      border-radius: 10px;
+      background-color: white;
+      &:hover{
+       transform: translateY(-5px);
+       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      }
+     }
+     .view_btn{
+      border: 1px solid #1f0a68;
+      color: black;
+      padding: 8px;
+      border-radius: 10px;
+      background-color: white;
+      &:hover{
+       transform: translateY(-5px);
+       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+      }
+     }
+ }
+
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding-top: 20px;
+}
+
+.card-text {
+    font-size: 1rem;
+    color: #666;
+    line-height: 1.5;
+}
+.btn {
+ position: fixed; 
+ bottom: 20px; 
+ right: 20px; 
+ z-index: 999; 
+ background-color: white;
+ padding: 15px;
+ font-size: 15px;
+ font-weight: 500;
+}
+
+/* .btn pseudo-elements */
+.btn:before,
+.btn:after {
+ position: absolute;
+ border-color: #333;
+ -webkit-transition: all 0.25s;
+ transition: all 0.25s;
+ border-style: solid;
+ border-width: 0;
+ content: "";
+ height: 40px;
+ position: absolute;
+ width: 40px;
+}
+
+/* .btn before pseudo-element */
+.btn:before {
+ border-left-width: 2px;
+ left: -6px;
+ top: 6px;
+}
+
+/* .btn after pseudo-element */
+.btn:after {
+ border-right-width: 2px;
+ right: -6px;
+ top: 6px;
+}
+
+/* Hover effect for .btn */
+.btn:hover:before,
+.btn:hover:after {
+ border-top-width: 2px;
+ border-left-width: 0px;
+ border-bottom-width: 2px;
+ border-right-width: 0;
+ border-color: #003399;
+ top: -3px;
+ bottom: -3px;
+ width: 100%;
+ height: 100%;
+}
+
+/* Hover effect for .btn to remove border */
+.btn:hover {
+ border: none;
+}
+
+/* Animation */
+@keyframes scaleUp {
+ 0% {
+   transform: scale(1);
+ }
+ 100% {
+   transform: scale(1.1);
+ }
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        flex-basis: calc(50% - 20px); /* Adjust card  for smaller screens */
+    } 
+}

@@ -1,0 +1,21 @@
+.Feed-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  img {
+    width: 100%;
+    -webkit-user-drag: none;
+  }
+  .middle-icons {
+    display: flex;
+    padding-top: 8px;
+    gap: 16px;
+    align-items: center;
+  }
+  .comments {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

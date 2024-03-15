@@ -1,0 +1,54 @@
+
+.qna-container-super{
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ .qna-container-main{
+     width: 94%;
+     span{
+         font-size: 1.5rem;
+     }
+     .qna-container-sub{
+         display: flex;
+         flex-direction: column;
+         gap: 25px;
+         height: 55vh;
+         margin-top: 10px;
+         overflow-y: scroll;
+         .question-block{
+             display: flex;
+             flex-direction: column;
+             gap: 15px;
+             h6{
+                 font-weight: 300;
+                 cursor: pointer;
+                 // edited
+               border: 2px solid rgba(202, 197, 197, 0.363);
+               padding: 20px;
+               border-radius: 20px;
+               box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                a.tq-read-btn{
+                    color: #11111188;
+                    text-decoration: none;
+                }
+               
+             }
+             h6:hover{
+                 // color: rgba(56, 59, 59, 0.473);
+                 transition: all 0.3s ease;
+                 text-shadow: 0 3px 20px rgba(255, 255, 255, 0.589);
+                 //edited
+                 border: 2px solid rgba(44, 43, 43, 0.624);
+             }
+         }
+     }
+ }
+}
+// edited
+@media (max-width:768px){
+ .rs-stack{
+  flex-direction: column;
+ }
+ }
+ 

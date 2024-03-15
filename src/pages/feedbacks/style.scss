@@ -1,0 +1,16 @@
+.Feedbacks-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  padding: 24px;
+  background-color: var(--primary-light);
+  .feedbacks {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 50vw;
+  }
+}

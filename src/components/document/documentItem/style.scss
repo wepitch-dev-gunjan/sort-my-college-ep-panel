@@ -1,0 +1,74 @@
+.DocumentItem {
+  .DocumentItemRow {
+    width: 100%;
+  }
+  .DocumentItemCol {
+    .delete-button {
+      cursor: pointer;
+      padding: 20px;
+    }
+  }
+  .row {
+    .col {
+      display: flex;
+      justify-content: start;
+      width: 100%;
+      align-items: center;
+      gap: 16px;
+      // changed by r
+      // gap: 12px;
+      // changed by r
+
+      .dropdown {
+        width: 100%;
+
+        select {
+          padding: 12px;
+          font-size: var(--fs-sm);
+          border-radius: 8px;
+          cursor: pointer;
+          // changed by r
+          text-overflow: ellipsis;
+          width: 96%;
+          // changed by r
+        }
+      }
+
+      .button-upload {
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        border-radius: 8px;
+        width: 200px;
+        color: #111111;
+        border: 0px solid rgba(0, 0, 0, 0.267);
+        font-size: 14px !important;
+        &:hover {
+          box-shadow: 5px 5px 10px #1111116b;
+        }
+      }
+
+      .delete-button {
+        padding: 10px;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all ease 0.3s;
+        &:hover {
+          box-shadow: 5px 5px 10px #1111116b;
+        }
+      }
+
+      .up-icons {
+        // width: 100%;
+        display: flex;
+        position: absolute;
+        right: 20px;
+        flex-direction: row;
+        gap: 4px;
+        cursor: pointer;
+      }
+    }
+  }
+}

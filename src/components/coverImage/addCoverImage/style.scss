@@ -1,0 +1,99 @@
+.AddCoverImage-container {
+ z-index: 99999999;
+ display: flex;
+ flex-direction: column;
+ position: absolute;
+ left: 0;
+ justify-content: center;
+ align-items: center;
+ width: 100vw; /* Use viewport width */
+ height: 100vh; /* Use viewport height */
+ backdrop-filter: blur(10px); /* Adjust the value based on your preference */
+ background-color: #11111140;
+
+ .drop-area-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   width: 90%; /* Adjust width as needed */
+   max-width: 524px; /* Set maximum width */
+   height: 90%; /* Adjust height as needed */
+   max-height: 524px; /* Set maximum height */
+   background-color: var(--browse-bg);
+
+   .drop-area {
+     color: var(--browse-file);
+     gap: 20px;
+     width: calc(100% - 24px);
+     height: calc(100% - 24px);
+     border: 4px dashed var(--browse-file);
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     box-shadow: 2px 2px 80px #11111183;
+     cursor: pointer;
+
+     .browse-button {
+       color: var(--browse-file);
+       cursor: pointer;
+       padding: 20px 32px;
+       border: 4px solid var(--browse-file);
+     }
+   }
+ }
+
+ .middle {
+   display: flex;
+   flex-direction: row;
+   justify-content: center;
+   gap: 10%; /* Use gap with percentage */
+   align-items: center;
+ }
+
+ .bottom {
+   display: flex;
+   padding: 2vh; /* Use viewport height for padding */
+   gap: 12px;
+
+   button {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     padding: 2vh 3vw; /* Use viewport units for padding */
+     width: 100%;
+     border: none;
+     border-radius: 20px;
+     cursor: pointer;
+     color: var(--text-light);
+     background-color: var(--primary-dark);
+     transition: all 0.3s ease;
+
+     &:hover {
+       background-color: #755cc7;
+     }
+   }
+ }
+
+ input[type="range"] {
+   /* Rotate the slider vertically */
+   writing-mode: bt-lr; /* for IE/Edge */
+   writing-mode: lr-bt;
+   -webkit-appearance: slider-vertical;
+   height: 80vh; /* Use viewport height for height */
+   width: 1vw; /* Use viewport width for width */
+   margin: 0 2vw; /* Use viewport width for margin */
+ }
+
+ input[type="file"] {
+   display: none;
+ }
+}
+
+.avatar-editor-container {
+ display: flex;
+ flex-direction: column;
+ border: 5px solid var(--border-light);
+ border-radius: 5px;
+ box-shadow: 2px 2px 40px #11111165;
+}

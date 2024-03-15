@@ -1,0 +1,37 @@
+.SidebarMenuButton-container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  border-radius: 5px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  .inner-container {
+    display: flex;
+    gap: 8px;
+    svg{
+      color: #1F0A68;
+      width: 0.7em;
+      height: auto;
+    }
+    .Text_Content{
+    font-size: var(--fs-sm);
+    color: #1F0A68;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: var(--primary-color);
+  }
+  &:hover {
+    background-color: var(--background-color);
+  }
+}
+
+.active {
+  border-left: 4px solid #FB5C74;
+  background-color: var(--background-dark);
+}
+.nikhil[title]{
+  border: solid 2px pink;
+}

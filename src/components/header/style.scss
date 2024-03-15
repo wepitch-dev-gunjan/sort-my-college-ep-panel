@@ -1,0 +1,30 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  border-bottom: 1px solid #8686863f;
+  background-color: var(--primary-light);
+  //edited
+  flex-wrap: wrap;
+  .leftSide {
+    max-width: 30%;
+    img {
+      width: 100%;
+      height: auto;
+      // edited
+      flex: 1;
+    }
+  }
+  .rightSide {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    border: none;
+    // edited
+    flex: 1;
+    justify-content: flex-end;
+  }
+}
+
