@@ -27,6 +27,7 @@ import { HelpContext } from "./context/HelpContext";
 import DocumentDelete from "./components/documentDelete";
 import Queries from "./pages/queries";
 import Courses from "./pages/courses"
+import Faculties from "./pages/faculties";
 
 function App() {
   const addProfilePicRef = useRef(null);
@@ -122,6 +123,8 @@ function App() {
                   element={<FaqAndTroubleshooting />}
                 />
                 <Route path="/courses" element={<Courses />} />
+
+                <Route path="/faculties" element={<Faculties />} />
                 {/* <Route
                   path="/help/faq-and-troubleshooting/ask-a-question"
                   element={<AskQuestion />}

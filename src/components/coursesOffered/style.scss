@@ -1,0 +1,63 @@
+.CoursesOffered-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background-light);
+  padding: 24px;
+  border: 1px solid #1111111a;
+  border-radius: 20px;
+  gap: 24px;
+
+
+
+  .heading {
+    border-bottom: 1px solid #1111111a;
+    padding-bottom: 12px;
+    h2{
+     font-size: var(--fs-m);
+    }
+  }
+  .pcb-under-heading{
+      p{
+          font-size: 1.3em;
+          font-weight: bold;
+          padding-bottom: 1em;
+      }
+  }
+  .pcb-post-heading{
+      p{
+          font-size: 1.3em;
+          font-weight: bold;
+          padding-bottom: 1em;
+          padding-top: 2.5em;
+      }
+  }
+  .pc-blocks-main{
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
+
+      .pc-blocks-sub{
+          
+          p.profile-courses-heading{
+              color: #111111b0;
+              font-size: 0.9em;
+              font-weight: bold;
+              padding-left: 0;
+              padding-bottom: 0.2em;
+
+          }
+          p{
+              color: #1111119d;
+              font-size: 0.8em;
+              // padding-left: 4em;
+              span{
+                  font-weight: bold;
+                  color: #111111b0;
+                  
+              }
+          }
+      }
+  }
+
+}

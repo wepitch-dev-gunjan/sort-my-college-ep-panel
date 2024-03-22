@@ -4,12 +4,16 @@ import ProfilePic from "../../components/profilePic";
 import CoverImage from "../../components/coverImage";
 import { UserContext } from "../../context/UserContext";
 import BasicInfo from "../../components/basicInfo";
-import ContactInfo from "../../components/contactInfo";
+import RegistrantDetails from "../../components/registrantDetails";
 import OtherInfo from "../../components/otherInfo";
 import { ProfileContext } from "../../context/ProfileContext";
 import { backend_url } from "../../config";
 import axios from "axios";
 import { toast } from "react-toastify";
+import CoursesOffered from "../../components/coursesOffered";
+import FacultyDetails from "../../components/facultyDetails";
+import KeyFeatures from "../../components/keyFeatures";
+import WhatsNew from "../../components/whatsNew";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -74,17 +78,38 @@ const Profile = () => {
             <h3>{profile.designation}</h3>
           </div>
           <div className="middle">
+          <RegistrantDetails
+              profile={profile}
+              editProfileEnable={editProfileEnable}
+              setProfile={setProfile}
+            />
             <BasicInfo
               profile={profile}
               editProfileEnable={editProfileEnable}
               setProfile={setProfile}
             />
-            <ContactInfo
+
+            {/* <OtherInfo
+              profile={profile}
+              editProfileEnable={editProfileEnable}
+              setProfile={setProfile}
+            /> */}
+            <CoursesOffered
               profile={profile}
               editProfileEnable={editProfileEnable}
               setProfile={setProfile}
             />
-            <OtherInfo
+            <FacultyDetails
+              profile={profile}
+              editProfileEnable={editProfileEnable}
+              setProfile={setProfile}
+            />
+            <KeyFeatures
+              profile={profile}
+              editProfileEnable={editProfileEnable}
+              setProfile={setProfile}
+            />
+            <WhatsNew
               profile={profile}
               editProfileEnable={editProfileEnable}
               setProfile={setProfile}

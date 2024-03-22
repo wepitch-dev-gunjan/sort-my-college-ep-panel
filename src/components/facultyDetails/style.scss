@@ -1,0 +1,59 @@
+.FacultyDetails-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-light);
+    padding: 24px;
+    border: 1px solid #1111111a;
+    border-radius: 20px;
+    gap: 24px;
+
+
+
+    .heading {
+      border-bottom: 1px solid #1111111a;
+      padding-bottom: 12px;
+      h2{
+       font-size: var(--fs-m);
+      }
+    }
+
+    .profile-faculty-main{
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1em;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .profile-faculty-sub{
+            width: 48%;
+            padding: 1em;
+            display: flex;
+            gap: 1em;
+            border-radius: 20px;
+            box-shadow: rgba(50, 50, 93, 0.137) 0px 2px 5px -1px, rgba(0, 0, 0, 0.2) 0px 1px 3px -1px;
+            .p-faculty-left{
+                width: 50%;
+                img{
+                    width: 100%;
+                    height: auto;
+                    border-radius: 13px;
+                }
+            }
+            .p-faculty-right{
+                p{
+                    font-size: 0.9em;
+                    color: #1111119c;
+                    span{
+                        font-weight: bold;
+                        color: #111111b0;
+                    }
+                }
+            }
+        }
+    }
+
+  }
+  

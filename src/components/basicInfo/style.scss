@@ -12,6 +12,24 @@
       list-style-type: none;
     }
   }
+  .profile-branches-main{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    .pb-sub{
+      span{
+        color: #111111ab;
+      }
+    }
+  }
+  .institute-profile-timing-main{
+    p{
+      span{
+        color: #111111c0;
+      }
+    }
+  }
   .heading {
     border-bottom: 1px solid #1111111a;
     padding-bottom: 12px;
@@ -22,7 +40,7 @@
   .info {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 1.5em;
     .row {
       display: flex;
       justify-content: start;
@@ -35,6 +53,13 @@
           p{
            font-size: var(--fs-sm);
           }
+        }
+        .address-labels, 
+        .address-inputs{
+          display: flex;
+          flex-direction: column;
+          gap: 1em;
+          padding: 1.5em 0 1em 0; 
         }
         .info-value {
           width: 100%;
@@ -50,7 +75,30 @@
           input {
             z-index: 999;
             width: 100%;
-            border-bottom: 1px solid #111;
+            border-bottom: 1px solid #11111154;
+          }
+          .institute-timings-days{
+            display: flex;
+          }
+          select{
+            width: 50%;
+            font-size: 0.9em;
+            padding: 0.5em;
+            border: 1px solid #00000060;
+          }
+          .input-info-small{
+            font-size: 0.8em;
+            color: #111111de;
+          }
+          textarea{
+            width: 100%;
+            height: 200px;
+            resize: none;
+            border: 1px solid #1111115d;
+            padding: 1em;
+          }
+          p.short-desc-institute{
+            font-size: 0.9em;
           }
         }
       }

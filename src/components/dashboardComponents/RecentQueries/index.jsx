@@ -220,7 +220,7 @@ const RecentQueries = () => {
             <div className="col"><h4>ID</h4></div>
             <div className="col"><h4>Date</h4></div>
             <div className="col"><h4>Name</h4></div>
-            <div className="col"><h4>Email</h4></div>
+            <div className="col"><h4>Phone Number</h4></div>
             <div className="col"><h4>Query</h4></div>
             <div className="col"><h4>Status</h4></div>
           </div>

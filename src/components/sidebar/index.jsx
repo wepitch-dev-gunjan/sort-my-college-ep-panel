@@ -12,6 +12,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import { ProfileContext } from "../../context/ProfileContext";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
+import { LiaChalkboardTeacherSolid } from "react-icons/lia";
 
 
 
@@ -69,6 +70,12 @@ const Sidebar = () => {
             href= "/courses"
             icon={FaGraduationCap}
             text="Courses"
+            expand={expand}
+            />
+            <SidebarMenuButton 
+            href= "/faculties"
+            icon={LiaChalkboardTeacherSolid}
+            text="Faculties"
             expand={expand}
             />
             <SidebarMenuButton
