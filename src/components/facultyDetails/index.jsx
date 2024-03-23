@@ -89,6 +89,29 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile }) => {
               <p>Indian Institute of Science (IISc) Bangalore</p>
             </div>
           </div>
+
+          <div className="profile-faculty-sub">
+            <div className="p-faculty-left">
+              <img src={t_3}></img>
+            </div>
+            <div className="p-faculty-right">
+              <p><span>Dr. Priya Sharma</span></p>
+              <p>35+ Years</p>
+              <p>Indian Institute of Technology (IIT) Bombay</p>
+            </div>
+          </div>
+
+          <div className="profile-faculty-sub">
+            <div className="p-faculty-left">
+              <img src={t_3}></img>
+            </div>
+            <div className="p-faculty-right">
+              <p><span>Dr. Priya Sharma</span></p>
+              <p>35+ Years</p>
+              <p>Indian Institute of Technology (IIT) Bombay</p>
+            </div>
+          </div>
+          
         </>
           :
           <>         
