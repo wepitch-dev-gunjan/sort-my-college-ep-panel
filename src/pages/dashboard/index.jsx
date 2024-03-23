@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import RecentPayments from "../../components/dashboardComponents/RecentQueries";
+import RecentLeads from "../../components/dashboardComponents/RecentLeads";
 import Widget from "../../components/dashboardComponents/widget";
 import "./style.scss";
 import { MediaQueryContext } from "../../context/MediaQueryContext";
@@ -65,7 +65,7 @@ const Dashboard = () => {
         {/* {isSmallScreen ? null : <RecentPayments />} */}
         {/* <RecentPayments /> */}
         <div className='dashboard-recent-payments-main'>
-          <RecentPayments />
+          <RecentLeads />
         </div>
 
       </div>

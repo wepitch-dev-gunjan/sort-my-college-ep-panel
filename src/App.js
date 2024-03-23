@@ -25,9 +25,10 @@ import AskQuestion from "./pages/askQuestion";
 import "rsuite/dist/rsuite-no-reset.min.css";
 import { HelpContext } from "./context/HelpContext";
 import DocumentDelete from "./components/documentDelete";
-import Queries from "./pages/queries";
+import Leads from "./pages/leads";
 import Courses from "./pages/courses"
 import Faculties from "./pages/faculties";
+import AllQueries from "./pages/allqueries";
 
 function App() {
   const addProfilePicRef = useRef(null);
@@ -117,7 +118,8 @@ function App() {
                 <Route path="/feedbacks" element={<Feedbacks />} />
                 <Route path="/login" element={<Navigate replace to="/" />} />
                 <Route path="/help" element={<Help />} />
-                <Route path="/queries" element={<Queries />} />
+                <Route path="/leads" element={<Leads />} />
+               <Route path = "/allQueries" element={<AllQueries />}/>
                 <Route
                   path="/help/faq-and-troubleshooting"
                   element={<FaqAndTroubleshooting />}

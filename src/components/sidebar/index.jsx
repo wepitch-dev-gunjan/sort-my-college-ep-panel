@@ -79,9 +79,9 @@ const Sidebar = () => {
             expand={expand}
             />
             <SidebarMenuButton
-              href="/queries"
+              href="/leads"
               icon={FaClipboardQuestion}
-              text="Queries"
+              text="Leads"
               expand={expand}
             />
 
