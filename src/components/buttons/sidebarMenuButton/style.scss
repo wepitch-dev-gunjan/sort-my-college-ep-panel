@@ -3,7 +3,7 @@
   justify-content: start;
   align-items: center;
   border-radius: 5px;
-  padding: 20px;
+  padding: 1em;
   transition: all 0.3s ease;
   cursor: pointer;
   .inner-container {
@@ -11,7 +11,7 @@
     gap: 8px;
     svg{
       color: #1F0A68;
-      width: 0.7em;
+      width: 1.2em;
       height: auto;
     }
     .Text_Content{

@@ -13,6 +13,23 @@ import { ProfileContext } from "../../context/ProfileContext";
 import { FaClipboardQuestion } from "react-icons/fa6";
 import { FaGraduationCap } from "react-icons/fa6";
 import { LiaChalkboardTeacherSolid } from "react-icons/lia";
+import { TfiAnnouncement } from "react-icons/tfi";
+import { VscSymbolKeyword } from "react-icons/vsc";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { BsPeople } from "react-icons/bs";
+import { GoCodeReview } from "react-icons/go";
+import { MdOutlineLeaderboard } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { IoIosHelpCircleOutline } from "react-icons/io";
+import { LiaGraduationCapSolid } from "react-icons/lia";
+
+
+
+
+
+
+
+
 
 
 
@@ -62,14 +79,14 @@ const Sidebar = () => {
           (<>
             <SidebarMenuButton
               href="/"
-              icon={DashboardIcon}
+              icon={LuLayoutDashboard}
               text="Dashboard"
               expand={expand}
             />
             <SidebarMenuButton 
             href= "/courses"
-            icon={FaGraduationCap}
-            text="Courses"
+            icon={LiaGraduationCapSolid}
+            text="Courses Offered"
             expand={expand}
             />
             <SidebarMenuButton 
@@ -78,31 +95,42 @@ const Sidebar = () => {
             text="Faculties"
             expand={expand}
             />
+
+            <SidebarMenuButton 
+            href= "/key-features"
+            icon={VscSymbolKeyword}
+            text="Key Features"
+            expand={expand}
+            />
+
             <SidebarMenuButton
-              href="/leads"
-              icon={FaClipboardQuestion}
-              text="Leads"
+              href="/announcements"
+              icon={TfiAnnouncement}
+              text="Announcements"
               expand={expand}
             />
 
             <SidebarMenuButton
-              href="/users"
-              icon={GroupIcon}
+              href="/followers"
+              icon={BsPeople}
               text="Followers"
               expand={expand}
             />
+
             <SidebarMenuButton
-              href="/feedbacks"
-              icon={ReviewsIcon}
-              text="User Feedbacks"
+              href="/reviews"
+              icon={GoCodeReview}
+              text="Reviews"
               expand={expand}
             />
+
             <SidebarMenuButton
-              href="/feeds"
-              icon={FeedIcon}
-              text="Feeds"
+              href="/leads"
+              icon={MdOutlineLeaderboard}
+              text="Leads"
               expand={expand}
             />
+
 
           </>)
 
@@ -111,13 +139,13 @@ const Sidebar = () => {
 
         <SidebarMenuButton
           href="/profile"
-          icon={PersonIcon}
+          icon={CgProfile}
           text="Profile"
           expand={expand}
         />
         <SidebarMenuButton
           href="/help"
-          icon={HelpOutlineIcon}
+          icon={IoIosHelpCircleOutline}
           text="Help"
           expand={expand}
         />

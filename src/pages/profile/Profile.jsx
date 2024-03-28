@@ -12,7 +12,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import CoursesOffered from "../../components/coursesOffered";
 import FacultyDetails from "../../components/facultyDetails";
-import KeyFeatures from "../../components/keyFeatures";
 import WhatsNew from "../../components/whatsNew";
 
 const Profile = () => {
@@ -94,21 +93,12 @@ const Profile = () => {
               editProfileEnable={editProfileEnable}
               setProfile={setProfile}
             /> */}
-            <CoursesOffered
-              profile={profile}
-              editProfileEnable={editProfileEnable}
-              setProfile={setProfile}
-            />
+
             {/* <FacultyDetails
               profile={profile}
               editProfileEnable={editProfileEnable}
               setProfile={setProfile}
             /> */}
-            <KeyFeatures
-              profile={profile}
-              editProfileEnable={editProfileEnable}
-              setProfile={setProfile}
-            />
             <WhatsNew
               profile={profile}
               editProfileEnable={editProfileEnable}

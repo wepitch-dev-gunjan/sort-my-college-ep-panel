@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './style.scss';
 import { Link } from 'react-router-dom';
-import { Button } from 'bootstrap';
+
 
 const RecentLeads = () => {
   const [queries, setQueries] = useState([

@@ -29,6 +29,7 @@ import Leads from "./pages/leads";
 import Courses from "./pages/courses"
 import Faculties from "./pages/faculties";
 import AllQueries from "./pages/allqueries";
+import KeyFeatures from "./pages/keyFeatures";
 
 function App() {
   const addProfilePicRef = useRef(null);
@@ -120,6 +121,7 @@ function App() {
                 <Route path="/help" element={<Help />} />
                 <Route path="/leads" element={<Leads />} />
                <Route path = "/allQueries" element={<AllQueries />}/>
+               <Route path="/key-features" element={<KeyFeatures />} />
                 <Route
                   path="/help/faq-and-troubleshooting"
                   element={<FaqAndTroubleshooting />}
