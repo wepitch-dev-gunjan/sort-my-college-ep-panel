@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import { UserContext } from './UserContext';
 import axios from 'axios';
-import { backend_url } from '../config';
+import config from '@/config';
+const { backend_url } = config;
 
 export const ProfileContext = createContext();
 
@@ -11,7 +12,7 @@ export const ProfileProvider = ({ children }) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(`${backend_url}/counsellor/${user._id}`,
+      const response = await axios.get(`${backend_url}/ep/${user._id}`,
         {
           headers: {
             Authorization: user.token

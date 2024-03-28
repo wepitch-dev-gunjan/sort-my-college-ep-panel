@@ -4,8 +4,9 @@ import Notification from "./notification";
 import { NotificationContext } from "../../context/NotificationContext";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
-import { backend_url } from "../../config";
 import { ImSpinner3 } from "react-icons/im";
+import config from '@/config';
+const { backend_url } = config;
 
 const Notifications = () => {
   const { notifications, setNotifications, notificationsRef, getNotifications, page, setPage, notificationsLoading, allNotificationsFetched } = useContext(NotificationContext);

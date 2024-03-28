@@ -7,12 +7,13 @@ import BasicInfo from "../../components/basicInfo";
 import RegistrantDetails from "../../components/registrantDetails";
 import OtherInfo from "../../components/otherInfo";
 import { ProfileContext } from "../../context/ProfileContext";
-import { backend_url } from "../../config";
 import axios from "axios";
 import { toast } from "react-toastify";
 import CoursesOffered from "../../components/coursesOffered";
 import FacultyDetails from "../../components/facultyDetails";
 import WhatsNew from "../../components/whatsNew";
+import config from '@/config';
+const { backend_url } = config;
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -77,7 +78,7 @@ const Profile = () => {
             <h3>{profile.designation}</h3>
           </div>
           <div className="middle">
-          <RegistrantDetails
+            <RegistrantDetails
               profile={profile}
               editProfileEnable={editProfileEnable}
               setProfile={setProfile}

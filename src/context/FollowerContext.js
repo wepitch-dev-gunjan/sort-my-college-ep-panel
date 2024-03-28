@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState, createContext } from "react";
 import { UserContext } from "./UserContext";
-import { backend_url } from "../config";
 import axios from "axios";
+import config from '@/config';
+const { backend_url } = config;
 
 export const FollowerContext = createContext();
 
@@ -12,7 +13,7 @@ export const FollowerProvider = ({ children }) => {
   useEffect(() => {
     const getFollowers = async () => {
       try {
-        const { data } = await axios.get(`${backend_url}/counsellor/follower/followers`, {
+        const { data } = await axios.get(`${backend_url}/ep/follower/followers`, {
           headers: {
             Authorization: user.token
           }

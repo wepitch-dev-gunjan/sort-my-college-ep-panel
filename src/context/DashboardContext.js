@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { backend_url } from "../config";
 import { UserContext } from "./UserContext";
+import config from '@/config';
+const { backend_url } = config;
 
 export const DashboardContext = createContext();
 
@@ -16,7 +17,7 @@ export const DashboardProvider = ({ children }) => {
       try {
         if (user && user.token) {
           const { data } = await axios.get(
-            `${backend_url}/counsellor/dashboard/dashboard-data`,
+            `${backend_url}/ep/dashboard/dashboard-data`,
             {
               headers: {
                 Authorization: user.token

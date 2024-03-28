@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react'
 import { UserContext } from './UserContext';
 import axios from 'axios';
-import { backend_url } from '../config';
+import config from '@/config';
+const { backend_url } = config;
 
 export const FeedbackContext = createContext();
 
@@ -11,7 +12,7 @@ export const FeedbackProvider = ({ children }) => {
 
   const getFeedbacks = async () => {
     try {
-      const { data } = await axios.get(`${backend_url}/counsellor/feedback/getall`, {
+      const { data } = await axios.get(`${backend_url}/ep/feedback/getall`, {
         params: {
           counsellor_id: user._id,
           page: 1,

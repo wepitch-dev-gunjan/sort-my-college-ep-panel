@@ -1,6 +1,6 @@
 let configPromise;
 
-if (ProcessingInstruction.env.Node_ENV === 'production') {
+if (ProcessingInstruction?.env?.NODE_ENV === 'production') {
   configPromise = import('./config.prod.json').then(module => module.default);
 } else {
   configPromise = import('./config.dev.json').then(module => module.default);

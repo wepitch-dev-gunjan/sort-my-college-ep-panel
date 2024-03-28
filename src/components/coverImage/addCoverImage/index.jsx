@@ -12,8 +12,9 @@ import { IoCloudUploadOutline } from "react-icons/io5";
 import { UserContext } from "../../../context/UserContext";
 import axios from "axios";
 import { dataURLtoFile } from "../../../utilities";
-import { backend_url } from "../../../config";
 import { toast } from "react-toastify";
+import config from '@/config';
+const { backend_url } = config;
 
 const AddCoverImage = forwardRef((props, ref) => {
   const [image, setImage] = useState(null);

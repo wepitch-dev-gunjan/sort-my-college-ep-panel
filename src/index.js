@@ -26,11 +26,11 @@ root.render(
               <SocketProvider>
                 <HelpProvider>
                   <FollowerProvider>
-                      <NotificationProvider>
-                        <FeedbackProvider>
-                          <App />
-                        </FeedbackProvider>
-                      </NotificationProvider>
+                    <NotificationProvider>
+                      <FeedbackProvider>
+                        <App />
+                      </FeedbackProvider>
+                    </NotificationProvider>
                   </FollowerProvider>
                 </HelpProvider>
               </SocketProvider>
