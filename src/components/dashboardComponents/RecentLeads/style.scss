@@ -1,48 +1,98 @@
 .RecentPayments-container {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--primary-light);
-  .see-all-button {
-    font-weight: 800;
-    color: var(--primary-dark);
-    cursor: pointer;
-    display: flex;
-    justify-content: end;
-    font-size: var(--fs-sm) ;
-  }
-  .payments-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-  }
-  .payments-table p{
+ display: flex;
+ flex-direction: column;
+ overflow-y: auto;
+
+ h1 {
+   font-size: var(--fs-l);
+ }
+
+ .filters {
+   position: relative; 
+   display: flex;
+   justify-content: flex-start; 
+   padding: 20px;
+   border-bottom: 1px solid black;
+   margin-bottom: 10px;
+   gap: 20px;
+
+   .dropdown-header {
+     display: flex;
+     align-items: center;
+     cursor: pointer;
+     gap: 5px; /* Adjust gap between text and icon */
+   }
+
+   .dropdown-header span {
+     font-size: 20px;
+   }
+
+   .dropdown-content {
+     position: absolute; /* Position absolute to overlay below the filter text */
+     top: 100%; /* Position below the filter text */
+     left: 0; /* Align with the left edge of the filter */
+     z-index: 1; /* Ensure dropdown is above other content */
+     display: none; /* Initially hide the dropdown */
+     flex-direction: column;
+     gap: 10px; /* Adjust gap between search and status fields */
+     background-color: white; /* Optionally, add a background color */
+     padding: 10px; /* Optionally, add padding */
+   }
+
+   &:hover .dropdown-content {
+     display: flex; /* Display the dropdown content on hover */
+   }
+ }
+
+ .btn_main {
+   display: flex;
+   gap: 20px;
+ }
+
+ .see-all-button {
+   font-weight: 800;
+   color: var(--primary-dark);
+   cursor: pointer;
+   display: flex;
+   justify-content: end;
    font-size: var(--fs-sm);
-  }
-  .table {
-    .row {
-      display: flex;
-      border-bottom: 1px solid rgba(24, 45, 107, 0.158);
-      padding: 20px;
-      margin: 29px;
-      text-align: start;
-      justify-content: space-between;
-      .col {
-        display: flex;
-        width: 100%;
-        font-size: var(--fs-sm);
-        color: var(--text-dark);
-      }
-    }
-  }
-  .link{
-   p {
-    border: 1px solid black;
-    border-radius: 20px;
-    padding: 4px 15px;
-    text-decoration: none;
-    &:hover{
-     text-decoration: none;
-    }
-  }
+ }
+
+ .payments-top {
+   display: flex;
+   justify-content: space-between;
+   align-items: end;
+ }
+
+ .payments-table p {
+   font-size: var(--fs-sm);
+ }
+
+ .table {
+   .row {
+     display: flex;
+     border-bottom: 1px solid rgba(24, 45, 107, 0.158);
+     padding: 20px;
+     margin: 29px;
+     text-align: start;
+     justify-content: space-between;
+
+     .col {
+       display: flex;
+       width: 100%;
+       font-size: var(--fs-sm);
+       color: var(--text-dark);
+
+       h4 {
+         font-size: var(--fs-sm);
+       }
+     }
+
+     .link {
+       border: 1px solid grey;
+       border-radius: 10px;
+       padding: 10px;
+     }
+   }
  }
 }

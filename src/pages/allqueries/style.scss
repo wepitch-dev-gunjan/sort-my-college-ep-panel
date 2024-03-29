@@ -1,60 +1,59 @@
-.main_container{
- background-color: #F8F4FF;
-// display: flex;
-justify-content: center;
-padding: 20px;
-p{
- font-size: 20px;
-}
-ul{
+.main_container {
+ width: 100%;
  padding: 40px;
- li{
-  list-style-type: none;
- }
-}
-}
-.sub_Container{
  display: flex;
-justify-content: center;
-align-items: center;
-padding: 20px;
-background-color: #F8F4FF;
- .main_query{
-  align-items: center;
-  // border: 2px solid grey;
-  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); 
-border-radius: 20px;
-  padding: 20px;
-h3{
- padding: 20px;
-}
+ align-items: center;
+ justify-content: center;
+ background-color: var(--primary-light);
+ .main_query {
+   // border: 2px solid grey;
+   box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+   border-radius: 20px;
+   padding: 40px;
+   width: 60%;
+   font-size: 15px;
+
+   p {
+     font-size: 25px;
+     font-weight: 400;
+   }
+   ul {
+     padding: 40px;
+     li {
+       list-style-type: none;
+     }
+   }
+
+   .query_btn {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     gap: 40px;
+     padding-top: 20px;
+
+     .btn1 button {
+       border-radius: 20px;
+       background-color: #007bff;
+       padding: 10px;
+       color: white;
+
+       &:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+       }
+     }
+
+     .btn2 button {
+       border-radius: 20px;
+       background-color: rgb(4, 105, 4);
+       padding: 10px;
+       color: white;
+
+       &:hover {
+         transform: translateY(-5px);
+         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+       }
+     }
+   }
  }
- .query_btn{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  padding-top: 20px;
- 
- .btn1 button{
-border-radius: 20px;
-background-color: #007bff;
-padding: 10px;
-color: white;
-&:hover{
- transform: translateY(-5px);
- box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-}
- }
- .btn2 button{
-  border-radius: 20px;
-  background-color: rgb(4, 105, 4);
-  padding: 10px;
-  color: white;
-  &:hover{
-   transform: translateY(-5px);
-   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-  }
- }
-}
 }
