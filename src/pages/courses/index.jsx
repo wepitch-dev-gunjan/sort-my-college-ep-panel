@@ -62,7 +62,13 @@ const Courses = () => {
 
   return (
     <div className="container mt-5">
+      <div className="add_course_btn">
       <h1 className="courses-heading">Courses</h1>
+    <button>
+     ADD COURSE
+        </button>
+    </div>
+<hr></hr>
       <div className="row card-parent">
         {courses.map((course) => (
           <div key={course._id}>
@@ -80,17 +86,16 @@ const Courses = () => {
                   <button className="edit_btn">
                     Edit
                   </button>
-                  <button className="view_btn">View
+                  <button className="delete_btn">Delete
                   </button>
                 </div>
               </div>
             </div>
           </div>
         ))}
+
       </div>
-      <button className="btn">
-     ADD COURSE
-        </button>
+    
     </div>
   );
 };
