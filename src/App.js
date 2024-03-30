@@ -30,7 +30,6 @@ import Courses from "./pages/courses"
 import Faculties from "./pages/faculties";
 import AllQueries from "./pages/allqueries";
 import KeyFeatures from "./pages/keyFeatures";
-
 function App() {
   const addProfilePicRef = useRef(null);
   const { user, setUser } = useContext(UserContext);
