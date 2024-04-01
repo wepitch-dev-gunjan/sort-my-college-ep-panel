@@ -71,7 +71,7 @@ const FacultyDetails = ({
           return (
             <div className="profile-faculty-sub">
               <div className="p-faculty-left">
-                <img src=""></img>
+                <img src={data.display_pic}></img>
               </div>
               <div className="p-faculty-right">
                 <p>
