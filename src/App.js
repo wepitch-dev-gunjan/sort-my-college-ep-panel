@@ -26,10 +26,11 @@ import "rsuite/dist/rsuite-no-reset.min.css";
 import { HelpContext } from "./context/HelpContext";
 import DocumentDelete from "./components/documentDelete";
 import Leads from "./pages/leads";
-import Courses from "./pages/courses"
+import Courses from "./pages/courses";
 import Faculties from "./pages/faculties";
 import AllQueries from "./pages/allqueries";
 import KeyFeatures from "./pages/keyFeatures";
+import AddFaculty from "./components/addFaculty";
 function App() {
   const addProfilePicRef = useRef(null);
   const { user, setUser } = useContext(UserContext);
@@ -38,7 +39,7 @@ function App() {
     useContext(ProfileContext);
   const { coverImageEditMode, setCoverImageEditMode } =
     useContext(ProfileContext);
-    const {documentDelete,setDocumentDelete}=useContext(ProfileContext)
+  const { documentDelete, setDocumentDelete } = useContext(ProfileContext);
 
   const { askQuestionEnable, setAskQuestionEnable } = useContext(HelpContext);
 
@@ -50,7 +51,6 @@ function App() {
   const { isLoggedIn } = user;
 
   const navigate = useNavigate();
-
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -77,7 +77,6 @@ function App() {
 
   return (
     <div>
-
       {profilePicEditMode && (
         <div className="add-profile-pic-panel">
           <AddProfilePic ref={addProfilePicRef} />
@@ -94,9 +93,12 @@ function App() {
           <AskQuestion ref={askQuestionRef} />
         </div>
       )}
-       {documentDelete && (
+      {documentDelete && (
         <div className="ask-a-question">
-          <DocumentDelete documentDelete={documentDelete} setDocumentDelete={setDocumentDelete} />
+          <DocumentDelete
+            documentDelete={documentDelete}
+            setDocumentDelete={setDocumentDelete}
+          />
         </div>
       )}
 
@@ -119,8 +121,8 @@ function App() {
                 <Route path="/login" element={<Navigate replace to="/" />} />
                 <Route path="/help" element={<Help />} />
                 <Route path="/leads" element={<Leads />} />
-               <Route path = "/allQueries" element={<AllQueries />}/>
-               <Route path="/key-features" element={<KeyFeatures />} />
+                <Route path="/allQueries" element={<AllQueries />} />
+                <Route path="/key-features" element={<KeyFeatures />} />
                 <Route
                   path="/help/faq-and-troubleshooting"
                   element={<FaqAndTroubleshooting />}
@@ -128,6 +130,7 @@ function App() {
                 <Route path="/courses" element={<Courses />} />
 
                 <Route path="/faculties" element={<Faculties />} />
+                <Route path="/addfaculty" element={<AddFaculty />} />
                 {/* <Route
                   path="/help/faq-and-troubleshooting/ask-a-question"
                   element={<AskQuestion />}
