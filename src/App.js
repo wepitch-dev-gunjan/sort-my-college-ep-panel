@@ -31,6 +31,7 @@ import Faculties from "./pages/faculties";
 import AllQueries from "./pages/allqueries";
 import KeyFeatures from "./pages/keyFeatures";
 import AddFaculty from "./components/addFaculty";
+import AddCourse from "./components/buttons/addCourse";
 function App() {
   const addProfilePicRef = useRef(null);
   const { user, setUser } = useContext(UserContext);
@@ -39,7 +40,7 @@ function App() {
     useContext(ProfileContext);
   const { coverImageEditMode, setCoverImageEditMode } =
     useContext(ProfileContext);
-  const { documentDelete, setDocumentDelete, addfaculty, setAddfaculty } =
+  const { documentDelete, setDocumentDelete, addfaculty, setAddfaculty ,addCourse , setAddCourse } =
     useContext(ProfileContext);
 
   const { askQuestionEnable, setAskQuestionEnable } = useContext(HelpContext);
@@ -106,6 +107,11 @@ function App() {
         <div className="addfacultybtn">
           <AddFaculty setAddfaculty={setAddfaculty} />
         </div>
+      )}
+      {addCourse && (
+      <div className="addCourseBtn">
+       <AddCourse setAddCourse ={setAddCourse}/>
+      </div>
       )}
 
       {isLoggedIn && <Header handleLogout={handleLogout} />}

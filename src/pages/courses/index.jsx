@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios"; // Import Axios for making HTTP requests
 import "./style.scss";
 import Image from '../../assets/Image.jpeg'
+import { ProfileContext } from "../../context/ProfileContext";
 const Courses = () => {
+ const {addCourse ,setAddCourse} = useContext(ProfileContext);
   const [courses, setCourses] = useState([
     {
       name: "CLAT",
@@ -59,12 +61,14 @@ const Courses = () => {
     };
     fetchCourses();
   }, []);
-
+const handlePopUp =() =>{
+setAddCourse((prev)=> !prev)
+}
   return (
     <div className="container mt-5">
       <div className="add_course_btn">
       <h1 className="courses-heading">Courses</h1>
-    <button>
+    <button onClick={handlePopUp}>
      ADD COURSE
         </button>
     </div>

@@ -32,7 +32,7 @@ export const ProfileProvider = ({ children }) => {
   const [coverImageEditMode, setCoverImageEditMode] = useState(false);
   const [documentDelete, setDocumentDelete] = useState(false);
   const [addfaculty, setAddfaculty] = useState(false);
-
+  const [addCourse, setAddCourse] = useState(false);
   return (
     <ProfileContext.Provider
       value={{
@@ -49,6 +49,8 @@ export const ProfileProvider = ({ children }) => {
         setDocumentDelete,
         addfaculty,
         setAddfaculty,
+        addCourse,
+        setAddCourse,
       }}
     >
       {children}
