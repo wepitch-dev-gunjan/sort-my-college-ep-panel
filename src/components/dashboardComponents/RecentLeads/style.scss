@@ -10,12 +10,12 @@
  .filters {
    position: relative; 
    display: flex;
-   justify-content: flex-start; 
+   justify-content: space-between; 
    padding: 20px;
    border-bottom: 1px solid black;
    margin-bottom: 10px;
    gap: 20px;
-
+   // width :100%;
    .dropdown-header {
      display: flex;
      align-items: center;
@@ -28,15 +28,16 @@
    }
 
    .dropdown-content {
-     position: absolute; /* Position absolute to overlay below the filter text */
-     top: 100%; /* Position below the filter text */
-     left: 0; /* Align with the left edge of the filter */
-     z-index: 1; /* Ensure dropdown is above other content */
-     display: none; /* Initially hide the dropdown */
+     // position: absolute; 
+     width: 200px;
+     top: 100%; 
+     left: 0;
+     z-index: 1; 
+     display: none; 
      flex-direction: column;
-     gap: 10px; /* Adjust gap between search and status fields */
-     background-color: white; /* Optionally, add a background color */
-     padding: 10px; /* Optionally, add padding */
+     gap: 10px;
+     background-color: white; 
+     padding: 10px; 
    }
 
    &:hover .dropdown-content {

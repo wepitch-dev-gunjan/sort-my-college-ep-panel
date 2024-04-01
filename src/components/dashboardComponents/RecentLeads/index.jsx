@@ -274,7 +274,7 @@ const RecentLeads = () => {
               label="Search"
               type="text"
               name="search"
-              sx={{ height: "50px" }}
+              sx={{ height: "50px" , width : "400px"}}
               placeholder="Search by all fields"
             />
             <FormControl style={{ width: "150px" }}>
