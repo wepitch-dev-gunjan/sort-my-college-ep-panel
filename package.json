@@ -18,6 +18,7 @@
     "axios": "^1.6.8",
     "craco": "^0.0.3",
     "dayjs": "^1.11.5",
+    "formik": "^2.4.5",
     "js-cookie": "^3.0.5",
     "label": "^0.2.2",
     "mock": "^0.1.1",
@@ -44,7 +45,8 @@
     "rsuite": "^5.53.2",
     "sass": "^1.69.1",
     "socket.io-client": "^4.7.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.4.0"
   },
   "scripts": {
     "start": "craco start",

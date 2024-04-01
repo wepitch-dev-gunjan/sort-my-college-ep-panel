@@ -53,7 +53,9 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile }) => {
     <div className="FacultyDetails-container">
       <div className="heading">
         <h2>Faculty Details</h2>
-        <button onClick={addfaculty}>add</button>
+        <button className="addfaculty" onClick={addfaculty}>
+          Add
+        </button>
       </div>
 
       <div className="profile-faculty-main">
