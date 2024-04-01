@@ -39,7 +39,8 @@ function App() {
     useContext(ProfileContext);
   const { coverImageEditMode, setCoverImageEditMode } =
     useContext(ProfileContext);
-  const { documentDelete, setDocumentDelete } = useContext(ProfileContext);
+  const { documentDelete, setDocumentDelete, addfaculty, setAddfaculty } =
+    useContext(ProfileContext);
 
   const { askQuestionEnable, setAskQuestionEnable } = useContext(HelpContext);
 
@@ -101,6 +102,11 @@ function App() {
           />
         </div>
       )}
+      {addfaculty && (
+        <div className="addfacultybtn">
+          <AddFaculty setAddfaculty={setAddfaculty} />
+        </div>
+      )}
 
       {isLoggedIn && <Header handleLogout={handleLogout} />}
       <div className="main">
@@ -129,8 +135,16 @@ function App() {
                 />
                 <Route path="/courses" element={<Courses />} />
 
-                <Route path="/faculties" element={<Faculties />} />
-                <Route path="/addfaculty" element={<AddFaculty />} />
+                <Route
+                  path="/faculties"
+                  element={
+                    <Faculties
+                      addfaculty={addfaculty}
+                      setAddfaculty={setAddfaculty}
+                    />
+                  }
+                />
+
                 {/* <Route
                   path="/help/faq-and-troubleshooting/ask-a-question"
                   element={<AskQuestion />}

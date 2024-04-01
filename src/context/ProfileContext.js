@@ -1,7 +1,7 @@
-import { createContext, useContext, useEffect, useState } from 'react';
-import { UserContext } from './UserContext';
-import axios from 'axios';
-import config from '@/config';
+import { createContext, useContext, useEffect, useState } from "react";
+import { UserContext } from "./UserContext";
+import axios from "axios";
+import config from "@/config";
 const { backend_url } = config;
 
 export const ProfileContext = createContext();
@@ -12,27 +12,26 @@ export const ProfileProvider = ({ children }) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(`${backend_url}/ep/${user._id}`,
-        {
-          headers: {
-            Authorization: user.token
-          }
-        });
-      setProfile(response.data[0])
+      const response = await axios.get(`${backend_url}/ep/${user._id}`, {
+        headers: {
+          Authorization: user.token,
+        },
+      });
+      setProfile(response.data[0]);
     } catch (err) {
-      console.error('Error fetching profile:', err);
+      console.error("Error fetching profile:", err);
     }
   };
 
   useEffect(() => {
-    if (user && user.isLoggedIn)
-      fetchProfile();
+    if (user && user.isLoggedIn) fetchProfile();
   }, [user]);
 
-  const [editProfileEnable, setEditProfileEnable] = useState(false)
+  const [editProfileEnable, setEditProfileEnable] = useState(false);
   const [profilePicEditMode, setProfilePicEditMode] = useState(false);
   const [coverImageEditMode, setCoverImageEditMode] = useState(false);
   const [documentDelete, setDocumentDelete] = useState(false);
+  const [addfaculty, setAddfaculty] = useState(false);
 
   return (
     <ProfileContext.Provider
@@ -47,7 +46,9 @@ export const ProfileProvider = ({ children }) => {
         editProfileEnable,
         fetchProfile,
         documentDelete,
-        setDocumentDelete
+        setDocumentDelete,
+        addfaculty,
+        setAddfaculty,
       }}
     >
       {children}

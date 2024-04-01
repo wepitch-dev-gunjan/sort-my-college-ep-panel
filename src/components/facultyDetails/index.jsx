@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
 import { DatePicker } from "@mui/x-date-pickers";
@@ -7,10 +7,18 @@ import { handleInput } from "../../utilities";
 import config from "@/config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { ProfileContext } from "../../context/ProfileContext";
 const { backend_url } = config;
 
-const FacultyDetails = ({ profile, editProfileEnable, setProfile }) => {
+const FacultyDetails = ({
+  profile,
+  editProfileEnable,
+  setProfile,
+
+  // setAddfaculty,
+}) => {
   const [profileSubCount, setProfileSubCount] = useState(2);
+  const { addfaculty, setAddfaculty } = useContext(ProfileContext);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const handleDateChange = (date) => {
@@ -45,15 +53,15 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile }) => {
   useEffect(() => {
     getFacultyDetails();
   }, []);
-  const addfaculty = () => {
-    navigate("/addfaculty");
+  const addfacultybtn = () => {
+    setAddfaculty((prev) => !prev);
   };
 
   return (
     <div className="FacultyDetails-container">
       <div className="heading">
         <h2>Faculty Details</h2>
-        <button className="addfaculty" onClick={addfaculty}>
+        <button className="addfaculty" onClick={addfacultybtn}>
           Add
         </button>
       </div>

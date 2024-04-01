@@ -5,8 +5,9 @@ import ImageUploader from "../ImageUploder";
 import "./style.scss";
 import axios from "axios";
 
-const AddFaculty = () => {
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+const AddFaculty = ({ setAddfaculty }) => {
+  const handleSubmit = (values, { setSubmitting, resetForm }) => {
+    setAddfaculty((prev) => !prev);
     axios
       .post("your-backend-url", values)
       .then((response) => {
