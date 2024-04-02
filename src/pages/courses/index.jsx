@@ -11,6 +11,7 @@ const { backend_url } = config;
 const Courses = () => {
  const {user} = useContext(UserContext);
  const {addCourse ,setAddCourse} = useContext(ProfileContext);
+ const {documentDelete,setDocumentDelete} =useContext(ProfileContext);
   const [courses, setCourse] = useState([]);
 
     const fetchCourses = async () => {
@@ -33,17 +34,20 @@ const Courses = () => {
 const handlePopUp =() =>{
 setAddCourse((prev)=> !prev)
 }
-// delete Courses
-const handleDelete = async (courseId) => {
- try{
-await axios.delete(`${ backend_url }/ep/courses/${courseId}`);
-setCourse ((prevCourses) => 
- prevCourses.filter((course) => course._id !==courseId)
-);
-console.log("Course Deleted Succesfully")
- }catch(error){
-  console.log("error Deleting Course" , error)
- }
+// // delete Courses
+// const handleDelete = async (courseId) => {
+//  try{
+// await axios.delete(`${ backend_url }/ep/courses/${courseId}`);
+// setCourse ((prevCourses) => 
+//  prevCourses.filter((course) => course._id !==courseId)
+// );
+// console.log("Course Deleted Succesfully")
+//  }catch(error){
+//   console.log("error Deleting Course" , error)
+//  }
+// }
+const Delete =() =>{
+ setDocumentDelete((prev) => !prev)
 }
   return (
     <div className="container mt-5">
@@ -73,8 +77,7 @@ console.log("Course Deleted Succesfully")
                     Edit
                   </button>
                   <button className="delete_btn"
-
-                   onClick = {() => handleDelete(course._id)}
+                  onClick={Delete}
                    >
                     Delete
                   </button>
