@@ -5,15 +5,21 @@ import config from "@/config";
 import axios from "axios"; // Import Axios for making HTTP requests
 import "./style.scss";
 import { ProfileContext } from "../../context/ProfileContext";
+import { UserContext } from "../../context/UserContext";
 // const { backend_url } = config;
 const { backend_url } = config;
 const Courses = () => {
+ const {user} = useContext(UserContext);
  const {addCourse ,setAddCourse} = useContext(ProfileContext);
   const [courses, setCourse] = useState([]);
 
     const fetchCourses = async () => {
       try {
-        const { data } = await axios.get(`${backend_url}/ep/courses`); 
+        const { data } = await axios.get(`${backend_url}/ep/courses`,{
+         headers : {
+          Authorization  :user.token
+         }
+        }); 
         console.log(data)
         setCourse(data)
       } catch (error) {
@@ -26,6 +32,18 @@ const Courses = () => {
   
 const handlePopUp =() =>{
 setAddCourse((prev)=> !prev)
+}
+// delete Courses
+const handleDelete = async (courseId) => {
+ try{
+await axios.delete(`${ backend_url }/ep/courses/${courseId}`);
+setCourse ((prevCourses) => 
+ prevCourses.filter((course) => course._id !==courseId)
+);
+console.log("Course Deleted Succesfully")
+ }catch(error){
+  console.log("error Deleting Course" , error)
+ }
 }
   return (
     <div className="container mt-5">
@@ -54,7 +72,11 @@ setAddCourse((prev)=> !prev)
                   <button className="edit_btn">
                     Edit
                   </button>
-                  <button className="delete_btn">Delete
+                  <button className="delete_btn"
+
+                   onClick = {() => handleDelete(course._id)}
+                   >
+                    Delete
                   </button>
                 </div>
               </div>

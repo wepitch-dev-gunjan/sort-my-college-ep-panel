@@ -8,7 +8,8 @@ import axios from "axios";
 const AddFaculty = ({ setAddfaculty }) => {
   const handleSubmit = (values, { setSubmitting, resetForm }) => {
     setAddfaculty((prev) => !prev);
-    axios.post("your-backend-url", values).then((response) => {
+    axios.post("your-backend-url", values)
+      .then((response) => {
         console.log("Data sent successfully:", response.data);
         resetForm();
       })
