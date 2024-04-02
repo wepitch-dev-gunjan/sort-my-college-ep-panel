@@ -80,6 +80,10 @@ const FacultyDetails = ({
                 <p>{data.experience_in_years}</p>
                 <p>{data.graduated_from}</p>
               </div>
+              <div>
+                <button>Edit</button>
+                <button>Delete</button>
+              </div>
             </div>
           );
         })}

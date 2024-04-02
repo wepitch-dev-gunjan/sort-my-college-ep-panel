@@ -40,8 +40,14 @@ function App() {
     useContext(ProfileContext);
   const { coverImageEditMode, setCoverImageEditMode } =
     useContext(ProfileContext);
-  const { documentDelete, setDocumentDelete, addfaculty, setAddfaculty ,addCourse , setAddCourse } =
-    useContext(ProfileContext);
+  const {
+    deleteData,
+    setDeleteData,
+    addfaculty,
+    setAddfaculty,
+    addCourse,
+    setAddCourse,
+  } = useContext(ProfileContext);
 
   const { askQuestionEnable, setAskQuestionEnable } = useContext(HelpContext);
 
@@ -95,12 +101,9 @@ function App() {
           <AskQuestion ref={askQuestionRef} />
         </div>
       )}
-      {documentDelete && (
+      {deleteData && (
         <div className="ask-a-question">
-          <DocumentDelete
-            documentDelete={documentDelete}
-            setDocumentDelete={setDocumentDelete}
-          />
+          <DocumentDelete delete={deleteData} setDeleteData={setDeleteData} />
         </div>
       )}
       {addfaculty && (
@@ -109,9 +112,9 @@ function App() {
         </div>
       )}
       {addCourse && (
-      <div className="addCourseBtn">
-       <AddCourse setAddCourse ={setAddCourse}/>
-      </div>
+        <div className="addCourseBtn">
+          <AddCourse setAddCourse={setAddCourse} />
+        </div>
       )}
 
       {isLoggedIn && <Header handleLogout={handleLogout} />}

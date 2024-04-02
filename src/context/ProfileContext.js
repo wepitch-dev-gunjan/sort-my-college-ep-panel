@@ -30,7 +30,7 @@ export const ProfileProvider = ({ children }) => {
   const [editProfileEnable, setEditProfileEnable] = useState(false);
   const [profilePicEditMode, setProfilePicEditMode] = useState(false);
   const [coverImageEditMode, setCoverImageEditMode] = useState(false);
-  const [documentDelete, setDocumentDelete] = useState(false);
+  const [deleteData, setDeleteData] = useState(false);
   const [addfaculty, setAddfaculty] = useState(false);
   const [addCourse, setAddCourse] = useState(false);
   return (
@@ -45,8 +45,8 @@ export const ProfileProvider = ({ children }) => {
         setEditProfileEnable,
         editProfileEnable,
         fetchProfile,
-        documentDelete,
-        setDocumentDelete,
+        deleteData,
+        setDeleteData,
         addfaculty,
         setAddfaculty,
         addCourse,
