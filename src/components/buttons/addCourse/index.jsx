@@ -4,10 +4,10 @@ import "./style.scss"
 import TextFields from "../../TextFields";
 import CheckBoxes from "../../checkbox";
 import { DatePicker, DateRangePicker } from "@mui/x-date-pickers-pro";
-
+import useClickOutside from "../../../customHooks/useClickOutside"
 
 const AddCourse = ({setAddCourse}) => {
- const handlePopClose= () =>{
+ const handleAddCourse= () =>{
   setAddCourse((prev) => !prev);
  }
   return (
@@ -51,7 +51,7 @@ const AddCourse = ({setAddCourse}) => {
                 <TextFields data={"Graduated From"} />
               </div>
             </div>
-            <button onClick={handlePopClose}> Submit</button>
+            <button onClick={handleAddCourse}> Submit</button>
           </div>
         </div>
       </div>
