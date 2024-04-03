@@ -9,7 +9,7 @@ const { backend_url } = config;
 
 const KeyFeatures = () => {
     const [keyFeaturesInstitute, setKeyFeaturesInstitute] = useState([]);
-    const [remainingKeyFeatures, set]
+    const [remainingKeyFeatures, setRemainingKeyFeatures] = useState([]);
     const {user} = useContext (UserContext);
     const {editKeyFeatureEnable, setEditKeyFeatureEnable} = useContext(ProfileContext)
     const getKeyFeatures = async () => {
@@ -28,7 +28,14 @@ const KeyFeatures = () => {
 
     const getRemainingKeyFeatures = async () => {
         try {
-            const 
+            const { data } = await axios.get(`${backend_url}/admin/key-features-institute/remaining-key-features-for-institute`,
+            {
+                headers:{
+                    Authorization : user.token
+                }
+            }
+            );
+            setRemainingKeyFeatures(data)
         } catch (error) {
             console.log("Error fetching the remaining key features")
         }
@@ -36,6 +43,9 @@ const KeyFeatures = () => {
     useEffect(() => {
         getKeyFeatures();
     }, []);
+    useEffect(()=>{
+        getRemainingKeyFeatures();
+    })
 
 
     return(
@@ -46,7 +56,13 @@ const KeyFeatures = () => {
             </div>
             {editKeyFeatureEnable ? 
                 <>
-
+                    <div className="key-features-child">
+                        {remainingKeyFeatures.map((remainingKeyFeature, i) => {
+                            return (
+                                <KeyFeaturesChildren featureName={remainingKeyFeature.name} featurePng={remainingKeyFeature.key_features_icon} />
+                            )
+                        })}
+                    </div>
                 </> 
             :
                 <div className="key-features-child">
