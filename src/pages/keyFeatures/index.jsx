@@ -9,6 +9,7 @@ const { backend_url } = config;
 
 const KeyFeatures = () => {
     const [keyFeaturesInstitute, setKeyFeaturesInstitute] = useState([]);
+    const [remainingKeyFeatures, set]
     const {user} = useContext (UserContext);
     const {editKeyFeatureEnable, setEditKeyFeatureEnable} = useContext(ProfileContext)
     const getKeyFeatures = async () => {
@@ -23,6 +24,14 @@ const KeyFeatures = () => {
         } catch (error) {
             console.log("Error Fetching Key Features")
         };
+    }
+
+    const getRemainingKeyFeatures = async () => {
+        try {
+            const 
+        } catch (error) {
+            console.log("Error fetching the remaining key features")
+        }
     }
     useEffect(() => {
         getKeyFeatures();
