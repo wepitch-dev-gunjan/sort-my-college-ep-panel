@@ -18,7 +18,8 @@ const FacultyDetails = ({
   // setAddfaculty,
 }) => {
   const [profileSubCount, setProfileSubCount] = useState(2);
-  const { addfaculty, setAddfaculty } = useContext(ProfileContext);
+  const { setAddfaculty, deleteData, setDeleteData } =
+    useContext(ProfileContext);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const handleDateChange = (date) => {
@@ -32,15 +33,6 @@ const FacultyDetails = ({
     return dayjs(date).format("YYYY-MM-DD");
   };
 
-  const handleAddProfileSub = () => {
-    setProfileSubCount((prevCount) => prevCount + 1);
-  };
-
-  const handleDeleteProfileSub = (index) => {
-    setProfileSubCount((prevCount) => prevCount - 1);
-    // Additional logic if you need to update profile state upon deletion
-  };
-
   const getFacultyDetails = async () => {
     try {
       const { data } = await axios.get(`${backend_url}/ep/faculties`);
@@ -52,11 +44,17 @@ const FacultyDetails = ({
   };
   useEffect(() => {
     getFacultyDetails();
-  }, []);
+  }, [deleteData]);
   const addfacultybtn = () => {
     setAddfaculty((prev) => !prev);
   };
 
+  const handleDeleteFaculty = (id) => {
+    const path = window.location.pathname;
+    const newPath = `${path}/${id}`;
+    window.history.pushState({ path: newPath }, "", newPath);
+    setDeleteData((prev) => !prev);
+  };
   return (
     <div className="FacultyDetails-container">
       <div className="heading">
@@ -82,7 +80,9 @@ const FacultyDetails = ({
               </div>
               <div>
                 <button>Edit</button>
-                <button>Delete</button>
+                <button onClick={() => handleDeleteFaculty(data._id)}>
+                  Delete
+                </button>
               </div>
             </div>
           );

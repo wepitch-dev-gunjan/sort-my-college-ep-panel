@@ -12,7 +12,7 @@ const { backend_url } = config;
 const Courses = () => {
   const { user } = useContext(UserContext);
   const { addCourse, setAddCourse } = useContext(ProfileContext);
-  const { setDeleteData } = useContext(ProfileContext);
+  const { deleteData, setDeleteData } = useContext(ProfileContext);
   const [courses, setCourse] = useState([]);
 
   const fetchCourses = async () => {
@@ -28,9 +28,10 @@ const Courses = () => {
       console.error("Error fetching courses:", error);
     }
   };
+
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [deleteData]);
 
   const handlePopUp = () => {
     setAddCourse((prev) => !prev);
@@ -50,9 +51,11 @@ const Courses = () => {
         <button onClick={handlePopUp}>ADD COURSE</button>
       </div>
       <hr></hr>
-      <div className="row card-parent">
-        {courses.map((course) => {
-          return (
+      {courses.length === 0 ? (
+        <p>No course found</p>
+      ) : (
+        <div className="row card-parent">
+          {courses?.map((course) => (
             <div key={course._id}>
               <div className="card">
                 <div className="card-body">
@@ -80,9 +83,9 @@ const Courses = () => {
                 </div>
               </div>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
