@@ -4,11 +4,14 @@ import * as Yup from "yup";
 import ImageUploader from "../ImageUploder";
 import "./style.scss";
 import axios from "axios";
+import config from "@/config";
+const { backend_url } = config;
 
 const AddFaculty = ({ setAddfaculty }) => {
-  const handleSubmit = (values, { setSubmitting, resetForm }) => {
-    setAddfaculty((prev) => !prev);
-    axios.post("your-backend-url", values)
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    console.log(values);
+    await axios
+      .post(`${backend_url}/ep/addfaculties`, values)
       .then((response) => {
         console.log("Data sent successfully:", response.data);
         resetForm();
@@ -19,6 +22,7 @@ const AddFaculty = ({ setAddfaculty }) => {
       .finally(() => {
         setSubmitting(false);
       });
+    setAddfaculty((prev) => !prev);
   };
 
   return (
@@ -26,16 +30,16 @@ const AddFaculty = ({ setAddfaculty }) => {
       <Formik
         initialValues={{
           name: "",
-          experience: "",
+          experience_in_years: "",
           qualifications: "",
-          graduatedFrom: "",
+          graduated_from: "",
           image: null,
         }}
         validationSchema={Yup.object({
           name: Yup.string().required("Name is required"),
-          experience: Yup.string().required("Experience is required"),
+          experience_in_years: Yup.string().required("Experience is required"),
           qualifications: Yup.string().required("Qualifications are required"),
-          graduatedFrom: Yup.string().required("Graduated From is required"),
+          graduated_from: Yup.string().required("Graduated From is required"),
         })}
         onSubmit={handleSubmit}
       >
@@ -76,14 +80,14 @@ const AddFaculty = ({ setAddfaculty }) => {
                     <div className="faculty_input">
                       <Field
                         type="text"
-                        id="experience"
+                        id="experience_in_years"
                         className="input"
-                        name="experience"
+                        name="experience_in_years"
                       />
                       <br />
 
                       <ErrorMessage
-                        name="experience"
+                        name="experience_in_years"
                         component="span"
                         className="error"
                       />
@@ -117,12 +121,12 @@ const AddFaculty = ({ setAddfaculty }) => {
                       <Field
                         className="input"
                         type="text"
-                        id="graduatedFrom"
-                        name="graduatedFrom"
+                        id="graduated_from"
+                        name="graduated_from"
                       />
                       <br />
                       <ErrorMessage
-                        name="graduatedFrom"
+                        name="graduated_from"
                         component="span"
                         className="error"
                       />

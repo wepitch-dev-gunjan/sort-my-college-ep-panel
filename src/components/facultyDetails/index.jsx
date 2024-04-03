@@ -4,10 +4,10 @@ import "./style.scss";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
 import { handleInput } from "../../utilities";
-import config from "@/config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../../context/ProfileContext";
+import config from "@/config";
 const { backend_url } = config;
 
 const FacultyDetails = ({
