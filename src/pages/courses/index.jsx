@@ -14,6 +14,7 @@ const Courses = () => {
   const { addCourse, setAddCourse } = useContext(ProfileContext);
   const { deleteData, setDeleteData } = useContext(ProfileContext);
   const [courses, setCourse] = useState([]);
+  const [editMode ,setEditMode] =useState(false);
 
   const fetchCourses = async () => {
     try {
@@ -36,7 +37,19 @@ const Courses = () => {
   const handlePopUp = () => {
     setAddCourse((prev) => !prev);
   };
-
+  // handle Edit Save 
+  const handleSave =() =>{
+   try {
+    
+   } catch (error) {
+    console.log(error);
+   }
+  }
+ // cancel edit course
+ const handleCancel =() =>{
+  setAddCourse();
+  setEditMode(false);
+ }
   const Delete = (id) => {
     const path = window.location.pathname;
     const newPath = `${path}/${id}`;

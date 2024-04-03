@@ -13,6 +13,7 @@ const AddCourse = ({setAddCourse}) => {
  const handleAddCourse= () =>{
   setAddCourse((prev) => !prev);
  }
+ 
  const handleCancel =() =>{
   setAddCourse(false);
  }
