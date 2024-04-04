@@ -1,20 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import config from "@/config";
 
-// import config from "../../config"
-import axios from "axios"; // Import Axios for making HTTP requests
+import axios from "axios"; 
 import "./style.scss";
 import { ProfileContext } from "../../context/ProfileContext";
 import { UserContext } from "../../context/UserContext";
-
-// const { backend_url } = config;
 const { backend_url } = config;
 const Courses = () => {
   const { user } = useContext(UserContext);
   const { addCourse, setAddCourse } = useContext(ProfileContext);
   const { deleteData, setDeleteData } = useContext(ProfileContext);
   const [courses, setCourse] = useState([]);
-  const [editMode ,setEditMode] =useState(false);
+  const [editMode, setEditMode] = useState(false);
+  const [editcourse, setEditCourse] = useState(null);
 
   const fetchCourses = async () => {
     try {
@@ -32,67 +30,142 @@ const Courses = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, [deleteData]);
+  }, [deleteData , addCourse] );
 
   const handlePopUp = () => {
     setAddCourse((prev) => !prev);
   };
-  // handle Edit Save 
-  const handleSave =() =>{
-   try {
-    
-   } catch (error) {
-    console.log(error);
-   }
-  }
- // cancel edit course
- const handleCancel =() =>{
-  setAddCourse();
-  setEditMode(false);
- }
+  // handle Edit Save put API
+  const handleSave = async () => {
+    try {
+      const response = await axios.put(
+        `${backend_url}/ep/courses/${editcourse._id}`,
+        editcourse,
+        {
+          headers: {
+            Authorization: user.token,
+          },
+        }
+      );
+      console.log("Course Edited Succesfully ");
+      setEditMode(false);
+      setCourse((prev) =>
+        prev.map((item) => (item._id === editcourse._id ? response.data : item))
+      );
+    } catch (error) {
+      console.log("error while editing course", error);
+    }
+  };
+  // handle Edit Course
+  const handleEdit = (course) => {
+    setEditCourse(course);
+    setEditMode(true);
+  };
+  // cancel edit course
+  const handleCancel = () => {
+    setEditCourse(null);
+    setEditMode(false);
+  };
   const Delete = (id) => {
     const path = window.location.pathname;
     const newPath = `${path}/${id}`;
     window.history.pushState({ path: newPath }, "", newPath);
     setDeleteData((prev) => !prev);
   };
-
+  // Changes The Input
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditCourse((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
   return (
     <div className="container mt-5">
       <div className="add_course_btn">
         <h1 className="courses-heading">Courses</h1>
         <button onClick={handlePopUp}>ADD COURSE</button>
       </div>
-      <hr></hr>
+      <hr />
       {courses.length === 0 ? (
         <p>No course found</p>
       ) : (
         <div className="row card-parent">
-          {courses?.map((course) => (
+          {courses.map((course) => (
             <div key={course._id}>
               <div className="card">
                 <div className="card-body">
                   <div className="images">
                     <img src={course.image} alt="Course Image" />
                   </div>
-                  <h5 className="card-title">{course.name}</h5>
-                  <p className="card-text">Category: {course.type}</p>
-                  <p className="card-text">Fees: {course.course_fee}</p>
-                  <p className="card-text">
-                    Duration: {course.course_duration_in_days}
-                  </p>
-                  <p className="card-text">
-                    Session: {course.acedemic_session}
-                  </p>
-                  <div className="icons">
-                    <button className="edit_btn">Edit</button>
-                    <button
-                      className="delete_btn"
-                      onClick={(event) => Delete(course._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
+                  {editMode && editcourse && editcourse._id === course._id ? (
+                    <>
+                      <input
+                        type="text"
+                        name="name"
+                        value={editcourse.name}
+                        onChange={handleInputChange}
+                      />
+                      <input
+                        type="text"
+                        name="type"
+                        value={editcourse.type}
+                        onChange={handleInputChange}
+                      />
+                      <input
+                        type="text"
+                        name="type"
+                        value={editcourse.course_fee}
+                        onChange={handleInputChange}
+                      />
+                      <input
+                        type="text"
+                        name="type"
+                        value={editcourse.course_duration_in_days}
+                        onChange={handleInputChange}
+                      />
+                      <input
+                        type="text"
+                        name="type"
+                        value={editcourse.academic_session}
+                        onChange={handleInputChange}
+                      />
+
+                      <button className="save_btn" onClick={handleSave}>
+                        Save
+                      </button>
+                      <button className="cancel_btn" onClick={handleCancel}>
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <h5 className="card-title">{course.name}</h5>
+                      <p className="card-text">Category: {course.type}</p>
+                      <p className="card-text">Fees: {course.course_fee}</p>
+                      <p className="card-text">
+                        Duration: {course.course_duration_in_days}
+                      </p>
+                      <p className="card-text">
+                        Session: {course.academic_session?.start_year} -{" "}
+                        {course.academic_session?.end_year}
+                      </p>
+                      <div className="icons">
+                        <button
+                          className="edit_btn"
+                          onClick={() => handleEdit(course)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="delete_btn"
+                          onClick={() => Delete(course._id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

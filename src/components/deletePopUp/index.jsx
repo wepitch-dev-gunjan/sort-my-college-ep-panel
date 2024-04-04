@@ -5,12 +5,13 @@ import "./style.scss";
 import { HelpContext } from "../../context/HelpContext";
 import { ProfileContext } from "../../context/ProfileContext";
 import { useNavigate } from "react-router";
+import { UserContext } from "../../context/UserContext";
 const { backend_url } = config;
 
 const DocumentDelete = ({ deleteData, setDeleteData }) => {
   const { askQuestionRef } = useContext(HelpContext);
   const navigate = useNavigate();
-
+const { user } = useContext(UserContext);
   const [id, setId] = useState("");
   const [pathName, setPathName] = useState("");
 
@@ -34,7 +35,11 @@ const DocumentDelete = ({ deleteData, setDeleteData }) => {
   // delete Courses
   const handleDelete = async () => {
     try {
-      await axios.delete(`${backend_url}/ep/${pathName}/${id}`);
+      await axios.delete(`${backend_url}/ep/${pathName}/${id}` ,{
+       headers :{
+        Authorization : user.token,
+       },
+      });
 
       setDeleteData((prev) => !prev);
       navigate(`/${pathName}`);

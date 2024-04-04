@@ -24,7 +24,7 @@ import FaqAndTroubleshooting from "./pages/faqAndTroubleshooting";
 import AskQuestion from "./pages/askQuestion";
 import "rsuite/dist/rsuite-no-reset.min.css";
 import { HelpContext } from "./context/HelpContext";
-import DocumentDelete from "./components/documentDelete";
+import DocumentDelete from "./components/deletePopUp";
 import Leads from "./pages/leads";
 import Courses from "./pages/courses";
 import Faculties from "./pages/faculties";
@@ -47,6 +47,7 @@ function App() {
     setAddfaculty,
     addCourse,
     setAddCourse,
+    setCourses
   } = useContext(ProfileContext);
 
   const { askQuestionEnable, setAskQuestionEnable } = useContext(HelpContext);
@@ -113,7 +114,7 @@ function App() {
       )}
       {addCourse && (
         <div className="addCourseBtn">
-          <AddCourse setAddCourse={setAddCourse} />
+          <AddCourse setAddCourse={setAddCourse} setCourses={setCourses} />
         </div>
       )}
 

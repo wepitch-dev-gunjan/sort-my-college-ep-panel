@@ -1,3 +1,6 @@
+div.MuiPickersPopper-root.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root.MuiPopper-root{
+ z-index: 99999 !important;
+}
 .addcourse-container {
  width: 100%;
  height: 100vh;
@@ -8,6 +11,12 @@
  position: absolute;
  z-index: 9999;
  backdrop-filter: blur(10px);
+
+
+
+ .css-1anqmj6-MuiPopper-root-MuiPickersPopper-root{
+  z-index: 99999 !important;
+ }
 
  .course_section {
    .main-container {
@@ -31,9 +40,21 @@
          }
          .course_input {
           display: flex; 
+
+
        
          }
-       }
+       
+        }
+        .btn button{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+        color: white;
+         width: 40%;
+         border-radius: 200px;
+         padding: 10px;
+        }
      }
    }
  }
