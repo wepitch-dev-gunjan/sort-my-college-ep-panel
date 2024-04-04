@@ -5,77 +5,123 @@ import config from "@/config"
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from '../../context/UserContext';
 import { ProfileContext } from '../../context/ProfileContext';
+
 const { backend_url } = config;
 
 const KeyFeatures = () => {
     const [keyFeaturesInstitute, setKeyFeaturesInstitute] = useState([]);
     const [remainingKeyFeatures, setRemainingKeyFeatures] = useState([]);
-    const {user} = useContext (UserContext);
-    const {editKeyFeatureEnable, setEditKeyFeatureEnable} = useContext(ProfileContext)
-    const getKeyFeatures = async () => {
-        try{
-            const { data } = await axios.get(`${backend_url}/ep/key-features`, {
-                headers:{
-                    Authorization : user.token
-                }
-            });
-            console.log(data);
-            setKeyFeaturesInstitute(data);
-        } catch (error) {
-            console.log("Error Fetching Key Features")
-        };
-    }
+    const [draggedFeature, setDraggedFeature] = useState(null);
+    const { user } = useContext(UserContext);
+    const { editKeyFeatureEnable, setEditKeyFeatureEnable } = useContext(ProfileContext);
 
-    const getRemainingKeyFeatures = async () => {
-        try {
-            const { data } = await axios.get(`${backend_url}/admin/key-features-institute/remaining-key-features-for-institute`,
-            {
-                headers:{
-                    Authorization : user.token
-                }
-            }
-            );
-            setRemainingKeyFeatures(data)
-        } catch (error) {
-            console.log("Error fetching the remaining key features")
-        }
-    }
     useEffect(() => {
-        getKeyFeatures();
-    }, []);
-    useEffect(()=>{
-        getRemainingKeyFeatures();
-    })
+        async function fetchData() {
+            try {
+                const { data } = await axios.get(`${backend_url}/ep/key-features`, {
+                    headers: {
+                        Authorization: user.token
+                    }
+                });
+                setKeyFeaturesInstitute(data);
+            } catch (error) {
+                console.log("Error Fetching Key Features");
+            }
+        }
+        fetchData();
+    }, [user.token]);
 
+    useEffect(() => {
+        async function fetchRemainingFeatures() {
+            try {
+                const { data } = await axios.get(`${backend_url}/admin/key-features-institute/remaining-key-features-for-institute`, {
+                    headers: {
+                        Authorization: user.token
+                    }
+                });
+                setRemainingKeyFeatures(data);
+            } catch (error) {
+                console.log("Error fetching the remaining key features");
+            }
+        }
+        fetchRemainingFeatures();
+    }, [user.token]);
 
-    return(
+    const handleDragStart = (e, feature) => {
+        setDraggedFeature(feature);
+    };
+
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleDrop = (e, target) => {
+        e.preventDefault();
+        if (draggedFeature) {
+            let updatedRemainingFeatures = [...remainingKeyFeatures];
+            let updatedInstituteFeatures = [...keyFeaturesInstitute];
+
+            if (target === 'existing') {
+                updatedInstituteFeatures.push(draggedFeature);
+                updatedRemainingFeatures = updatedRemainingFeatures.filter(feature => feature !== draggedFeature);
+            } else if (target === 'remaining') {
+                updatedRemainingFeatures.push(draggedFeature);
+                updatedInstituteFeatures = updatedInstituteFeatures.filter(feature => feature !== draggedFeature);
+            }
+
+            setRemainingKeyFeatures(updatedRemainingFeatures);
+            setKeyFeaturesInstitute(updatedInstituteFeatures);
+            setDraggedFeature(null);
+        }
+    };   
+
+    return (
         <div className="key-features-parent">
             <div className="key-features-head">
                 <h1>Key Features</h1>
-                <button onClick={() => setEditKeyFeatureEnable(true)}>Add New</button>
+                {!editKeyFeatureEnable ?  
+                    <button className='kf-edit' onClick={() => setEditKeyFeatureEnable(true)}>Edit</button>
+                :
+                    <div className='cancel-save-btns'>
+                        <button className='kf-save' onClick={() => setEditKeyFeatureEnable(false)}>Save</button>
+                        <button className='kf-cancel' onClick={() => setEditKeyFeatureEnable(false)}>Cancel</button>
+                    </div>
+                }
             </div>
             {editKeyFeatureEnable ? 
-                <>
-                    <div className="key-features-child">
-                        {remainingKeyFeatures.map((remainingKeyFeature, i) => {
-                            return (
-                                <KeyFeaturesChildren featureName={remainingKeyFeature.name} featurePng={remainingKeyFeature.key_features_icon} />
-                            )
-                        })}
+                <div className="edit-key-features">
+                    <div className="key-features-child key-features-remaining" onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, 'remaining')}>
+                        {remainingKeyFeatures.map((remainingKeyFeature, i) => (
+                            <KeyFeaturesChildren
+                                key={i}
+                                featureName={remainingKeyFeature.name}
+                                featurePng={remainingKeyFeature.key_features_icon}
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, remainingKeyFeature)}
+                            />
+                        ))}
                     </div>
-                </> 
+                    <div className="key-features-child key-features-existing" onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, 'existing')}>
+                        {keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
+                            <KeyFeaturesChildren
+                                key={i}
+                                featureName={keyFeatureInstitute.name}
+                                featurePng={keyFeatureInstitute.key_features_icon}
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, keyFeatureInstitute)}
+                            />
+                        ))}
+                    </div>
+                </div>
             :
                 <div className="key-features-child">
-                    {keyFeaturesInstitute.map((keyFeatureInstitute, i) => {
-                        return (
-                            <KeyFeaturesChildren featureName={keyFeatureInstitute.name} featurePng={keyFeatureInstitute.key_features_icon} />
-                        )
-                    })}
+                    {keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
+                        <KeyFeaturesChildren key={i} featureName={keyFeatureInstitute.name} featurePng={keyFeatureInstitute.key_features_icon} />
+                    ))}
                 </div>
             }
-
         </div>
-    )
-}
+    );
+};
 
 export default KeyFeatures;

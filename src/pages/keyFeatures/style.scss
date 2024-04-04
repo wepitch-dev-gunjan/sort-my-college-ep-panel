@@ -17,6 +17,30 @@
         z-index: 1;
         padding: 40px 40px 20px 40px;
 
+        .cancel-save-btns{
+            display: flex;
+            gap: 1em;
+
+            .kf-cancel{
+                background-color: rgba(255, 0, 0, 0.692);
+                border: 2px solid rgba(255, 0, 0, 0.842);
+            }
+            .kf-cancel:hover{
+                background-color: #F7F4FF;
+                color: red;
+            }
+            .kf-save{
+                background-color: rgba(0, 128, 0, 0.658);
+                border: 2px solid rgba(0, 128, 0, 0.829);
+            }
+            .kf-save:hover{
+                background-color: #F7F4FF;
+                color: green;
+            }
+        }
+        .kf-edit{
+            padding: 0.1em 1.5em 0.1em 1.5em;
+        }
         button{
             background-color: #1F0A68;
             border-radius: 40px;
@@ -31,12 +55,32 @@
             transition: all 0.3s ease;
         }
     }
+    .edit-key-features{
+        display: flex;
+        gap: 2em;
+        width: 100%;
+
+        .key-features-remaining{
+            width: 50%;
+        }
+        .key-features-existing{
+            width: 49%;
+        }
+        .key-features-child{
+            padding: 0 0 0 40px ;
+            p{
+                font-size: 0.9em;
+            }
+        }
+    }
 
     .key-features-child{
         width: 100%;
+        height: max-content;
         display: flex;
         flex-wrap: wrap;
         gap: 1em;
         padding: 20px 40px 40px 40px;
     }
+    
 }
