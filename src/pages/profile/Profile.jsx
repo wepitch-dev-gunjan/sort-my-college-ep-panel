@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 import CoursesOffered from "../../components/coursesOffered";
 import FacultyDetails from "../../components/facultyDetails";
 import WhatsNew from "../../components/whatsNew";
-import config from '@/config';
+import config from "@/config";
 const { backend_url } = config;
 
 const Profile = () => {
@@ -34,16 +34,16 @@ const Profile = () => {
 
       const response = await axios.put(endpointUrl, profile, {
         headers: {
-          Authorization: user.token
-        }
+          Authorization: user.token,
+        },
       });
       setProfile(response.data);
       setInitialUserProfileBackup(response.data);
       setEditProfileEnable(false);
-      toast('Profile successfully saved');
+      toast("Profile successfully saved");
     } catch (error) {
       // Handle errors if the request fails
-      toast(error.message)
+      toast(error.message);
       console.error("Error while saving:", error);
       // You might want to handle the error state here
     }
@@ -89,23 +89,22 @@ const Profile = () => {
               setProfile={setProfile}
             />
 
-            {/* <OtherInfo
-              profile={profile}
-              editProfileEnable={editProfileEnable}
-              setProfile={setProfile}
-            /> */}
-
-            {/* <FacultyDetails
-              profile={profile}
-              editProfileEnable={editProfileEnable}
-              setProfile={setProfile}
-            /> */}
-            <WhatsNew
+            <OtherInfo
               profile={profile}
               editProfileEnable={editProfileEnable}
               setProfile={setProfile}
             />
 
+            {/* <FacultyDetails
+              profile={profile}
+              editProfileEnable={editProfileEnable}
+              setProfile={setProfile}
+            />
+            <WhatsNew
+              profile={profile}
+              editProfileEnable={editProfileEnable}
+              setProfile={setProfile}
+            /> */}
           </div>
           <div className="bottom">
             {editProfileEnable && (

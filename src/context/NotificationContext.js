@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { UserContext } from "./UserContext";
 import axios from "axios";
-import config from '@/config';
+import config from "@/config";
 const { backend_url } = config;
 
 export const NotificationContext = createContext();
@@ -14,7 +14,9 @@ export const NotificationProvider = ({ children }) => {
   const [allNotificationsFetched, setAllNotificationsFetched] = useState(false);
   const { user } = useContext(UserContext);
   const [notificationsLoading, setNotificationsLoading] = useState(false);
-  const [fetchedNotificationIds, setFetchedNotificationIds] = useState(new Set()); // Track IDs of fetched notifications
+  const [fetchedNotificationIds, setFetchedNotificationIds] = useState(
+    new Set()
+  ); // Track IDs of fetched notifications
 
   const getNotifications = async (page) => {
     try {
@@ -32,17 +34,24 @@ export const NotificationProvider = ({ children }) => {
       } else {
         setAllNotificationsFetched(false);
         const uniqueNotifications = data.notifications.filter(
-          notification => !fetchedNotificationIds.has(notification._id)
+          (notification) => !fetchedNotificationIds.has(notification._id)
         );
 
-        setNotifications(prevNotifications => [...prevNotifications, ...uniqueNotifications]);
-        const newNotificationIds = new Set(data.notifications.map(notification => notification._id));
-        setFetchedNotificationIds(new Set([...fetchedNotificationIds, ...newNotificationIds]));
+        setNotifications((prevNotifications) => [
+          ...prevNotifications,
+          ...uniqueNotifications,
+        ]);
+        const newNotificationIds = new Set(
+          data.notifications.map((notification) => notification._id)
+        );
+        setFetchedNotificationIds(
+          new Set([...fetchedNotificationIds, ...newNotificationIds])
+        );
       }
     } catch (error) {
-      console.error('Error fetching notifications:', error);
+      console.error("Error fetching notifications:", error);
     } finally {
-      setNotificationsLoading(false)
+      setNotificationsLoading(false);
     }
   };
 
@@ -64,11 +73,10 @@ export const NotificationProvider = ({ children }) => {
         setPage,
         allNotificationsFetched,
         notificationsLoading,
-        setNotificationsLoading
+        setNotificationsLoading,
       }}
     >
       {children}
     </NotificationContext.Provider>
   );
 };
-

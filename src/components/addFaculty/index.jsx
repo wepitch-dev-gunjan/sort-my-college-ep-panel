@@ -9,20 +9,31 @@ const { backend_url } = config;
 
 const AddFaculty = ({ setAddfaculty }) => {
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log(values);
-    await axios
-      .post(`${backend_url}/ep/addfaculties`, values)
-      .then((response) => {
-        console.log("Data sent successfully:", response.data);
-        resetForm();
-      })
-      .catch((error) => {
-        console.error("Error sending data:", error);
-      })
-      .finally(() => {
-        setSubmitting(false);
-      });
-    setAddfaculty((prev) => !prev);
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("experience_in_years", values.experience_in_years);
+    formData.append("qualifications", values.qualifications);
+    formData.append("graduated_from", values.graduated_from);
+    formData.append("image", values.image); // Append the image file to the FormData
+
+    try {
+      const response = await axios.post(
+        `${backend_url}/ep/addfaculties`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
+          },
+        }
+      );
+      console.log("Data sent successfully:", response.data);
+      resetForm();
+      setAddfaculty((prev) => !prev);
+    } catch (error) {
+      console.error("Error sending data:", error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -48,7 +59,11 @@ const AddFaculty = ({ setAddfaculty }) => {
             <div className="faculty_section">
               <div className="main-container">
                 <div className="img_uploder">
-                  <ImageUploader
+                  {/* <ImageUploader
+                    onImageUpload={(file) => setFieldValue("image", file)}
+                  /> */}
+                  <input
+                    type="file"
                     onImageUpload={(file) => setFieldValue("image", file)}
                   />
                 </div>

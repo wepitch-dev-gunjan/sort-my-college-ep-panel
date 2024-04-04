@@ -1,7 +1,7 @@
-import { createContext, useContext, useEffect, useState } from 'react'
-import { UserContext } from './UserContext';
-import axios from 'axios';
-import config from '@/config';
+import { createContext, useContext, useEffect, useState } from "react";
+import { UserContext } from "./UserContext";
+import axios from "axios";
+import config from "@/config";
 const { backend_url } = config;
 
 export const FeedbackContext = createContext();
@@ -16,8 +16,8 @@ export const FeedbackProvider = ({ children }) => {
         params: {
           counsellor_id: user._id,
           page: 1,
-          limit: 10
-        }
+          limit: 10,
+        },
       });
       setFeedbacks(data);
     } catch (error) {
@@ -31,7 +31,12 @@ export const FeedbackProvider = ({ children }) => {
 
   // Pass the feedbacks state as the value to the Provider
   return (
-    <FeedbackContext.Provider value={{ feedbacks, getFeedbacks }}>
+    <FeedbackContext.Provider
+      value={{
+        feedbacks,
+        getFeedbacks,
+      }}
+    >
       {children}
     </FeedbackContext.Provider>
   );

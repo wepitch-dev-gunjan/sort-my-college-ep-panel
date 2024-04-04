@@ -12,12 +12,13 @@ export const ProfileProvider = ({ children }) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(`${backend_url}/ep/${user._id}`, {
+      const { data } = await axios.get(`${backend_url}/ep/institute`, {
         headers: {
           Authorization: user.token,
         },
       });
-      setProfile(response.data[0]);
+      console.log(data);
+      setProfile(data);
     } catch (err) {
       console.error("Error fetching profile:", err);
     }
@@ -53,7 +54,7 @@ export const ProfileProvider = ({ children }) => {
         addCourse,
         setAddCourse,
         editKeyFeatureEnable,
-        setEditKeyFeatureEnable
+        setEditKeyFeatureEnable,
       }}
     >
       {children}
