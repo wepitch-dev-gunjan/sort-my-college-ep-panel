@@ -5,15 +5,15 @@ import config from "@/config"
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from '../../context/UserContext';
 import { ProfileContext } from '../../context/ProfileContext';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
+
 const { backend_url } = config;
+
 const KeyFeatures = () => {
     const [keyFeaturesInstitute, setKeyFeaturesInstitute] = useState([]);
     const [remainingKeyFeatures, setRemainingKeyFeatures] = useState([]);
-    const [draggedFeature, setDraggedFeature] = useState(null);
     const { user } = useContext(UserContext);
     const { editKeyFeatureEnable, setEditKeyFeatureEnable } = useContext(ProfileContext);
+
     useEffect(() => {
         async function fetchData() {
             try {
@@ -23,12 +23,14 @@ const KeyFeatures = () => {
                     }
                 });
                 setKeyFeaturesInstitute(data);
+                console.log(keyFeaturesInstitute)
             } catch (error) {
                 console.log("Error Fetching Key Features");
             }
         }
         fetchData();
     }, [user.token]);
+
     useEffect(() => {
         async function fetchRemainingFeatures() {
             try {
@@ -44,81 +46,108 @@ const KeyFeatures = () => {
         }
         fetchRemainingFeatures();
     }, [user.token]);
-    const handleDragStart = (e, feature) => {
-        console.log("start")
-        setDraggedFeature(feature);
+
+    const handleDragStart = (e, item) => {
+        e.dataTransfer.setData('text/plain', JSON.stringify(item));
     };
-    const handleDragOver = (e) => {
-        console.log("dragging")
-        e.preventDefault();
-    };
+
     const handleDrop = (e, target) => {
-        console.log(target)
         e.preventDefault();
-        if (draggedFeature) {
-            let updatedRemainingFeatures = [...remainingKeyFeatures];
-            let updatedInstituteFeatures = [...keyFeaturesInstitute];
-            if (target === 'existing') {
-                updatedInstituteFeatures.push(draggedFeature);
-                updatedRemainingFeatures = updatedRemainingFeatures.filter(feature => feature !== draggedFeature);
-            } else if (target === 'remaining') {
-                updatedRemainingFeatures.push(draggedFeature);
-                updatedInstituteFeatures = updatedInstituteFeatures.filter(feature => feature !== draggedFeature);
+        const item = JSON.parse(e.dataTransfer.getData('text/plain'));
+        
+        // Check if the item is already in the target list
+        const isDuplicate = target === 'institute' ? 
+            keyFeaturesInstitute.some(feature => feature.name === item.name) :
+            remainingKeyFeatures.some(feature => feature.name === item.name);
+    
+        // If it's not a duplicate, update the lists accordingly
+        if (!isDuplicate) {
+            if (target === 'institute') {
+                setKeyFeaturesInstitute(prevState => [...prevState, item]);
+                setRemainingKeyFeatures(prevState => prevState.filter(el => el.name !== item.name));
+            } else {
+                setRemainingKeyFeatures(prevState => [...prevState, item]);
+                setKeyFeaturesInstitute(prevState => prevState.filter(el => el.name !== item.name));
             }
-            setRemainingKeyFeatures(updatedRemainingFeatures);
-            setKeyFeaturesInstitute(updatedInstituteFeatures);
-            setDraggedFeature(null);
         }
     };
+    console.log(keyFeaturesInstitute)
+    const handleDragOver = (e) => {
+        e.preventDefault();
+    };
+
+    const handleSave = async () => {
+        try {
+            // Extract _id from each item in keyFeaturesInstitute and create new_key_features array
+            const new_key_features = keyFeaturesInstitute.map(feature => ({ _id: feature._id }));
+            
+            await axios.put(`${backend_url}/ep/key-features/edit`, { new_key_features }, {
+                headers: {
+                    Authorization: user.token
+                }
+            });
+            // Handle success
+            console.log("Key features updated successfully!");
+            setEditKeyFeatureEnable(false); // Disable editing mode after successful save
+        } catch (error) {
+            console.log("Error updating key features:", error);
+            // Handle error
+        }
+    };
+    
+
     return (
-        <DndProvider backend={HTML5Backend}>
-            <div className="key-features-parent">
-                <div className="key-features-head">
-                    <h1>Key Features</h1>
-                    {!editKeyFeatureEnable ?
-                        <button className='kf-edit' onClick={() => setEditKeyFeatureEnable(true)}>Edit</button>
+        <div className="key-features-parent">
+            <div className="key-features-head">
+                <h1>Key Features</h1>
+                {!editKeyFeatureEnable ?
+                    <button className='kf-edit' onClick={() => setEditKeyFeatureEnable(true)}>Edit</button>
                     :
-                        <div className='cancel-save-btns'>
-                            <button className='kf-save' onClick={() => setEditKeyFeatureEnable(false)}>Save</button>
-                            <button className='kf-cancel' onClick={() => setEditKeyFeatureEnable(false)}>Cancel</button>
-                        </div>
-                    }
-                </div>
-                {editKeyFeatureEnable ?
-                    <div className="edit-key-features">
-                        <div className="key-features-child key-features-remaining" >
-                            {remainingKeyFeatures.map((remainingKeyFeature, i) => (
-                                <KeyFeaturesChildren
-                                    onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, 'remaining')}
-                                    key={i}
-                                    featureName={remainingKeyFeature.name}
-                                    featurePng={remainingKeyFeature.key_features_icon}
-                                    draggable
-                                    onDragStart={(e) => handleDragStart(e, remainingKeyFeature)}
-                                />
-                            ))}
-                        </div>
-                        <div className="key-features-child key-features-existing" onDragOver={handleDragOver} onDrop={(e) => handleDrop(e, 'existing')}>
-                            {keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
-                                <KeyFeaturesChildren
-                                    key={i}
-                                    featureName={keyFeatureInstitute.name}
-                                    featurePng={keyFeatureInstitute.key_features_icon}
-                                    draggable
-                                    onDragStart={(e) => handleDragStart(e, keyFeatureInstitute)}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                :
-                    <div className="key-features-child">
-                        {keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
-                            <KeyFeaturesChildren key={i} featureName={keyFeatureInstitute.name} featurePng={keyFeatureInstitute.key_features_icon} />
-                        ))}
+                    <div className='cancel-save-btns'>
+                        <button className='kf-save' onClick={handleSave}>Save</button>
+                        <button className='kf-cancel' onClick={() => setEditKeyFeatureEnable(false)}>Cancel</button>
                     </div>
                 }
             </div>
-        </DndProvider>
+            {editKeyFeatureEnable ?
+                <div className="edit-key-features">
+                    <div className="key-features-child key-features-remaining"
+                         onDrop={(e) => handleDrop(e, 'remaining')}
+                         onDragOver={handleDragOver}>
+                        {remainingKeyFeatures.map((remainingKeyFeature, i) => (
+                            <KeyFeaturesChildren
+                                key={i}
+                                featureName={remainingKeyFeature.name}
+                                featurePng={remainingKeyFeature.key_features_icon}
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, remainingKeyFeature)}
+                            />
+                        ))}
+                    </div>
+                    <div className="key-features-child key-features-existing"
+                         onDrop={(e) => handleDrop(e, 'institute')}
+                         onDragOver={handleDragOver}>
+                        {keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
+                            <KeyFeaturesChildren
+                                key={i}
+                                featureName={keyFeatureInstitute.name}
+                                featurePng={keyFeatureInstitute.key_features_icon}
+                                draggable
+                                onDragStart={(e) => handleDragStart(e, keyFeatureInstitute)}
+                            />
+                        ))}
+                    </div>
+                </div>
+                :
+                <div className="key-features-child">
+                    {keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
+                        <KeyFeaturesChildren key={i} featureName={keyFeatureInstitute.name}
+                                             featurePng={keyFeatureInstitute.key_features_icon}/>
+                    ))}
+                </div>
+            }
+        </div>
     );
 };
+
 export default KeyFeatures;
