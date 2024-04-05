@@ -40,12 +40,13 @@ const RecentLeads = () => {
   };
   const getQueriesData = async () => {
     try {
-      const { data } = await axios.get(`${backend_url}/ep/enquiries`, {
+      const response = await axios.get(`${backend_url}/ep/enquiries`, {
         headers: {
           Authorization: user.token,
         },
       });
-      console.log("sddsfsdf", { data });
+      let { data } = response;
+      console.log("sddsfsdf", data);
       setQueries(data);
     } catch (error) {
       console.log("error");
@@ -155,7 +156,9 @@ const RecentLeads = () => {
               <div className="col">
                 <p>{query.name}</p>
               </div>
-              <div className="col">{/* <p>{query.phone}</p> */}</div>
+              <div className="col">
+                <p>{query.phone_number}</p>
+              </div>
               {/* <div className= "col"><p>{query.query}</p></div> */}
               <div
                 className={`col ${
@@ -171,7 +174,7 @@ const RecentLeads = () => {
                 <p>{query.status}</p>
               </div>
               <div className="link">
-                <Link to={"/allQueries"}>
+                <Link to={`/allQueries/${query._id}`}>
                   <p>View </p>
                 </Link>
               </div>

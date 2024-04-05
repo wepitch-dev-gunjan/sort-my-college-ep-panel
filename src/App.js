@@ -47,7 +47,7 @@ function App() {
     setAddfaculty,
     addCourse,
     setAddCourse,
-    setCourses
+    setCourses,
   } = useContext(ProfileContext);
 
   const { askQuestionEnable, setAskQuestionEnable } = useContext(HelpContext);
@@ -137,7 +137,10 @@ function App() {
                 <Route path="/login" element={<Navigate replace to="/" />} />
                 <Route path="/help" element={<Help />} />
                 <Route path="/leads" element={<Leads />} />
-                <Route path="/allQueries" element={<AllQueries />} />
+                <Route
+                  path="/allQueries/:enquiry_id"
+                  element={<AllQueries />}
+                />
                 <Route path="/key-features" element={<KeyFeatures />} />
                 <Route
                   path="/help/faq-and-troubleshooting"

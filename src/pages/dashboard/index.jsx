@@ -71,10 +71,10 @@ const Dashboard = () => {
         {/* {isSmallScreen ? null : <RecentPayments />} */}
         {/* <RecentPayments /> */}
         <div className="dashboard-recent-payments-main">
-          {/* <RecentLeads /> */}
+          <RecentLeads />
         </div>
       </div>
-      {/* <div className="summary">{!smallScreen && <Summary />}</div> */}
+      {/* <div className="summary">{!smallScreen && <summary />}</div> */}
     </div>
   );
 };
