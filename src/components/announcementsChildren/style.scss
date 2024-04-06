@@ -1,0 +1,28 @@
+.announcements-children{
+    padding: 1em;
+    background-color: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+    border-radius: 2px;
+    display: flex;
+    gap: 1em;
+
+    p{
+        font-size: 1em;
+    }
+
+    .ac-edit-icons{
+        display: flex;
+        gap: 0.5em;
+        align-items: center;
+        svg{
+            cursor: pointer;
+        }
+
+        .ac-done{
+            color: rgb(7, 192, 7);
+        }
+        .ac-delete{
+            color: red;
+        }
+    }
+}

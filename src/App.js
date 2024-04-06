@@ -32,6 +32,9 @@ import AllQueries from "./pages/allqueries";
 import KeyFeatures from "./pages/keyFeatures";
 import AddFaculty from "./components/addFaculty";
 import AddCourse from "./components/buttons/addCourse";
+import Announcements from "./pages/announcements";
+
+
 function App() {
   const addProfilePicRef = useRef(null);
   const { user, setUser } = useContext(UserContext);
@@ -157,6 +160,8 @@ function App() {
                     />
                   }
                 />
+
+                <Route path="/announcements" element={<Announcements/>} />
 
                 {/* <Route
                   path="/help/faq-and-troubleshooting/ask-a-question"

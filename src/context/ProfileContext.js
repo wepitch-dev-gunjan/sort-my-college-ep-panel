@@ -35,6 +35,7 @@ export const ProfileProvider = ({ children }) => {
   const [addfaculty, setAddfaculty] = useState(false);
   const [addCourse, setAddCourse] = useState(false);
   const [editKeyFeatureEnable, setEditKeyFeatureEnable] = useState(false);
+  const [editAnnouncementsEnable, setEditAnnouncementsEnable] = useState(false);
   return (
     <ProfileContext.Provider
       value={{
@@ -55,6 +56,9 @@ export const ProfileProvider = ({ children }) => {
         setAddCourse,
         editKeyFeatureEnable,
         setEditKeyFeatureEnable,
+        editAnnouncementsEnable,
+        setEditAnnouncementsEnable
+
       }}
     >
       {children}
