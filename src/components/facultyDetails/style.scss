@@ -81,9 +81,12 @@
           p {
             font-size: 1.2rem;
             color: #1111119c;
-            span {
+            .span {
               font-weight: bold;
               color: #111111b0;
+            }
+            .spans {
+              font-size: small;
             }
           }
         }
