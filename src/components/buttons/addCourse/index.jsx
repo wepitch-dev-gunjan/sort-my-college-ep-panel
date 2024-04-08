@@ -1,25 +1,19 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import config from "@/config";
 import axios from "axios";
-
 import ImageUploader from "../../ImageUploder";
 import "./style.scss"
-import TextFields from "../../TextFields";
-import CheckBoxes from "../../checkbox";
-import { DatePicker } from "@mui/x-date-pickers-pro"; // Import only necessary components
+import { DatePicker } from "@mui/x-date-pickers-pro"; 
 import useClickOutside from "../../../customHooks/useClickOutside"
 import { UserContext } from "../../../context/UserContext";
+import { TextField } from "@mui/material";
 const { backend_url } = config;
 
 const AddCourse = ({ setAddCourse , setCourses }) => {
- const { user } = useContext(UserContext)
- const Ref = useRef(null)
+ const [selectedDate, setSelectedDate] = useState(null);
+ const { user } = useContext(UserContext);
+ const Ref = useRef(null);
 
- const handleCancel = () => {
-  setAddCourse(false);
- }
- useClickOutside(Ref, () => handleCancel());
- 
  const [formData, setFormData] = useState({
   name: "",
   image: "",
@@ -29,19 +23,46 @@ const AddCourse = ({ setAddCourse , setCourses }) => {
   course_duration_in_days: "",
  });
 
+ const [errors, setErrors] = useState({});
+
  const handleChange = (e) => {
   const { name, value } = e.target;
   setFormData({ ...formData, [name]: value });
+  // Clear error message when user starts typing in the field
+  setErrors({ ...errors, [name]: "" });
  };
 
  const handleDateChange = (field, value) => {
   setFormData({
-   ...formData,
-   academic_session: { ...formData.academic_session, [field]: value },
+    ...formData,
+    academic_session: { ...formData.academic_session, [field]: value },
   });
- };
+};
 
  const handleAddCourse = async () => {
+  // // Validate form fields
+  // const validationErrors = {};
+  // if (!formData.name.trim()) {
+  //   validationErrors.name = "Please fill in the name field";
+  // }
+  // if (!formData.type) {
+  //   validationErrors.type = "Please select a type";
+  // }
+  // if (!formData.academic_session.start_year || !formData.academic_session.end_year) {
+  //   validationErrors.academic_session = "Please fill in both start and end years";
+  // }
+  // if (!formData.course_fee.trim()) {
+  //   validationErrors.course_fee = "Please fill in the course fee";
+  // }
+  // if (!formData.course_duration_in_days.trim()) {
+  //   validationErrors.course_duration_in_days = "Please fill in the course duration";
+  // }
+
+  // if (Object.keys(validationErrors).length > 0) {
+  //   setErrors(validationErrors);
+  //   return; // Stop further execution
+  // }
+
   try {
    const response = await axios.post(
     `${backend_url}/ep/courses`,
@@ -59,6 +80,12 @@ const AddCourse = ({ setAddCourse , setCourses }) => {
   }
  };
 
+ const handleCancel = () => {
+  setAddCourse(false);
+ };
+
+ useClickOutside(Ref, () => handleCancel());
+
  return (
   <div className="addcourse-container">
    <div  className="course_section">
@@ -73,11 +100,13 @@ const AddCourse = ({ setAddCourse , setCourses }) => {
        </div>
        <div className="course_input">
         <input
+        placeholder="enter Course Name"
          type="text"
          name="name"
          value={formData.name}
          onChange={handleChange}
         />
+        {errors.name && <div className="error">{errors.name}</div>}
        </div>
       </div>
       <div className="right-Section">
@@ -94,24 +123,30 @@ const AddCourse = ({ setAddCourse , setCourses }) => {
          <option value="UG">UG</option>
          <option value="PG">PG</option>
         </select>
+        {errors.type && <div className="error">{errors.type}</div>}
        </div>
       </div>
       <div className="right-Section">
-       <div className="course_details">
-        <label htmlFor="">Academic Session:</label>
-       </div>
-       <div className="course_input" style={{ width: "300px" }}>
-        <DatePicker
-         label="Start Year"
-         value={formData.academic_session.start_year}
-         onChange={(date) => handleDateChange("start_year", date)}
-        />
-        <DatePicker
-         label="End Year"
-         value={formData.academic_session.end_year}
-         onChange={(date) => handleDateChange("end_year", date)}
-        />
-       </div>
+        <div className="course_details">
+          <label htmlFor="">Academic Session:</label>
+        </div>
+        <div className="course_input" style={{ width: "300px" }}>
+          <DatePicker
+            label="Start Year"
+            views={["year"]}
+            value={formData.academic_session.start_year}
+            onChange={(value) => handleDateChange("start_year", value)}
+            renderInput={(props) => <TextField {...props} />}
+          />
+          <DatePicker
+            label="End Year"
+            views={["year"]}
+            value={formData.academic_session.end_year}
+            onChange={(value) => handleDateChange("end_year", value)}
+            renderInput={(props) => <TextField {...props} />}
+          />
+          {errors.academic_session && <div className="error">{errors.academic_session}</div>}
+        </div>
       </div>
       <div className="right-Section">
        <div className="course_details">
@@ -119,11 +154,13 @@ const AddCourse = ({ setAddCourse , setCourses }) => {
        </div>
        <div className="course_input">
         <input
+        placeholder="Enter Fees"
          type="number"
          name="course_fee"
          value={formData.course_fee}
          onChange={handleChange}
         />
+        {errors.course_fee && <div className="error">{errors.course_fee}</div>}
        </div>
       </div>
       <div className="right-Section">
@@ -132,21 +169,23 @@ const AddCourse = ({ setAddCourse , setCourses }) => {
        </div>
        <div className="course_input">
         <input
+        placeholder="Enter Duration"
          type="number"
          name="course_duration_in_days"
          value={formData.course_duration_in_days}
          onChange={handleChange}
         />
+        {errors.course_duration_in_days && <div className="error">{errors.course_duration_in_days}</div>}
        </div>
       </div>
       <div className="btn">
-       <button
+       <button className="edit"
         onClick={handleAddCourse}
         style={{ backgroundColor: "#1F0A69" }}
        >
         Submit
        </button>
-       <button
+       <button className="cancel"
         onClick={handleCancel}
         style={{ backgroundColor: "#1F0A69" }}
        >

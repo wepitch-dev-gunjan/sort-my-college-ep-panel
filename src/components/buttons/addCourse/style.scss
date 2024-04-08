@@ -14,13 +14,13 @@ div.MuiPickersPopper-root.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root.MuiPo
 
 
 
- .css-1anqmj6-MuiPopper-root-MuiPickersPopper-root{
-  z-index: 99999 !important;
- }
+ // .css-1anqmj6-MuiPopper-root-MuiPickersPopper-root{
+ //  z-index: 99999 !important;
+ // }
 
  .course_section {
    .main-container {
-     padding: 20px;
+     padding: 30px;
      border-radius: 10px;
      display: flex;
      background-color: #fff;
@@ -46,14 +46,16 @@ div.MuiPickersPopper-root.css-1anqmj6-MuiPopper-root-MuiPickersPopper-root.MuiPo
          }
        
         }
-        .btn button{
+        .btn {
          display: flex;
-         justify-content: center;
-         align-items: center;
+         justify-content: space-between;
         color: white;
+         .edit ,.cancel{
          width: 40%;
          border-radius: 200px;
          padding: 10px;
+        }
+      
         }
      }
    }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import config from "@/config";
 
-import axios from "axios"; 
+import axios from "axios";
 import "./style.scss";
 import { ProfileContext } from "../../context/ProfileContext";
 import { UserContext } from "../../context/UserContext";
+import { DatePicker } from "rsuite";
 const { backend_url } = config;
 const Courses = () => {
   const { user } = useContext(UserContext);
@@ -30,7 +31,7 @@ const Courses = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, [deleteData , addCourse] );
+  }, [deleteData, addCourse]);
 
   const handlePopUp = () => {
     setAddCourse((prev) => !prev);
@@ -80,6 +81,15 @@ const Courses = () => {
       [name]: value,
     }));
   };
+  const handleDateChange = (field, value) => {
+    setEditCourse((prev) => ({
+      ...prev,
+      academic_session: {
+        ...prev.academic_session,
+        [field]: value,
+      },
+    }));
+  };
   return (
     <div className="container mt-5">
       <div className="add_course_btn">
@@ -103,32 +113,63 @@ const Courses = () => {
                       <input
                         type="text"
                         name="name"
+                        className="card-title"
                         value={editcourse.name}
                         onChange={handleInputChange}
                       />
+                      {/* category */}
+                      <label htmlFor="type">Category:</label>
                       <input
                         type="text"
                         name="type"
+                        className="card-text"
                         value={editcourse.type}
                         onChange={handleInputChange}
                       />
+                      {/* fees */}
+                      <label htmlFor="course_fee">Fees:</label>
+
                       <input
                         type="text"
-                        name="type"
+                        name="course_fee"
+                        className="card-text"
                         value={editcourse.course_fee}
                         onChange={handleInputChange}
                       />
+                      {/* Duration */}
+                      <label htmlFor="course_duration_in_days">Duration:</label>
+
                       <input
                         type="text"
-                        name="type"
+                        name="course_duration_in_days"
+                        className="card-text"
                         value={editcourse.course_duration_in_days}
                         onChange={handleInputChange}
                       />
-                      <input
-                        type="text"
-                        name="type"
-                        value={editcourse.academic_session}
-                        onChange={handleInputChange}
+                      {/* academic Session */}
+                      <label htmlFor="academic_session">Session:</label>
+                      <DatePicker
+                        label="Start Year"
+                        views={["year"]} // Only allow selecting the year
+                        value={editcourse.academic_session.start_year}
+                        onChange={(value) =>
+                          handleDateChange("start_year", value)
+                        }
+                        renderInput={(props) => (
+                          <input {...props} className="card-text" />
+                        )}
+                      />
+
+                      <DatePicker
+                        label="End Year"
+                        views={["year"]} // Only allow selecting the year
+                        value={editcourse.academic_session.end_year}
+                        onChange={(value) =>
+                          handleDateChange("end_year", value)
+                        }
+                        renderInput={(props) => (
+                          <input {...props} className="card-text" />
+                        )}
                       />
 
                       <button className="save_btn" onClick={handleSave}>
@@ -147,9 +188,17 @@ const Courses = () => {
                         Duration: {course.course_duration_in_days}
                       </p>
                       <p className="card-text">
-                        Session: {course.academic_session?.start_year} -{" "}
-                        {course.academic_session?.end_year}
+                        Session:{" "}
+                        {course.academic_session?.start_year &&
+                          course.academic_session?.start_year.substring(
+                            0,
+                            4
+                          )}{" "}
+                        -{" "}
+                        {course.academic_session?.end_year &&
+                          course.academic_session?.end_year.substring(0, 4)}
                       </p>
+
                       <div className="icons">
                         <button
                           className="edit_btn"

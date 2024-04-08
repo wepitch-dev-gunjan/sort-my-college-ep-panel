@@ -8,6 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ProfileContext } from "../../context/ProfileContext";
 import config from "@/config";
+import { UserContext } from "../../context/UserContext";
 const { backend_url } = config;
 
 const FacultyDetails = ({
@@ -20,6 +21,9 @@ const FacultyDetails = ({
   const [profileSubCount, setProfileSubCount] = useState(2);
   const { setAddfaculty, deleteData, setDeleteData } =
     useContext(ProfileContext);
+  const { user } = useContext(UserContext);
+  const [editMode, setEditMode] = useState(false);
+  const [editFaculty, setEditFaculty] = useState(null);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const handleDateChange = (date) => {
@@ -55,6 +59,43 @@ const FacultyDetails = ({
     window.history.pushState({ path: newPath }, "", newPath);
     setDeleteData((prev) => !prev);
   };
+  // handle Edit Save
+  const handleEdit = (data) => {
+    setEditFaculty(data);
+    setEditMode(true);
+  };
+  // handle cancel
+  const handleCancel = () => {
+    setEditFaculty(null);
+    setEditMode(false);
+  };
+  // handle Save And Put Api
+  const handleSave = async () => {
+    try {
+      const response = await axios.put(
+        `${backend_url}/ep/editfaculties/${editFaculty._id}`,
+        editFaculty,
+        {
+          headers: {
+            Authorization: user.token,
+          },
+        }
+      );
+      console.log("Faculty Edited Succesfully");
+      setEditMode(false);
+      setData((prev) => prev.map((item) => item._id === editFaculty._id));
+    } catch (error) {
+      console.log("error While Editing");
+    }
+  };
+  // Changes The Input
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setEditFaculty((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
   return (
     <div className="FacultyDetails-container">
       <div className="heading">
@@ -63,31 +104,67 @@ const FacultyDetails = ({
           Add
         </button>
       </div>
+      <hr />
+      {data.length === 0 ? (
+        <p> no faculty Found</p>
+      ) : (
+        <div className="profile-faculty-main">
+          {data.map((data) => (
+            <div key={data._id}>
+             <div className="profile-faculty-sub">
+  <div className="p-faculty-left">
+    <img src={data.display_pic}></img>
+  </div>
+  <div className="p-faculty-right">
+    {editMode && editFaculty && editFaculty._id === data._id ? (
+      <>
+        <input
+          type="text"
+          name="name"
+          value={editFaculty.name}
+          onChange={handleInputChange}
+        />
+        {/* Experience */}
+        <input
+          type="text"
+          name="type"
+          value={editFaculty.experience_in_years}
+          onChange={handleInputChange}
+        />
+        {/* Graduated from */}
+        <input
+          type="text"
+          name="course_fee"
+          value={editFaculty.graduated_from}
+          onChange={handleInputChange}
+        />
+        <button className="save_btn" onClick={handleSave}>
+          Save
+        </button>
+        <button className="cancel_btn" onClick={handleCancel}>
+          Cancel
+        </button>
+      </>
+    ) : (
+      <>
+        <p>
+          <span>{data.name}</span>
+        </p>
+        <p>{data.experience_in_years}</p>
+        <p>{data.graduated_from}</p>
+      </>
+    )}
+  </div>
+  <div>
+    <button onClick={() => handleEdit(data)}>Edit</button>
+    <button onClick={() => handleDeleteFaculty(data._id)}>Delete</button>
+  </div>
+</div>
 
-      <div className="profile-faculty-main">
-        {data.map((data, i) => {
-          return (
-            <div className="profile-faculty-sub">
-              <div className="p-faculty-left">
-                <img src={data.display_pic}></img>
-              </div>
-              <div className="p-faculty-right">
-                <p>
-                  <span>{data.name}</span>
-                </p>
-                <p>{data.experience_in_years}</p>
-                <p>{data.graduated_from}</p>
-              </div>
-              <div>
-                <button>Edit</button>
-                <button onClick={() => handleDeleteFaculty(data._id)}>
-                  Delete
-                </button>
-              </div>
             </div>
-          );
-        })}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
