@@ -43,8 +43,8 @@ const AddAnnouncementPopup = () => {
             placeholder="Enter a new announcement..."
         />
         <div className="actions">
-            <button className='add' onClick={handleAddAnnouncement}>Add</button>
             <button className='cancel' onClick={() => setAddAnnouncementPopup(false)}>Cancel</button>
+            <button className='add' onClick={handleAddAnnouncement}>Add</button>
         </div>
     </div>
 </div>

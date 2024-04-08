@@ -17,13 +17,15 @@
       background-color: #ffffff;
       padding: 20px;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 0px 8px;
       z-index: 1000;
       width: 40%;
     }
     
     .popup h2 {
       margin-top: 0;
+      padding: 0 0 0.3em 0;
     }
     
     .popup textarea {
@@ -34,11 +36,16 @@
       border-radius: 5px;
       padding: 10px;
       resize: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2em;
     }
     
     .popup .actions {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
+      gap: 1em;
+      padding: 1em 0 0 0 ;
     }
     
     .popup button {
@@ -55,8 +62,8 @@
     }
     
     .popup button.cancel {
-      background-color: #f5dfdde8;
-      color: #f44336;
-      border: 2px solid #f44336;
+      background-color: #ffffffe8;
+      color: #1e0a68cb;
+      border: 2px solid #1e0a68cb;
     }
 }
