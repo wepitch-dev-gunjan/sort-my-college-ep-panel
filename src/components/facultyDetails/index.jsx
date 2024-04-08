@@ -99,7 +99,7 @@ const FacultyDetails = ({
   return (
     <div className="FacultyDetails-container">
       <div className="heading">
-        <h2>Faculty Details</h2>
+        <h1>Faculty Details</h1>
         <button className="addfaculty" onClick={addfacultybtn}>
           Add
         </button>
@@ -165,7 +165,10 @@ const FacultyDetails = ({
                     <p>
                       <span>{data.name}</span>
                     </p>
-                    <p>{data.experience_in_years}</p>
+                    <p>
+                      {data.experience_in_years}{" "}
+                      <span>+ Years of Experience</span>{" "}
+                    </p>
                     <p>{data.graduated_from}</p>
                     <p>{data.qualifications}</p>
                     <div className="faculty-buttons">
