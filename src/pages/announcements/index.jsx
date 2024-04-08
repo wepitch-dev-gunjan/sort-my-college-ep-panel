@@ -75,6 +75,7 @@ const Announcements = () =>{
                     <AnnouncementsChildren
                     key={i} 
                     update={announcement.update}
+                    announcement_id={announcement._id}
                     
                     />
                 ))}

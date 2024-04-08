@@ -139,11 +139,15 @@ const KeyFeatures = () => {
                     </div>
                 </div>
                 :
+                
                 <div className="key-features-child">
-                    {keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
-                        <KeyFeaturesChildren key={i} featureName={keyFeatureInstitute.name}
-                                             featurePng={keyFeatureInstitute.key_features_icon}/>
-                    ))}
+                    {keyFeaturesInstitute.length === 0 ? (
+                        <p>You don't have any key features. Please click on edit to add.</p>
+                    ) : (
+                        keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
+                            <KeyFeaturesChildren key={i} featureName={keyFeatureInstitute.name} featurePng={keyFeatureInstitute.key_features_icon} />
+                        ))
+                    )}
                 </div>
             }
         </div>

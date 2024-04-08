@@ -4,15 +4,34 @@ import { MdDeleteOutline } from "react-icons/md";
 import { IoMdDoneAll } from "react-icons/io";
 import { useState, useEffect, useContext } from "react";
 import { ProfileContext } from '../../context/ProfileContext';
+import { UserContext } from '../../context/UserContext';
+import axios from "axios";
+import config from "@/config"
+
+const { backend_url } = config;
 
 const AnnouncementsChildren = (props) => {
     const { editAnnouncementsEnable, setEditAnnouncementsEnable } = useContext(ProfileContext);
-    const [isEditable, setIsEditable] = useState(false); // Local state to track edit mode
+    const [isEditable, setIsEditable] = useState(false);
+    const { user } = useContext(UserContext);
 
     const handleEditClick = () => {
-        setIsEditable(true); // Set the component to editable mode
-        setEditAnnouncementsEnable(true); // Set the global edit state
+        setIsEditable(true); 
+        setEditAnnouncementsEnable(true); 
     };
+
+    const handleDeleteAnnouncement = async (id) => {
+        try {
+            const response = await axios.delete(`${backend_url}/ep/announcements/${id}`,{
+                headers: {
+                    Authorization: user.token
+                }
+            })
+            console.log('Announcement deleted successfully:', response.data);
+        } catch(error){
+            console.log("Error deleting Announcement!!!")
+        }
+    }
 
     return (
         <div className={`announcements-children ${isEditable ? 'editable' : ''}`}>
@@ -27,7 +46,7 @@ const AnnouncementsChildren = (props) => {
                 ) : (
                     <IoMdDoneAll className='ac-done' onClick={() => setEditAnnouncementsEnable(false)} />
                 )}
-                <MdDeleteOutline className='ac-delete'/>
+                <MdDeleteOutline className='ac-delete' onClick={() => handleDeleteAnnouncement(props.announcement_id_id)} />
             </div>
         </div>
     );
