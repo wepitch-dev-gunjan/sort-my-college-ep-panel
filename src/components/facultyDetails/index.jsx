@@ -112,7 +112,9 @@ const FacultyDetails = ({
           {data.map((data) => (
             <div className="profile-faculty-sub" key={data._id}>
               {editMode && editFaculty && editFaculty._id === data._id ? (
-                <div className="p-faculty-left"></div>
+                <div className="p-faculty-left">
+                  <input className="img" type="file" name="" id="" />
+                </div>
               ) : (
                 <div className="p-faculty-left">
                   <img src={data.display_pic} />
