@@ -15,8 +15,11 @@ import { TiPlus } from "react-icons/ti";
 const { backend_url } = config;
 
 const Announcements = () =>{
-    const [announcements, setAnnouncements] = useState([]);
+    const {announcements, setAnnouncements} = useContext(ProfileContext);
+    const [newAnnouncementText, setNewAnnouncementText] = useState('');
+    const [showPopup, setShowPopup] = useState(false);
     const { editAnnouncementsEnable, setEditAnnouncementsEnable } = useContext(ProfileContext);
+    const {addAnnouncementPopup, setAddAnnouncementPopup} = useContext(ProfileContext);
     const { user } = useContext(UserContext);
 
 
@@ -35,13 +38,37 @@ const Announcements = () =>{
             }
         }
         fetchData();
-    }, [user.token])
+    }, [user.token]);
+
+    const togglePopup = () => {
+        setShowPopup(!showPopup);
+      };
+    
+      const handleAddAnnouncement = async () => {
+        try {
+          const response = await axios.post(`${backend_url}/ep/announcements`, {
+            update: newAnnouncementText,
+          }, {
+            headers: {
+                Authorization: user.token
+            }
+          });
+        
+          setAnnouncements([...announcements, response.data.data]); // Update announcements list
+          console.log(announcements)
+          console.log(response.data)
+          setNewAnnouncementText(''); // Clear the input
+          togglePopup(); // Close the popup
+        } catch (error) {
+          console.error('Error adding announcement:', error);
+        }
+      };
 
     return(
         <div className="announcements-main">
             <div className="announcements-head">
                 <h1>Announcements</h1>
-                    <button className='a-edit' >Add New</button>
+                    <button className='a-edit' onClick={() => setAddAnnouncementPopup(true)}>Add New</button>
             </div>
             <div className="announcements-parent">
                 {announcements.map((announcement, i) => (

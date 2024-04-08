@@ -33,7 +33,7 @@ import KeyFeatures from "./pages/keyFeatures";
 import AddFaculty from "./components/addFaculty";
 import AddCourse from "./components/buttons/addCourse";
 import Announcements from "./pages/announcements";
-
+import AddAnnouncementPopup from "./components/addAnnouncementPopup";
 
 function App() {
   const addProfilePicRef = useRef(null);
@@ -41,8 +41,9 @@ function App() {
 
   const { profilePicEditMode, setProfilePicEditMode } =
     useContext(ProfileContext);
-  const { coverImageEditMode, setCoverImageEditMode } =
+  const { coverImageEditMode, setCoverImageEditMode, addAnnouncementPopup, setAddAnnouncementPopup } =
     useContext(ProfileContext);
+
   const {
     deleteData,
     setDeleteData,
@@ -125,6 +126,7 @@ function App() {
       <div className="main">
         <ToastContainer />
 
+        {addAnnouncementPopup && <AddAnnouncementPopup setAddAnnouncementPopup={setAddAnnouncementPopup}/>}
         {notificationsEnable && <Notifications />}
 
         {isLoggedIn && <Sidebar />}
