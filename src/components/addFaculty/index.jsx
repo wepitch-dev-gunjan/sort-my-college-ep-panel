@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ImageUploader from "../ImageUploder";
 import "./style.scss";
 import axios from "axios";
 import config from "@/config";
+import useClickOutside from "../../customHooks/useClickOutside";
 const { backend_url } = config;
 
 const AddFaculty = ({ setAddfaculty }) => {
@@ -26,6 +27,7 @@ const AddFaculty = ({ setAddfaculty }) => {
           },
         }
       );
+
       console.log("Data sent successfully:", response.data);
       resetForm();
       setAddfaculty((prev) => !prev);
@@ -35,132 +37,146 @@ const AddFaculty = ({ setAddfaculty }) => {
       setSubmitting(false);
     }
   };
-
+  const handleCancel = () => {
+    setAddfaculty((prev) => !prev);
+  };
+  const Ref = useRef(null);
+  useClickOutside(Ref, () => handleCancel());
+  const handleCancelform = () => {
+    setAddfaculty((prev) => !prev);
+  };
   return (
     <div className="addfaculty-container">
-      <Formik
-        initialValues={{
-          name: "",
-          experience_in_years: "",
-          qualifications: "",
-          graduated_from: "",
-          image: null,
-        }}
-        validationSchema={Yup.object({
-          name: Yup.string().required("Name is required"),
-          experience_in_years: Yup.string().required("Experience is required"),
-          qualifications: Yup.string().required("Qualifications are required"),
-          graduated_from: Yup.string().required("Graduated From is required"),
-        })}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting, setFieldValue }) => (
-          <Form>
-            <div className="faculty_section">
-              <div className="main-container">
-                <div className="img_uploder">
-                 <ImageUploader />
-                  {/* <ImageUploader
-                    onImageUpload={(file) => setFieldValue("image", file)}
-                  /> */}
-                  <input
-                    type="file"
-                    onImageUpload={(file) => setFieldValue("image", file)}
-                  />
-                </div>
-                <div className="faculty-data">
-                  <div className="right-Section">
-                    <div className="faculty_details">
-                      <label htmlFor="name">Name:</label>
-                    </div>
-                    <div className="faculty_input">
-                      <Field
-                        type="text"
-                        className="input"
-                        id="name"
-                        name="name"
-                      />
-                      <br />
+      <div className="ref" ref={Ref}>
+        <Formik
+          initialValues={{
+            name: "",
+            experience_in_years: "",
+            qualifications: "",
+            graduated_from: "",
+            image: null,
+          }}
+          validationSchema={Yup.object({
+            name: Yup.string().required("Name is required"),
+            experience_in_years: Yup.string().required(
+              "Experience is required"
+            ),
+            qualifications: Yup.string().required(
+              "Qualifications are required"
+            ),
+            graduated_from: Yup.string().required("Graduated From is required"),
+          })}
+          onSubmit={handleSubmit}
+        >
+          {({ isSubmitting, setFieldValue }) => (
+            <Form>
+              <div className="faculty_section">
+                <div className="main-container">
+                  <div className="img_uploder">
+                    {/* <ImageUploader /> */}
+                    <ImageUploader
+                      onImageUpload={(file) => setFieldValue("image", file)}
+                    />
+                  </div>
+                  <div className="faculty-data">
+                    <div className="right-Section">
+                      <div className="faculty_details">
+                        <label htmlFor="name">Name:</label>
+                      </div>
+                      <div className="faculty_input">
+                        <Field
+                          type="text"
+                          className="input"
+                          id="name"
+                          name="name"
+                        />
+                        <br />
 
-                      <ErrorMessage
-                        name="name"
-                        component="span"
-                        className="error"
-                      />
+                        <ErrorMessage
+                          name="name"
+                          component="span"
+                          className="error"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="right-Section">
-                    <div className="faculty_details">
-                      <label htmlFor="experience">Experience in years:</label>
-                    </div>
-                    <div className="faculty_input">
-                      <Field
-                        type="text"
-                        id="experience_in_years"
-                        className="input"
-                        name="experience_in_years"
-                      />
-                      <br />
+                    <div className="right-Section">
+                      <div className="faculty_details">
+                        <label htmlFor="experience">Experience in years:</label>
+                      </div>
+                      <div className="faculty_input">
+                        <Field
+                          type="text"
+                          id="experience_in_years"
+                          className="input"
+                          name="experience_in_years"
+                        />
+                        <br />
 
-                      <ErrorMessage
-                        name="experience_in_years"
-                        component="span"
-                        className="error"
-                      />
+                        <ErrorMessage
+                          name="experience_in_years"
+                          component="span"
+                          className="error"
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="right-Section">
-                    <div className="faculty_details">
-                      <label htmlFor="qualifications">Qualifications</label>
+                    <div className="right-Section">
+                      <div className="faculty_details">
+                        <label htmlFor="qualifications">Qualifications</label>
+                      </div>
+                      <div className="faculty_input">
+                        <Field
+                          type="text"
+                          className="input"
+                          id="qualifications"
+                          name="qualifications"
+                        />
+                        <br />
+                        <ErrorMessage
+                          name="qualifications"
+                          component="span"
+                          className="error"
+                        />
+                      </div>
                     </div>
-                    <div className="faculty_input">
-                      <Field
-                        type="text"
-                        className="input"
-                        id="qualifications"
-                        name="qualifications"
-                      />
-                      <br />
-                      <ErrorMessage
-                        name="qualifications"
-                        component="span"
-                        className="error"
-                      />
-                    </div>
-                  </div>
 
-                  <div className="right-Section">
-                    <div className="faculty_details">
-                      <label htmlFor="graduatedFrom">Graduated From:</label>
+                    <div className="right-Section">
+                      <div className="faculty_details">
+                        <label htmlFor="graduatedFrom">Graduated From:</label>
+                      </div>
+                      <div className="faculty_input">
+                        <Field
+                          className="input"
+                          type="text"
+                          id="graduated_from"
+                          name="graduated_from"
+                        />
+                        <br />
+                        <ErrorMessage
+                          name="graduated_from"
+                          component="span"
+                          className="error"
+                        />
+                      </div>
                     </div>
-                    <div className="faculty_input">
-                      <Field
-                        className="input"
-                        type="text"
-                        id="graduated_from"
-                        name="graduated_from"
-                      />
-                      <br />
-                      <ErrorMessage
-                        name="graduated_from"
-                        component="span"
-                        className="error"
-                      />
+                    <div className="btns">
+                      <button
+                        className="button"
+                        type="submit"
+                        disabled={isSubmitting}
+                      >
+                        {isSubmitting ? "Submitting" : "Submit"}
+                      </button>
+                      <button className="button" onClick={handleCancelform}>
+                        Cancel
+                      </button>
                     </div>
                   </div>
-                  <button
-                    className="button"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? "Submitting" : "Submit"}
-                  </button>
                 </div>
               </div>
-            </div>
-          </Form>
-        )}
-      </Formik>
+            </Form>
+          )}
+        </Formik>
+      </div>
     </div>
   );
 };
