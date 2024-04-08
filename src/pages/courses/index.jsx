@@ -102,21 +102,28 @@ const Courses = () => {
       ) : (
         <div className="row card-parent">
           {courses.map((course) => (
-            <div key={course._id}>
-              <div className="card">
-                <div className="card-body">
+            <div className="card" key={course._id}>
+              <div className="card-body">
+                {editMode && editcourse && editcourse._id === course._id ? (
+                  <div className="input_field">
+                    <input className="img" type="file" name="image" />
+                  </div>
+                ) : (
                   <div className="images">
                     <img src={course.image} alt="Course Image" />
                   </div>
-                  {editMode && editcourse && editcourse._id === course._id ? (
-                    <>
-                      <input
-                        type="text"
-                        name="name"
-                        className="card-title"
-                        value={editcourse.name}
-                        onChange={handleInputChange}
-                      />
+                )}
+                {editMode && editcourse && editcourse._id === course._id ? (
+                  <>
+                    <input
+                      type="text"
+                      name="name"
+                      className="card-title"
+                      value={editcourse.name}
+                      onChange={handleInputChange}
+                    />
+                    <br />
+                    <div className="category_div">
                       {/* category */}
                       <label htmlFor="type">Category:</label>
                       <input
@@ -126,6 +133,8 @@ const Courses = () => {
                         value={editcourse.type}
                         onChange={handleInputChange}
                       />
+                    </div>
+                    <div className="course_div">
                       {/* fees */}
                       <label htmlFor="course_fee">Fees:</label>
 
@@ -136,86 +145,88 @@ const Courses = () => {
                         value={editcourse.course_fee}
                         onChange={handleInputChange}
                       />
-                      {/* Duration */}
-                      <label htmlFor="course_duration_in_days">Duration:</label>
+                    </div>
+                 <div className="duration_div">
+                     {/* Duration */}
+                    <label htmlFor="course_duration_in_days">Duration:</label>
 
-                      <input
-                        type="text"
-                        name="course_duration_in_days"
-                        className="card-text"
-                        value={editcourse.course_duration_in_days}
-                        onChange={handleInputChange}
-                      />
-                      {/* academic Session */}
-                      <label htmlFor="academic_session">Session:</label>
-                      <DatePicker
-                        label="Start Year"
-                        views={["year"]} // Only allow selecting the year
-                        value={editcourse.academic_session.start_year}
-                        onChange={(value) =>
-                          handleDateChange("start_year", value)
-                        }
-                        renderInput={(props) => (
-                          <input {...props} className="card-text" />
-                        )}
-                      />
+                    <input
+                      type="text"
+                      name="course_duration_in_days"
+                      className="card-text"
+                      value={editcourse.course_duration_in_days}
+                      onChange={handleInputChange}
+                    />
+                 </div>
+                    {/* academic Session */}
+                    <label htmlFor="academic_session">Session:</label>
+                    <DatePicker
+                      label="Start Year"
+                      views={["year"]} // Only allow selecting the year
+                      value={editcourse.academic_session.start_year}
+                      onChange={(value) =>
+                        handleDateChange("start_year", value)
+                      }
+                      renderInput={(props) => (
+                        <input {...props} className="card-text" />
+                      )}
+                    />
 
-                      <DatePicker
-                        label="End Year"
-                        views={["year"]} // Only allow selecting the year
-                        value={editcourse.academic_session.end_year}
-                        onChange={(value) =>
-                          handleDateChange("end_year", value)
-                        }
-                        renderInput={(props) => (
-                          <input {...props} className="card-text" />
-                        )}
-                      />
+                    <DatePicker
+                      label="End Year"
+                      views={["year"]} // Only allow selecting the year
+                      value={editcourse.academic_session.end_year}
+                      onChange={(value) => handleDateChange("end_year", value)}
+                      renderInput={(props) => (
+                        <input {...props} className="card-text" />
+                      )}
+                    />
 
-                      <button className="save_btn" onClick={handleSave}>
+                    <div className="icons">
+                      <button className="edit_btn" onClick={handleSave}>
                         Save
                       </button>
-                      <button className="cancel_btn" onClick={handleCancel}>
+                      <button className="delete_btn" onClick={handleCancel}>
                         Cancel
                       </button>
-                    </>
-                  ) : (
-                    <>
-                      <h5 className="card-title">{course.name}</h5>
-                      <p className="card-text">Category: {course.type}</p>
-                      <p className="card-text">Fees: {course.course_fee}</p>
-                      <p className="card-text">
-                        Duration: {course.course_duration_in_days}
-                      </p>
-                      <p className="card-text">
-                        Session:{" "}
-                        {course.academic_session?.start_year &&
-                          course.academic_session?.start_year.substring(
-                            0,
-                            4
-                          )}{" "}
-                        -{" "}
-                        {course.academic_session?.end_year &&
-                          course.academic_session?.end_year.substring(0, 4)}
-                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <h5 className="card-title">{course.name}</h5>
+                    <p className="card-text">Category: {course.type}</p>
+                    <p className="card-text">Fees: {course.course_fee}</p>
+                    <p className="card-text">
+                      Duration: {course.course_duration_in_days}
+                    </p>
+                    <p className="card-text">
+                      Session:{" "}
+                      {course.academic_session?.start_year &&
+                        course.academic_session?.start_year.substring(
+                          0,
+                          4
+                        )}{" "}
+                      -{" "}
+                      {course.academic_session?.end_year &&
+                        course.academic_session?.end_year.substring(0, 4)}
+                    </p>
 
-                      <div className="icons">
-                        <button
-                          className="edit_btn"
-                          onClick={() => handleEdit(course)}
-                        >
-                          Edit
-                        </button>
-                        <button
-                          className="delete_btn"
-                          onClick={() => Delete(course._id)}
-                        >
-                          Delete
-                        </button>
-                      </div>
-                    </>
-                  )}
-                </div>
+                    <div className="icons">
+                      <button
+                        className="edit_btn"
+                        onClick={() => handleEdit(course)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="delete_btn"
+                        onClick={() => Delete(course._id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           ))}

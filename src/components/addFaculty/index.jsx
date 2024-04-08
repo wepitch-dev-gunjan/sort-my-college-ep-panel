@@ -59,6 +59,7 @@ const AddFaculty = ({ setAddfaculty }) => {
             <div className="faculty_section">
               <div className="main-container">
                 <div className="img_uploder">
+                 <ImageUploader />
                   {/* <ImageUploader
                     onImageUpload={(file) => setFieldValue("image", file)}
                   /> */}

@@ -25,6 +25,7 @@ body {
 /* Card styles */
 .card {
     background-color: #fff;
+    width: 30%;
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -37,8 +38,11 @@ body {
 
 .card-body {
     padding: 9px;
-    img{
-     border-radius: 10px;
+    .images img{
+ width: 100%;
+ height: auto;
+ border-radius: 10px;
+
     }
     .icons {
      display: flex;

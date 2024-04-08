@@ -48,7 +48,7 @@ const FacultyDetails = ({
   };
   useEffect(() => {
     getFacultyDetails();
-  }, [deleteData]);
+  }, [deleteData , setAddfaculty]);
   const addfacultybtn = () => {
     setAddfaculty((prev) => !prev);
   };
@@ -60,8 +60,8 @@ const FacultyDetails = ({
     setDeleteData((prev) => !prev);
   };
   // handle Edit Save
-  const handleEdit = (data) => {
-    setEditFaculty(data);
+  const handleEdit = (faculty) => {
+    setEditFaculty(faculty);
     setEditMode(true);
   };
   // handle cancel
@@ -83,7 +83,9 @@ const FacultyDetails = ({
       );
       console.log("Faculty Edited Succesfully");
       setEditMode(false);
-      setData((prev) => prev.map((item) => item._id === editFaculty._id));
+      setData((prev) => prev.map((item) => (item._id === editFaculty._id ? response.data : item))
+      
+      );
     } catch (error) {
       console.log("error While Editing");
     }
@@ -133,8 +135,8 @@ const FacultyDetails = ({
                     {/* Experience */}
                     <input
                       className="faculty-input"
-                      type="text"
-                      name="type"
+                      type="number"
+                      name="experience_in_years"
                       value={editFaculty.experience_in_years}
                       onChange={handleInputChange}
                     />
@@ -142,14 +144,14 @@ const FacultyDetails = ({
                     <input
                       className="faculty-input"
                       type="text"
-                      name="course_fee"
+                      name="graduated_from"
                       value={editFaculty.graduated_from}
                       onChange={handleInputChange}
                     />
                     <input
                       className="faculty-input"
                       type="text"
-                      name="course_fee"
+                      name="qualifications"
                       value={editFaculty.qualifications}
                       onChange={handleInputChange}
                     />
