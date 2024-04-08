@@ -36,17 +36,22 @@
   .profile-faculty-main {
     width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    // justify-content: center;
+    // align-items: center;
     gap: 1em;
     row-gap: 0em;
     flex-wrap: wrap;
+    row-gap: 1rem;
     justify-content: flex-start;
     .profile-faculty-sub {
-      width: 18%;
+      width: 32%;
+      height: 12rem;
       padding: 1em;
       display: flex;
       gap: 1em;
+
+      padding: 20px;
+
       border-radius: 20px;
       background-color: #ffffff;
       box-shadow: rgba(50, 50, 93, 0.137) 0px 2px 5px -1px,
@@ -60,13 +65,24 @@
         }
       }
       .p-faculty-right {
-        p {
-          font-size: 0.9em;
-          color: #1111119c;
-          span {
-            font-weight: bold;
-            color: #111111b0;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        .info {
+          p {
+            font-size: 1.2rem;
+            color: #1111119c;
+            span {
+              font-weight: bold;
+              color: #111111b0;
+            }
           }
+        }
+
+        .faculty-buttons {
+          display: flex;
+          column-gap: 2rem;
         }
       }
     }

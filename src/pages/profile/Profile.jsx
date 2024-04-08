@@ -89,11 +89,11 @@ const Profile = () => {
               setProfile={setProfile}
             />
 
-            <OtherInfo
-              profile={profile}
-              editProfileEnable={editProfileEnable}
-              setProfile={setProfile}
-            />
+            {/* <OtherInfo
+                profile={profile}
+                editProfileEnable={editProfileEnable}
+                setProfile={setProfile}
+              /> */}
 
             {/* <FacultyDetails
               profile={profile}

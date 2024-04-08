@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import config from "@/config";
-
 import axios from "axios";
 import "./style.scss";
 import { ProfileContext } from "../../context/ProfileContext";
 import { UserContext } from "../../context/UserContext";
 import { DatePicker } from "rsuite";
+import config from "@/config";
 const { backend_url } = config;
+
 const Courses = () => {
   const { user } = useContext(UserContext);
   const { addCourse, setAddCourse } = useContext(ProfileContext);

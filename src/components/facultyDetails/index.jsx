@@ -111,56 +111,57 @@ const FacultyDetails = ({
         <div className="profile-faculty-main">
           {data.map((data) => (
             <div key={data._id}>
-             <div className="profile-faculty-sub">
-  <div className="p-faculty-left">
-    <img src={data.display_pic}></img>
-  </div>
-  <div className="p-faculty-right">
-    {editMode && editFaculty && editFaculty._id === data._id ? (
-      <>
-        <input
-          type="text"
-          name="name"
-          value={editFaculty.name}
-          onChange={handleInputChange}
-        />
-        {/* Experience */}
-        <input
-          type="text"
-          name="type"
-          value={editFaculty.experience_in_years}
-          onChange={handleInputChange}
-        />
-        {/* Graduated from */}
-        <input
-          type="text"
-          name="course_fee"
-          value={editFaculty.graduated_from}
-          onChange={handleInputChange}
-        />
-        <button className="save_btn" onClick={handleSave}>
-          Save
-        </button>
-        <button className="cancel_btn" onClick={handleCancel}>
-          Cancel
-        </button>
-      </>
-    ) : (
-      <>
-        <p>
-          <span>{data.name}</span>
-        </p>
-        <p>{data.experience_in_years}</p>
-        <p>{data.graduated_from}</p>
-      </>
-    )}
-  </div>
-  <div>
-    <button onClick={() => handleEdit(data)}>Edit</button>
-    <button onClick={() => handleDeleteFaculty(data._id)}>Delete</button>
-  </div>
-</div>
-
+              <div className="profile-faculty-sub">
+                <div className="p-faculty-left">
+                  <img src={data.display_pic}></img>
+                </div>
+                <div className="p-faculty-right">
+                  {editMode && editFaculty && editFaculty._id === data._id ? (
+                    <>
+                      <input
+                        type="text"
+                        name="name"
+                        value={editFaculty.name}
+                        onChange={handleInputChange}
+                      />
+                      {/* Experience */}
+                      <input
+                        type="text"
+                        name="type"
+                        value={editFaculty.experience_in_years}
+                        onChange={handleInputChange}
+                      />
+                      {/* Graduated from */}
+                      <input
+                        type="text"
+                        name="course_fee"
+                        value={editFaculty.graduated_from}
+                        onChange={handleInputChange}
+                      />
+                      <button className="save_btn" onClick={handleSave}>
+                        Save
+                      </button>
+                      <button className="cancel_btn" onClick={handleCancel}>
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <p>
+                        <span>{data.name}</span>
+                      </p>
+                      <p>{data.experience_in_years}</p>
+                      <p>{data.graduated_from}</p>
+                    </>
+                  )}
+                </div>
+                <div>
+                  <button onClick={() => handleEdit(data)}>Edit</button>
+                  <button onClick={() => handleDeleteFaculty(data._id)}>
+                    Delete
+                  </button>
+                </div>
+              </div>
             </div>
           ))}
         </div>

@@ -8,6 +8,8 @@ import axios from "axios";
 import { DashboardContext } from "../../context/DashboardContext";
 import { ProfileContext } from "../../context/ProfileContext";
 import config from "@/config";
+import { Link } from "react-router-dom";
+import Leads from "../leads";
 const { backend_url } = config;
 
 const Dashboard = () => {
@@ -71,6 +73,12 @@ const Dashboard = () => {
         {/* {isSmallScreen ? null : <RecentPayments />} */}
         {/* <RecentPayments /> */}
         <div className="dashboard-recent-payments-main">
+          <div className="seeall">
+            <Link to="/leads" element={<Leads />}>
+              See all
+            </Link>
+          </div>
+
           <RecentLeads />
         </div>
       </div>

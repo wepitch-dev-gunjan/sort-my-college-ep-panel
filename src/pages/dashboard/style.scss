@@ -1,13 +1,11 @@
-
-.all-dashboard{
+.all-dashboard {
   display: flex;
   flex-direction: row;
   width: 100%;
   justify-content: space-between;
   background-color: var(--primary-light);
-  .sidebar-container span{
-   font-size: 1px;
-
+  .sidebar-container span {
+    font-size: 1px;
   }
   .Dashboard-container {
     display: flex;
@@ -18,74 +16,77 @@
     overflow-y: auto;
     height: 100%;
 
-
     .business-dashbaord {
       display: flex;
       flex-direction: column;
       gap: 40px;
       padding: 20px;
-      h1{
-       font-size: var(--fs-l);
+      h1 {
+        font-size: var(--fs-l);
       }
-      h3{
-       font-size: var(--fs-sm);
+      h3 {
+        font-size: var(--fs-sm);
       }
-      h4{
-       font-size: var(--fs-sm);
+      h4 {
+        font-size: var(--fs-sm);
       }
-      p{
-       font-size: var(--fs-sm);
+      p {
+        font-size: var(--fs-sm);
       }
       .widgets-container {
         display: flex;
         // flex-wrap: wrap;
         justify-content: space-between;
         gap: 2%;
-
       }
     }
-    .payments-top, .payments-table{
-      h1{
+    .payments-top,
+    .payments-table {
+      h1 {
         font-size: var(--fs-l);
       }
-      h4{
+      h4 {
         font-size: var(--fs-m);
       }
     }
+    .dashboard-recent-payments-main {
+      margin: 0px;
+      padding: 0px;
+      .seeall {
+        text-align: end;
+        padding-right: 5%;
+      }
+    }
   }
-  
 }
 
-@media only screen
-and (max-width : 650px) {
-
-  .Dashboard-container{
-        // write recent payment css here 
-        .dashboard-recent-payments-main{
-          .dashboard-table-parent{
-            height: 500px;
-            width: 60%;
-            .payments-table{
-              h4{
-                font-size: var(--fs-table-heading);
-              }
-            }
-            .table{
-              overflow: scroll;
-              height: 100%;
-              width: 500px;
-
-            }
+@media only screen and (max-width: 650px) {
+  .Dashboard-container {
+    // write recent payment css here
+    .dashboard-recent-payments-main {
+      .dashboard-table-parent {
+        height: 500px;
+        width: 60%;
+        .payments-table {
+          h4 {
+            font-size: var(--fs-table-heading);
           }
         }
-        // recent payment css ends 
-        .widgets-container {
-          flex-direction: column;
-          height: 35vh;
-          gap: unset;
-        }
-        .Widget-container {
-          width: 100%;
+        .table {
+          overflow: scroll;
+          height: 100%;
+          width: 500px;
         }
       }
     }
+    // recent payment css ends
+    .widgets-container {
+      flex-direction: column;
+      height: 35vh;
+      gap: unset;
+    }
+    .Widget-container {
+      width: 100%;
+    }
+  }
+}
