@@ -8,7 +8,7 @@
   border: 1px solid #1111111a;
   // border-radius: 20px;
   gap: 24px;
-
+  overflow-y: auto;
   .heading {
     border-bottom: 1px solid #1111111a;
     padding-bottom: 12px;
@@ -42,15 +42,14 @@
     row-gap: 0em;
     flex-wrap: wrap;
     row-gap: 1rem;
-    justify-content: flex-start;
+    // justify-content: flex-start;
     .profile-faculty-sub {
       width: 32%;
       height: 12rem;
       padding: 1em;
       display: flex;
       gap: 1em;
-
-      padding: 20px;
+      // padding: 20px;
 
       border-radius: 20px;
       background-color: #ffffff;
@@ -58,6 +57,11 @@
         rgba(0, 0, 0, 0.2) 0px 1px 3px -1px;
       .p-faculty-left {
         width: 50%;
+        display: flex;
+
+        .img {
+          height: auto;
+        }
         img {
           width: 100%;
           height: auto;
@@ -70,8 +74,11 @@
         gap: 5px;
 
         .info {
+          .faculty-input {
+            font-size: 1.3rem;
+          }
           p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: #1111119c;
             span {
               font-weight: bold;
@@ -82,7 +89,15 @@
 
         .faculty-buttons {
           display: flex;
-          column-gap: 2rem;
+          row-gap: 2rem;
+          column-gap: 1rem;
+
+          .buttons {
+            width: 80px;
+            height: 40px;
+            border-radius: 10px;
+            background-color: rgba(64, 64, 230, 0.816);
+          }
         }
       }
     }
