@@ -7,6 +7,8 @@ import { ProfileContext } from '../../context/ProfileContext';
 import { UserContext } from '../../context/UserContext';
 import axios from "axios";
 import config from "@/config"
+import { CiEdit } from "react-icons/ci";
+
 
 const { backend_url } = config;
 
@@ -47,7 +49,7 @@ const AnnouncementsChildren = (props) => {
             )}
             <div className="ac-edit-icons">
                 {!isEditable && !editAnnouncementsEnable ? (
-                    <FaRegEdit className='ac-edit' onClick={handleEditClick} />
+                    <CiEdit className='ac-edit' onClick={handleEditClick} />
                 ) : (
                     <IoMdDoneAll className='ac-done' onClick={() => setEditAnnouncementsEnable(false)} />
                 )}
