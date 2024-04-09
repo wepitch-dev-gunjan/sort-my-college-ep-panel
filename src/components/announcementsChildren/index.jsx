@@ -13,6 +13,7 @@ const { backend_url } = config;
 const AnnouncementsChildren = (props) => {
     const { editAnnouncementsEnable, setEditAnnouncementsEnable } = useContext(ProfileContext);
     const [isEditable, setIsEditable] = useState(false);
+    const {announcements, setAnnouncements} = useContext(ProfileContext);
     const { user } = useContext(UserContext);
 
     const handleEditClick = () => {
@@ -28,6 +29,10 @@ const AnnouncementsChildren = (props) => {
                 }
             })
             console.log('Announcement deleted successfully:', response.data);
+            setAnnouncements(prevAnnouncements =>
+                prevAnnouncements.filter(announcement => announcement._id !== id)
+            );
+            console.log(announcements)
         } catch(error){
             console.log("Error deleting Announcement!!!")
         }
@@ -46,7 +51,7 @@ const AnnouncementsChildren = (props) => {
                 ) : (
                     <IoMdDoneAll className='ac-done' onClick={() => setEditAnnouncementsEnable(false)} />
                 )}
-                <MdDeleteOutline className='ac-delete' onClick={() => handleDeleteAnnouncement(props.announcement_id_id)} />
+                <MdDeleteOutline className='ac-delete' onClick={() => handleDeleteAnnouncement(props.announcement_id)} />
             </div>
         </div>
     );
