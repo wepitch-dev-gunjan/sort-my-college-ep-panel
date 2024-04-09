@@ -30,31 +30,31 @@ const Dashboard = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const incrementActivityPoint = async () => {
-      // console.log("last_checkin_date:", profile.last_checkin_date);
-      const lastCheckinDate = new Date(profile.last_checkin_date)
-        .toString()
-        .slice(0, 10);
-      // changed toISOString to toString line22 line24
-      const currentDate = new Date().toString().slice(0, 10); // Corrected to get current date properly
-      console.log(currentDate);
+  // useEffect(() => {
+  //   const incrementActivityPoint = async () => {
+  //     // console.log("last_checkin_date:", profile.last_checkin_date);
+  //     const lastCheckinDate = new Date(profile.last_checkin_date)
+  //       .toString()
+  //       .slice(0, 10);
+  //     // changed toISOString to toString line22 line24
+  //     const currentDate = new Date().toString().slice(0, 10); // Corrected to get current date properly
+  //     console.log(currentDate);
 
-      if (lastCheckinDate !== currentDate) {
-        const { data } = await axios.put(
-          `${backend_url}/counsellor/activity/increment-activity-points`,
-          null,
-          {
-            headers: {
-              Authorization: user.token,
-            },
-          }
-        );
-        console.log(data);
-      }
-    };
-    incrementActivityPoint();
-  }, []);
+  //     if (lastCheckinDate !== currentDate) {
+  //       const { data } = await axios.put(
+  //         `${backend_url}/counsellor/activity/increment-activity-points`,
+  //         null,
+  //         {
+  //           headers: {
+  //             Authorization: user.token,
+  //           },
+  //         }
+  //       );
+  //       console.log(data);
+  //     }
+  //   };
+  //   incrementActivityPoint();
+  // }, []);
 
   console.log(dashboardData);
   return (
