@@ -26,12 +26,12 @@ const FacultyDetails = ({
   const [editFaculty, setEditFaculty] = useState(null);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const handleDateChange = (date) => {
-    setProfile((prev) => ({
-      ...prev,
-      date_of_birth: formatDate(date),
-    }));
-  };
+  // const handleDateChange = (date) => {
+  //   setProfile((prev) => ({
+  //     ...prev,
+  //     date_of_birth: formatDate(date),
+  //   }));
+  // };
 
   const formatDate = (date) => {
     return dayjs(date).format("YYYY-MM-DD");
@@ -39,7 +39,11 @@ const FacultyDetails = ({
 
   const getFacultyDetails = async () => {
     try {
-      const { data } = await axios.get(`${backend_url}/ep/faculties`);
+      const { data } = await axios.get(`${backend_url}/ep/faculties`,{
+       headers: {
+        Authorization :user.token,
+       }
+      });
       console.log(data);
       setData(data);
     } catch (error) {
@@ -76,10 +80,10 @@ const FacultyDetails = ({
         `${backend_url}/ep/editfaculties/${editFaculty._id}`,
         editFaculty,
         {
-          headers: {
-            Authorization: user.token,
-          },
-        }
+         headers: {
+           Authorization: user.token,
+         },
+       }
       );
       console.log("Faculty Edited Succesfully");
       setEditMode(false);
@@ -106,12 +110,11 @@ const FacultyDetails = ({
           Add
         </button>
       </div>
-      <hr />
       {data.length === 0 ? (
         <p> no faculty Found</p>
       ) : (
         <div className="profile-faculty-main">
-          {data.map((data) => (
+          {data.map((data,i) => (
             <div className="profile-faculty-sub" key={data._id}>
               {editMode && editFaculty && editFaculty._id === data._id ? (
                 <div className="p-faculty-left">

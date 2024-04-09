@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ImageUploader from "../ImageUploder";
@@ -6,10 +6,12 @@ import "./style.scss";
 import axios from "axios";
 import config from "@/config";
 import useClickOutside from "../../customHooks/useClickOutside";
+import { UserContext } from "../../context/UserContext";
 const { backend_url } = config;
 
 const AddFaculty = ({ setAddfaculty }) => {
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+ const { user } = useContext(UserContext);
+   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("experience_in_years", values.experience_in_years);
@@ -23,7 +25,8 @@ const AddFaculty = ({ setAddfaculty }) => {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
+            // "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
+            Authorization : user.token,
           },
         }
       );

@@ -14,7 +14,7 @@ export const handleInputInsideInputChange = (value, input1, input2, setProfile) 
   setProfile((prevProfile) => ({
     ...prevProfile,
     [input1]: {
-      ...prevProfile.location,
+      ...prevProfile.address,
       [input2]: value,
     },
   }));

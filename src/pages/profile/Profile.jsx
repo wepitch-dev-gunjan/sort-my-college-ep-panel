@@ -30,7 +30,7 @@ const Profile = () => {
   // Function to handle saving changes
   const handleSave = async () => {
     try {
-      const endpointUrl = `${backend_url}/counsellor/${user._id}`; // Replace with your actual endpoint URL
+      const endpointUrl = `${backend_url}/ep/institute`; // Replace with your actual endpoint URL
 
       const response = await axios.put(endpointUrl, profile, {
         headers: {
@@ -54,7 +54,6 @@ const Profile = () => {
     setProfile(initialUserProfileBackup);
     setEditProfileEnable(false);
   };
-
   return (
     <div className="Profile-container">
       <div className="profile-body">
@@ -75,7 +74,7 @@ const Profile = () => {
           <div className="top">
             {/* <h1>{profile.name}</h1> */}
             <h1>Siliguri Institute of Technology</h1>
-            <h3>{profile.designation}</h3>
+            {/* <h3>{profile.designation}</h3> */}
           </div>
           <div className="middle">
             <RegistrantDetails

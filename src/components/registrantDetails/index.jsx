@@ -25,11 +25,12 @@ const RegistrantDetails = ({ profile, editProfileEnable, setProfile }) => {
               {editProfileEnable ? (
                   <input
                     type="text"
-                    value={profile.phone_no}
-                    onChange={handlePhoneNumberChange}
-                  />
+                    value={profile.registrant_full_name}
+                    onChange={(e) =>
+                     handleInput("registrant_full_name", e.target.value, setProfile)
+                   }/>
               ) : (
-                <p>Admin's Name</p>
+                <p>{profile.registrant_full_name}</p>
               )}
             </div>
           </div>
@@ -53,13 +54,13 @@ const RegistrantDetails = ({ profile, editProfileEnable, setProfile }) => {
                 </select>
                 <input
                   type="tel"
-                  value={profile.phone_no}
-                  onChange={handlePhoneNumberChange}
+                  value={profile.registrant_contact_number}
+                  onChange={(e) => handleInput('registrant_contact_number', e.target.value, setProfile)}
                 />
               </div>
               ) : (
                 <>
-                  <p>+91 823 344 9683</p>
+                  <p>{profile.registrant_contact_number}</p>
                 </>
               )}
             </div>
@@ -73,7 +74,7 @@ const RegistrantDetails = ({ profile, editProfileEnable, setProfile }) => {
               <p>Email Id</p>
             </div>
             <div className="info-value">
-              {editProfileEnable ? (
+              {/* {editProfileEnable ? (
                 <>
                 <input
                   type="email"
@@ -83,9 +84,10 @@ const RegistrantDetails = ({ profile, editProfileEnable, setProfile }) => {
                 </>
               ) : (
                 <>
-                  <p>admin@siit.com</p>
+                  <p>{profile.email}</p>
                 </>
-              )}
+              )} */}
+              <p>{profile.email}</p>
             </div>
           </div>
         </div>
@@ -99,11 +101,11 @@ const RegistrantDetails = ({ profile, editProfileEnable, setProfile }) => {
               {editProfileEnable ? (
                   <input
                     type="text"
-                    value={profile.phone_no}
-                    onChange={handlePhoneNumberChange}
+                    value={profile.registrant_designation}
+                    onChange={e => handleInput('registrant_designation', e.target.value, setProfile)}
                   />
               ) : (
-                <p>Registrar</p>
+                <p>{profile.registrant_designation}</p>
               )}
             </div>
           </div>

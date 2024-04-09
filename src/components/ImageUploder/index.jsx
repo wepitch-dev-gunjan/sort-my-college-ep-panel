@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Uploader, Message, Loader, useToaster } from "rsuite";
-import AvatarIcon from "@rsuite/icons/legacy/Avatar";
+// import AvatarIcon from "@rsuite/icons/legacy/Avatar";
+import { MdOutlineCloudUpload } from "react-icons/md";
 
 function previewFile(file, callback) {
   const reader = new FileReader();
@@ -48,7 +49,7 @@ const ImageUploader = () => {
         {fileInfo ? (
           <img src={fileInfo} alt="Uploaded" width="100%" height="100%" />
         ) : (
-          <AvatarIcon style={{ fontSize: 200 }} />
+          <MdOutlineCloudUpload style={{ fontSize: 200 }} />
         )}
       </button>
     </Uploader>

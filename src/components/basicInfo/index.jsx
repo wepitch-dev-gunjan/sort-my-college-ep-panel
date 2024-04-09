@@ -3,24 +3,23 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-import { handleInput } from "../../utilities";
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DemoContainer, DemoItem } from '@mui/x-date-pickers/internals/demo';
-import { styled } from '@mui/material/styles';
-import Tooltip from '@mui/material/Tooltip';
-import Stack from '@mui/material/Stack';
+import { handleInput, handleInputInsideInputChange } from "../../utilities";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { styled } from "@mui/material/styles";
+import Tooltip from "@mui/material/Tooltip";
+import Stack from "@mui/material/Stack";
 
-
-const ProSpan = styled('span')({
-  display: 'inline-block',
-  height: '1em',
-  width: '1em',
-  verticalAlign: 'middle',
-  marginLeft: '0.3em',
-  marginBottom: '0.08em',
-  backgroundSize: 'contain',
-  backgroundRepeat: 'no-repeat',
-  backgroundImage: 'url(https://mui.com/static/x/pro.svg)',
+const ProSpan = styled("span")({
+  display: "inline-block",
+  height: "1em",
+  width: "1em",
+  verticalAlign: "middle",
+  marginLeft: "0.3em",
+  marginBottom: "0.08em",
+  backgroundSize: "contain",
+  backgroundRepeat: "no-repeat",
+  backgroundImage: "url(https://mui.com/static/x/pro.svg)",
 });
 
 const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
@@ -32,7 +31,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
   };
 
   const formatDate = (date) => {
-    return dayjs(date).format('YYYY-MM-DD');
+    return dayjs(date).format("YYYY-MM-DD");
   };
 
   function Label({ componentName, valueType, isProOnly }) {
@@ -41,7 +40,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
         <strong>{componentName}</strong> for {valueType} editing
       </span>
     );
-  
+
     if (isProOnly) {
       return (
         <Stack direction="row" spacing={0.5} component="span">
@@ -57,7 +56,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
         </Stack>
       );
     }
-  
+
     return content;
   }
 
@@ -68,317 +67,352 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
       </div>
 
       <div className="info">
-
-          <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>Name of Institute</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-
-                      <input
-                      type="text"
-                      value={profile.address}
-                      onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                      />
-                  ) : (
-                    <p>
-                      Siliguri Institute of Technology
-                    </p>
-                  )}
-                </div>
-              </div>
+        {/* name */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Name of Institute</p>
             </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>About the Institute</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-                      <>
-                        <textarea
-                        type="text"
-                        value={profile.address}
-                        onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                        ></textarea>
-                        <p className="short-desc-institute" >Write a short description about the Institute</p>
-                      </>
-                  ) : (
-                    <p>
-                      At SIIT, our mission is to cultivate a dynamic learning environment that empowers students to excel in the fields of technology, computer science, and information systems. We are committed to providing comprehensive education that not only equips students with technical skills but also nurtures their creativity, critical thinking, and problem-solving abilities.
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field address-labels">
-                  {!editProfileEnable ? <p>Address</p> : 
-                    <>
-                      <p>Address</p>
-                      <p>Area</p>
-                      <p>City</p>
-                      <p>Country</p>
-                      <p>Pincode</p>
-                    </>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <input
+                  type="text"
+                  value={profile.name}
+                  onChange={(e) =>
+                    handleInput("name", e.target.value, setProfile)
                   }
-                  
-                </div>
-                <div className="info-value address-inputs">
-                  {editProfileEnable ? (
-                    <>
-                      <input
-                        type="text"
-                        value={profile.address}
-                        onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                        />
-                      <input
-                        type="text"
-                        value={profile.address}
-                        onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                        />
-                      <input
-                        type="text"
-                        value={profile.address}
-                        onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                        />
-                      <input
-                        type="text"
-                        value={profile.address}
-                        onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                        />
-                      <input
-                        type="text"
-                        value={profile.address}
-                        onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                        />
-                        
-                    </>
-                  ) : (
-                    <p>S.I.T Campus, Salbari,Hill Cart Road,
-                    Post Office - Sukna, Siliguri,
-                    District - Darjeeling,
-                    Pin Code - 734009,
-                    West Bengal (WB),
-                    India (IN).</p>
-                  )}
-                </div>
-              </div>
+                />
+              ) : (
+                <p>{profile.name}</p>
+              )}
             </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>Year Established</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-
-                    <input
+          </div>
+        </div>
+        {/* about */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>About the Institute</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <>
+                  <textarea
                     type="text"
-                    value={profile.address}
-                    onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                    />
-                  ) : (
-                    <p>1978</p>
-                  )}
-                </div>
-              </div>
+                    value={profile.about}
+                    onChange={(e) =>
+                      handleInput("about", e.target.value, setProfile)
+                    }
+                  ></textarea>
+                  <p className="short-desc-institute">
+                    Write a short description about the Institute
+                  </p>
+                </>
+              ) : (
+                <p>{profile.about}</p>
+              )}
             </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>Accreditations/Affiliations</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-
-                      <input
-                      type="text"
-                      value={profile.address}
-                      onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                      />
-                  ) : (
-                    <p>
-                      <ul className="specializations">
-                        <li>Indian Association of Higher Education (IAHE) </li>
-                        <li>National Consortium for Research Collaboration (NCRC)</li>
-                        <li>Center for Advancement in Indian Education (CAIE)</li>
-                      </ul>
-
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>Email</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-
-                      <input
-                      type="email"
-                      value={profile.address}
-                      onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                      />
-                  ) : (
-                    <p>
-                      info@siit.com
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>Contact Number</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-                    <div className="phone-input">
-                    {/* Country code dropdown */}
-                    <select
-                      value={profile.phone_code}
-                      onChange={(e) => handleInput('phone_code', e.target.value, setProfile)}
-                    >
-                      <option value="+1">+1(USA)</option>
-                      <option value="+91">+91(India)</option>
-                    </select>
+          </div>
+        </div>
+        {/* address not done yet */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field address-labels">
+             <p>Address</p>
+             </div>
+            <div className="info-value address-inputs">
+              {editProfileEnable ? (
+                <>
+                  {
                     <input
-                      type="tel"
-                      value={profile.phone_no}
-                      onChange={((e) => handleInput("email", e.target.value, setProfile))}
-                    />
-                  </div>
-                  ) : (
-                    <>
-                      <p>+91 823 344 9683</p>
-                    </>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>GSTIN</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-
-                      <input
                       type="text"
-                      value={profile.address}
-                      onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                      />
-                  ) : (
-                    <p>
-                      MFNPK9212A452
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>    
-            
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>Institute Timings</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
+                      value={profile.address.building_number}
+                      onChange={(e) =>
+                        handleInputInsideInputChange(
+                          e.target.value,
+                          'address',
+                          'building_number',
+                          setProfile
+                        )
+                      }
+                    />
+                  }
 
-                      <>
-                        <div className="institute-timings-days">
-                          <p>Monday - </p>
-                          {/* <DemoItem label={<Label componentName="TimePicker" valueType="time" />}>
+                  {
+                    <input
+                      type="text"
+                      value={profile.address.area}
+                      onChange={(e) =>
+                        handleInputInsideInputChange(
+                          e.target.value,
+                          'address',
+                          'area',
+                          setProfile
+                        )
+                      }
+                    />
+                  }
+
+                  {
+                    <input
+                      type="text"
+                      value={profile.address.city}
+                      onChange={(e) =>
+                        handleInputInsideInputChange(
+                          e.target.value,
+                          'address',
+                          'city',
+                          setProfile
+                        )
+                      }
+                    />
+                  }
+
+                  {
+                    <input
+                      type="text"
+                      value={profile.address.state}
+                      onChange={(e) =>
+                        handleInputInsideInputChange(
+                          e.target.value,
+                          'address',
+                          'state',
+                          setProfile
+                        )
+                      }
+                    />
+                  }
+                </>
+              ) : (
+               <>
+                <p>{`${profile.address?.building_number},`}</p>
+                <p>{`${profile.address?.area},`}</p>
+                <p>{`${profile.address?.city},`}</p>
+                <p>{`${profile.address?.state},`}</p>
+                <p>{`${profile.address?.pin_code},`}</p>
+               </>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* year_established_in */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Year Established</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <input
+                  type="number"
+                  value={profile.year_established_in}
+                  onChange={(e) =>
+                    handleInput(
+                      "year_established_in",
+                      e.target.value,
+                      setProfile
+                    )
+                  }
+                />
+              ) : (
+                <p>{profile.year_established_in}</p>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* affilations */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Accreditations/Affiliations</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <input
+                  type="text"
+                  value={profile.affilations}
+                  onChange={(e) =>
+                    handleInput("affilations", e.target.value, setProfile)
+                  }
+                />
+              ) : (
+                <p>{profile.affilations}</p>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* email */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Email</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <input
+                  type="email"
+                  value={profile.email}
+                  onChange={(e) =>
+                    handleInput("email", e.target.value, setProfile)
+                  }
+                />
+              ) : (
+                <p>{profile.email} </p>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* contact_number */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Contact Number</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <div className="phone-input">
+                  {/* Country code dropdown */}
+                  <select
+                    value={profile.phone_code}
+                    onChange={(e) =>
+                      handleInput("phone_code", e.target.value, setProfile)
+                    }
+                  >
+                    <option value="+1">+1(USA)</option>
+                    <option value="+91">+91(India)</option>
+                  </select>
+                  <input
+                    type="tel"
+                    value={profile.contact_number}
+                    onChange={(e) =>
+                      handleInput("contact_number", e.target.value, setProfile)
+                    }
+                  />
+                </div>
+              ) : (
+                <>
+                  <p>{profile.contact_number}</p>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* gstin */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>GSTIN</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <input
+                  type="text"
+                  value={profile.gstin}
+                  onChange={(e) =>
+                    handleInput("gstin", e.target.value, setProfile)
+                  }
+                />
+              ) : (
+                <p>{profile.gstin}</p>
+              )}
+            </div>
+          </div>
+        </div>
+        {/* Institute Timings */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Institute Timings</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <>
+                  <div className="institute-timings-days">
+                    <p>Monday - </p>
+                    {/* <DemoItem label={<Label componentName="TimePicker" valueType="time" />}>
                             <TimePicker />
                           </DemoItem> */}
-                        </div>
-                          
-                        <p>Tuesday - </p>
-                        <p>Wednesday - </p>
-                        <p>Thursday - </p>
-                        <p>Friday - </p>
-                        <p>Saturday - </p>
-                        <p>Sunday - </p>
-                      </>
-                  ) : (
-                    <div className="institute-profile-timing-main">
-                        <p>Monday - <span>09:00 to 18:00</span></p>
-                        <p>Tuesday - <span>09:00 to 18:00</span></p>
-                        <p>Wednesday - <span>09:00 to 18:00</span></p>
-                        <p>Thursday - <span>09:00 to 18:00</span></p>
-                        <p>Friday - <span>09:00 to 18:00</span></p>
-                        <p>Saturday - <span>09:00 to 18:00</span></p>
+                  </div>
 
-                    </div>
-                  )}
+                  <p>Tuesday - </p>
+                  <p>Wednesday - </p>
+                  <p>Thursday - </p>
+                  <p>Friday - </p>
+                  <p>Saturday - </p>
+                  <p>Sunday - </p>
+                </>
+              ) : (
+                <div className="institute-profile-timing-main">
+                  <p>
+                    Monday - <span>09:00 to 18:00</span>
+                  </p>
+                  <p>
+                    Tuesday - <span>09:00 to 18:00</span>
+                  </p>
+                  <p>
+                    Wednesday - <span>09:00 to 18:00</span>
+                  </p>
+                  <p>
+                    Thursday - <span>09:00 to 18:00</span>
+                  </p>
+                  <p>
+                    Friday - <span>09:00 to 18:00</span>
+                  </p>
+                  <p>
+                    Saturday - <span>09:00 to 18:00</span>
+                  </p>
                 </div>
-              </div>
+              )}
             </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>Mode of Study</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-
-                    <select name="mode-of-study">
-                      <option value="online">Online</option>
-                      <option value="offline">Offline</option>
-                      <option value="hybrid">Hybrid</option>
-                    </select>
-                  ) : (
-                    <p>
-                      Offline/Offine/Both
-                    </p>
-                  )}
-                </div>
-              </div>
+          </div>
+        </div>
+        {/* mode_of_study */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Mode of Study</p>
             </div>
-
-            <div className="row">
-              <div className="col">
-                <div className="info-field">
-                  <p>Medium of Study</p>
-                </div>
-                <div className="info-value">
-                  {editProfileEnable ? (
-                      <>
-                        <input
-                        type="text"
-                        value={profile.address}
-                        onChange={(e) => handleInput("email", e.target.value, setProfile)}
-                        />
-                        <span className="input-info-small">Example: English</span>
-                      </>
-                  ) : (
-                    <p>
-                      Example: English
-                    </p>
-                  )}
-                </div>
-              </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <input
+                  type="text"
+                  value={profile.mode_of_study}
+                  onChange={(e) =>
+                    handleInput("mode_of_study", e.target.value, setProfile)
+                  }
+                ></input>
+              ) : (
+                <p>{profile.mode_of_study}</p>
+              )}
             </div>
-
+          </div>
+        </div>
+        {/* medium_of_study */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Medium of Study</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <>
+                  <input
+                    type="text"
+                    value={profile.medium_of_study}
+                    onChange={(e) =>
+                      handleInput("medium_of_study", e.target.value, setProfile)
+                    }
+                  />
+                  <span className="input-info-small">Example: English</span>
+                </>
+              ) : (
+                <p>{profile.medium_of_study}</p>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
-    </div >
+    </div>
   );
 };
 
