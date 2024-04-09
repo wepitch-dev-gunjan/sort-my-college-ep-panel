@@ -14,6 +14,7 @@ import { MdMenu } from "react-icons/md";
 import axios from "axios";
 import config from "@/config";
 import { UserContext } from "../../../context/UserContext";
+import RecentLeadsFilters from "../../RecentLeadFilters";
 const { backend_url } = config;
 const RecentLeads = () => {
   const [queries, setQueries] = useState([]);
@@ -56,68 +57,17 @@ const RecentLeads = () => {
   useEffect(() => {
     getQueriesData();
   }, []);
-
+const pathName = window.location.pathname;
   return (
     <div className="RecentPayments-container">
       <h1>Recent Leads</h1>
-
-      <div className="filters" ref={dropdownRef}>
-        {xSmallScreen ? (
-          <>
-            <div className="dropdown-header" onClick={toggleDropdown}>
-              {/* Hamburger icon */}
-              <span>Filters</span>
-              <MdMenu />
-            </div>
-            {isDropdownOpen && (
-              <div className="dropdown-content">
-                {/* Search field */}
-                <TextField
-                  label="Search"
-                  type="text"
-                  name="search"
-                  placeholder="Search by all fields"
-                />
-                {/* Status dropdown */}
-                <FormControl style={{ width: "150px" }}>
-                  <InputLabel>Status</InputLabel>
-                  <Select name="status" label="Status" defaultValue="All">
-                    <MenuItem value="All">ALL</MenuItem>
-                    <MenuItem value="REPLIED">REPLIED</MenuItem>
-                    <MenuItem value="PENDING">PENDING</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            )}
-          </>
-        ) : (
-          <>
-            <TextField
-              label="Search"
-              type="text"
-              name="search"
-              sx={{ height: "50px", width: "400px" }}
-              placeholder="Search by all fields"
-            />
-            <FormControl style={{ width: "150px" }}>
-              <InputLabel>Status</InputLabel>
-              <Select name="status" label="Status" defaultValue="All">
-                <MenuItem value="All">ALL</MenuItem>
-                <MenuItem value="REPLIED">REPLIED</MenuItem>
-                <MenuItem value="PENDING">PENDING</MenuItem>
-              </Select>
-            </FormControl>
-            <div className="btn_main">
-              <Button sx={{ height: "55 px" }} variant="contained">
-                Apply Filters
-              </Button>
-              <Button sx={{ height: "55 px" }} variant="contained">
-                Reset Filters
-              </Button>
-            </div>
-          </>
-        )}
-      </div>
+<>
+{pathName === "/leads" ? (
+ <RecentLeadsFilters />
+): null
+}
+</>
+    
       <div className="payments-top">
         {/* <h1>Recent Leads</h1> */}
         <Link to="/queries">

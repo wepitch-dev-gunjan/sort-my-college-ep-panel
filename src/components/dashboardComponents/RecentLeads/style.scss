@@ -6,45 +6,6 @@
  h1 {
    font-size: var(--fs-l);
  }
-
- .filters {
-   position: relative; 
-   display: flex;
-   justify-content: space-between; 
-   padding: 20px;
-   border-bottom: 1px solid black;
-   margin-bottom: 10px;
-   gap: 20px;
-   // width :100%;
-   .dropdown-header {
-     display: flex;
-     align-items: center;
-     cursor: pointer;
-     gap: 5px; /* Adjust gap between text and icon */
-   }
-
-   .dropdown-header span {
-     font-size: 20px;
-   }
-
-   .dropdown-content {
-     // position: absolute; 
-     width: 200px;
-     top: 100%; 
-     left: 0;
-     z-index: 1; 
-     display: none; 
-     flex-direction: column;
-     gap: 10px;
-     background-color: white; 
-     padding: 10px; 
-   }
-
-   &:hover .dropdown-content {
-     display: flex; /* Display the dropdown content on hover */
-   }
- }
-
  .btn_main {
    display: flex;
    gap: 20px;
@@ -97,3 +58,6 @@
    }
  }
 }
+
+
+
