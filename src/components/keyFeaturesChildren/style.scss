@@ -10,6 +10,8 @@
     align-items: center;
     gap: 1em;
 
+
+
     img{
         width: 50%;
         height: auto;
@@ -18,4 +20,29 @@
         font-size: 1.2em;
         text-align: center;
     }
+    .tooltip {
+        position: absolute;
+        top: 30%;
+        
+        background-color: #ffffff63;
+        color: #00000098;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out; /* Add transition property */
+    }
+    
+    .key-features-children-block {
+        position: relative;
+        /* Rest of your styles */
+    }
+    
+    .tooltip.active {
+        opacity: 1;
+        border: 0;
+    }
+    
+    
 }

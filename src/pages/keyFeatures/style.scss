@@ -57,17 +57,52 @@
     }
     .edit-key-features{
         display: flex;
+        align-items: center;
         gap: 2em;
         width: 100%;
+        height: 100%;
+        overflow-y: scroll;
+        padding: 0 20px 0 20px;
 
         .key-features-remaining{
             width: 50%;
+            border: 1.5px solid #000000ee;
+            border-radius: 5px;
+            
+            .key-features-children-block{
+                height: 30%;
+                width: 22%;
+                img{
+                    cursor: grab;
+                    cursor: -webkit-grab;
+                }
+                .grabbing {
+                    cursor: grabbing;
+                    cursor: -webkit-grabbing;
+                  }
+                
+            }
         }
         .key-features-existing{
             width: 49%;
+            border: 2px dashed #888888a4;
+            border-radius: 5px;
+            
+            .key-features-children-block{
+                height: 30%;
+                width: 22%;
+                img{
+                    cursor: grab;
+                    cursor: -webkit-grab;
+                }
+                .grabbing {
+                    cursor: grabbing;
+                    cursor: -webkit-grabbing;
+                  }
+            }
         }
         .key-features-child{
-            padding: 0 0 0 40px ;
+            padding: 40px 0 0 40px ;
             p{
                 font-size: 0.9em;
             }
@@ -76,11 +111,18 @@
 
     .key-features-child{
         width: 100%;
-        height: max-content;
+        height: 100%;
+        overflow-y: scroll;
+        align-content: flex-start;
         display: flex;
         flex-wrap: wrap;
         gap: 1em;
         padding: 20px 40px 40px 40px;
     }
-    
+    .key-features-children-block{
+        height: 40%;
+        width: 16%;
+
+    }
+
 }

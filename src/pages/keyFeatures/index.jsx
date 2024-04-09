@@ -5,6 +5,7 @@ import config from "@/config"
 import { useState, useEffect, useContext } from "react";
 import { UserContext } from '../../context/UserContext';
 import { ProfileContext } from '../../context/ProfileContext';
+import { GoArrowSwitch } from "react-icons/go";
 
 const { backend_url } = config;
 
@@ -13,6 +14,7 @@ const KeyFeatures = () => {
     const [remainingKeyFeatures, setRemainingKeyFeatures] = useState([]);
     const { user } = useContext(UserContext);
     const { editKeyFeatureEnable, setEditKeyFeatureEnable } = useContext(ProfileContext);
+    
 
     useEffect(() => {
         async function fetchData() {
@@ -124,6 +126,7 @@ const KeyFeatures = () => {
                             />
                         ))}
                     </div>
+                    <GoArrowSwitch />
                     <div className="key-features-child key-features-existing"
                          onDrop={(e) => handleDrop(e, 'institute')}
                          onDragOver={handleDragOver}>
