@@ -47,7 +47,7 @@ const RecentLeads = () => {
         },
       });
       let { data } = response;
-      console.log("sddsfsdf", data);
+      console.log(data);
       setQueries(data);
     } catch (error) {
       console.log("error");
@@ -57,17 +57,12 @@ const RecentLeads = () => {
   useEffect(() => {
     getQueriesData();
   }, []);
-const pathName = window.location.pathname;
+  const pathName = window.location.pathname;
   return (
     <div className="RecentPayments-container">
       <h1>Recent Leads</h1>
-<>
-{pathName === "/leads" ? (
- <RecentLeadsFilters />
-): null
-}
-</>
-    
+      <>{pathName === "/leads" ? <RecentLeadsFilters /> : null}</>
+
       <div className="payments-top">
         {/* <h1>Recent Leads</h1> */}
         <Link to="/queries">

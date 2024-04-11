@@ -28,12 +28,12 @@ import DocumentDelete from "./components/deletePopUp";
 import Leads from "./pages/leads";
 import Courses from "./pages/courses";
 import Faculties from "./pages/faculties";
-import AllQueries from "./pages/allqueries";
 import KeyFeatures from "./pages/keyFeatures";
 import AddFaculty from "./components/addFaculty";
 import AddCourse from "./components/buttons/addCourse";
 import Announcements from "./pages/announcements";
 import AddAnnouncementPopup from "./components/addAnnouncementPopup";
+import QueryDetail from "./pages/queryDetail";
 
 function App() {
   const addProfilePicRef = useRef(null);
@@ -41,8 +41,12 @@ function App() {
 
   const { profilePicEditMode, setProfilePicEditMode } =
     useContext(ProfileContext);
-  const { coverImageEditMode, setCoverImageEditMode, addAnnouncementPopup, setAddAnnouncementPopup } =
-    useContext(ProfileContext);
+  const {
+    coverImageEditMode,
+    setCoverImageEditMode,
+    addAnnouncementPopup,
+    setAddAnnouncementPopup,
+  } = useContext(ProfileContext);
 
   const {
     deleteData,
@@ -126,7 +130,11 @@ function App() {
       <div className="main">
         <ToastContainer />
 
-        {addAnnouncementPopup && <AddAnnouncementPopup setAddAnnouncementPopup={setAddAnnouncementPopup}/>}
+        {addAnnouncementPopup && (
+          <AddAnnouncementPopup
+            setAddAnnouncementPopup={setAddAnnouncementPopup}
+          />
+        )}
         {notificationsEnable && <Notifications />}
 
         {isLoggedIn && <Sidebar />}
@@ -144,7 +152,7 @@ function App() {
                 <Route path="/leads" element={<Leads />} />
                 <Route
                   path="/allQueries/:enquiry_id"
-                  element={<AllQueries />}
+                  element={<QueryDetail />}
                 />
                 <Route path="/key-features" element={<KeyFeatures />} />
                 <Route
@@ -163,7 +171,7 @@ function App() {
                   }
                 />
 
-                <Route path="/announcements" element={<Announcements/>} />
+                <Route path="/announcements" element={<Announcements />} />
 
                 {/* <Route
                   path="/help/faq-and-troubleshooting/ask-a-question"
