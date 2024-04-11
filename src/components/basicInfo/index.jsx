@@ -10,6 +10,7 @@ import { styled } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Stack from "@mui/material/Stack";
 
+
 const ProSpan = styled("span")({
   display: "inline-block",
   height: "1em",
@@ -23,6 +24,9 @@ const ProSpan = styled("span")({
 });
 
 const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
+
+  const [aboutInputs, setAboutInputs] = useState(profile.about || [""]);
+
   const handleDateChange = (date) => {
     setProfile((prev) => ({
       ...prev,
@@ -57,13 +61,37 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
       );
     }
 
+    const handleAddAboutPoint = () => {
+      setProfile((prevProfile) => ({
+        ...prevProfile,
+        about: [...prevProfile.about, ""],
+      }));
+    };
+    
+
     return content;
   }
+
+  const handleAboutInputChange = (index, value) => {
+    const newAboutInputs = [...aboutInputs];
+    newAboutInputs[index] = value;
+    setAboutInputs(newAboutInputs);
+  };
+
+  const addAboutInput = () => {
+    setAboutInputs([...aboutInputs, ""]);
+  };
+
+  const removeAboutInput = (index) => {
+    const newAboutInputs = [...aboutInputs];
+    newAboutInputs.splice(index, 1);
+    setAboutInputs(newAboutInputs);
+  };
 
   return (
     <div className="BasicInfo-container">
       <div className="heading">
-        <h2>Basic info</h2>
+        <h2>Institute Details</h2>
       </div>
 
       <div className="info">
@@ -89,7 +117,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
           </div>
         </div>
         {/* about */}
-        <div className="row">
+        {/* <div className="row">
           <div className="col">
             <div className="info-field">
               <p>About the Institute</p>
@@ -97,19 +125,51 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             <div className="info-value">
               {editProfileEnable ? (
                 <>
-                  <textarea
+                  <input
                     type="text"
                     value={profile.about}
                     onChange={(e) =>
                       handleInput("about", e.target.value, setProfile)
                     }
-                  ></textarea>
+                  ></input>
                   <p className="short-desc-institute">
-                    Write a short description about the Institute
+                    Describe about the Institute in points
                   </p>
                 </>
               ) : (
                 <p>{profile.about}</p>
+              )}
+            </div>
+          </div>
+        </div> */}
+        {/* about new*/}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>About the Institute</p>
+            </div>
+            <div className="info-value about-info-value">
+            {editProfileEnable ? (
+                <>
+                  {aboutInputs.map((about, index) => (
+                    <div className="about-sub-points" key={index}>
+                      <input
+                        type="text"
+                        value={about}
+                        onChange={(e) => handleAboutInputChange(index, e.target.value)}
+                      />
+                      {index > 0 && (
+                        <button className="remove-about-point" onClick={() => removeAboutInput(index)}>Remove</button>
+                      )}
+                    </div>
+                  ))}
+                  <button className="add-about-point" onClick={addAboutInput}>Add</button>
+                  <p className="short-desc-institute">
+                    Describe about the Institute in points
+                  </p>
+                </>
+              ) : (
+                <p>{profile.about.join(", ")}</p>
               )}
             </div>
           </div>
@@ -192,6 +252,32 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                 <p>{`${profile.address?.pin_code},`}</p>
                </>
               )}
+            </div>
+          </div>
+        </div>
+        {/* direction URL */}
+        <div className="row">
+          <div className="col">
+            <div className="info-field">
+              <p>Direction URL</p>
+            </div>
+            <div className="info-value">
+              {editProfileEnable ? (
+                <>
+                <input
+                  type="text"
+                  value={profile.direction_url}
+                  onChange={(e) =>
+                    handleInput("direction_url", e.target.value, setProfile)
+                  }
+                />
+                <span className="input-info-small">Example: https://maps.app.goo.gl/hDKQS8UDo8RKvFW28</span>
+                </>
+                
+              ) : (
+                <p><a href={profile.direction_url}>{profile.direction_url}</a></p>
+              )}
+              
             </div>
           </div>
         </div>

@@ -101,6 +101,29 @@
             font-size: 0.9em;
           }
         }
+        .about-info-value{
+          display: flex;
+          flex-direction: column;
+          gap: 0.5em;
+          
+          .about-sub-points{
+            display: flex;
+            flex-direction: column;
+            gap: 0.3em;
+            align-items: flex-end;
+          }
+          .add-about-point{
+            background-color: #1F0A68;
+            color: #ffffff;
+            padding: 0.5em;
+            border-radius: 5px;
+            width: 30%;
+          }
+          .remove-about-point{
+            background: none;
+            color: red;
+          }
+        }
       }
     }
   }

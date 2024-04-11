@@ -48,11 +48,11 @@ const AnnouncementsChildren = (props) => {
                 <p>{props.update}</p>
             )}
             <div className="ac-edit-icons">
-                {!isEditable && !editAnnouncementsEnable ? (
+                {/* {!isEditable && !editAnnouncementsEnable ? (
                     <CiEdit className='ac-edit' onClick={handleEditClick} />
                 ) : (
                     <IoMdDoneAll className='ac-done' onClick={() => setEditAnnouncementsEnable(false)} />
-                )}
+                )} */}
                 <MdDeleteOutline className='ac-delete' onClick={() => handleDeleteAnnouncement(props.announcement_id)} />
             </div>
         </div>
