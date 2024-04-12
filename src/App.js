@@ -34,6 +34,7 @@ import AddCourse from "./components/buttons/addCourse";
 import Announcements from "./pages/announcements";
 import AddAnnouncementPopup from "./components/addAnnouncementPopup";
 import QueryDetail from "./pages/queryDetail";
+import QueryReplied from "./components/queryDetailReplied";
 
 function App() {
   const addProfilePicRef = useRef(null);
@@ -56,6 +57,8 @@ function App() {
     addCourse,
     setAddCourse,
     setCourses,
+    setQueryPopup,
+    queryPopup,
   } = useContext(ProfileContext);
 
   const { askQuestionEnable, setAskQuestionEnable } = useContext(HelpContext);
@@ -134,6 +137,11 @@ function App() {
           <AddAnnouncementPopup
             setAddAnnouncementPopup={setAddAnnouncementPopup}
           />
+        )}
+        {queryPopup && (
+          <div className="repliedConformationbtn">
+            <QueryReplied setQueryPopup={setQueryPopup} />
+          </div>
         )}
         {notificationsEnable && <Notifications />}
 

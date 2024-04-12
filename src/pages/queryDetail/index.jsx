@@ -4,6 +4,7 @@ import axios from "axios";
 import config from "@/config";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../context/UserContext";
+import { ProfileContext } from "../../context/ProfileContext";
 const { backend_url } = config;
 const QueryDetail = () => {
   const id = useParams();
@@ -11,6 +12,7 @@ const QueryDetail = () => {
   console.log(id);
   const [enquiry, setEnquiry] = useState("");
   const { user } = useContext(UserContext);
+  const { queryPopup, setQueryPopup } = useContext(ProfileContext);
   // const [rerender, setRerender] = useState(false);
   const getQueriesData = async () => {
     try {
@@ -30,22 +32,23 @@ const QueryDetail = () => {
     }
   };
   const changeStatus = async () => {
-    try {
-      const { data } = await axios.put(
-        `${backend_url}/ep/singleEnqury/${enquiry_id}`,
-        {},
-        {
-          headers: {
-            Authorization: user.token,
-          },
-        }
-      );
-      console.log(data);
-      setEnquiry(data);
-      // setRerender((prev) => !prev);
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   const { data } = await axios.put(
+    //     `${backend_url}/ep/singleEnqury/${enquiry_id}`,
+    //     {},
+    //     {
+    //       headers: {
+    //         Authorization: user.token,
+    //       },
+    //     }
+    //   );
+    //   console.log(data);
+    //   setEnquiry(data);
+    //   // setRerender((prev) => !prev);
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    setQueryPopup((prev) => !prev);
   };
 
   useEffect(() => {
@@ -88,7 +91,7 @@ const QueryDetail = () => {
             <>
               <div className="btn1">
                 <button
-                  disabled={enquiry.status === "Replied"}
+                  // disabled={enquiry.status === "Replied"}
                   onClick={changeStatus}
                 >
                   Replied

@@ -38,6 +38,7 @@ export const ProfileProvider = ({ children }) => {
   const [announcements, setAnnouncements] = useState([]);
   const [editAnnouncementsEnable, setEditAnnouncementsEnable] = useState(false);
   const [addAnnouncementPopup, setAddAnnouncementPopup] = useState(false);
+  const [queryPopup, setQueryPopup] = useState(false);
 
   return (
     <ProfileContext.Provider
@@ -64,8 +65,9 @@ export const ProfileProvider = ({ children }) => {
         editAnnouncementsEnable,
         setEditAnnouncementsEnable,
         addAnnouncementPopup,
-        setAddAnnouncementPopup
-
+        setAddAnnouncementPopup,
+        setQueryPopup,
+        queryPopup,
       }}
     >
       {children}
