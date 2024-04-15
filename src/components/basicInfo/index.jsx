@@ -76,6 +76,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
     const newAboutInputs = [...aboutInputs];
     newAboutInputs[index] = value;
     setAboutInputs(newAboutInputs);
+    console.log(aboutInputs);
   };
 
   const addAboutInput = () => {
@@ -170,6 +171,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                 </>
               ) : (
                 <p>{profile.about.join(", ")}</p>
+
               )}
             </div>
           </div>
