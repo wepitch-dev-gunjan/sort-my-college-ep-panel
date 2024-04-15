@@ -113,9 +113,13 @@ const KeyFeatures = () => {
             </div>
             {editKeyFeatureEnable ?
                 <div className="edit-key-features">
+                    
                     <div className="key-features-child key-features-remaining"
                          onDrop={(e) => handleDrop(e, 'remaining')}
                          onDragOver={handleDragOver}>
+                        <div className="key-features-child-heading">
+                            <h5>All Available Key Features</h5>
+                        </div>
                         {remainingKeyFeatures.map((remainingKeyFeature, i) => (
                             <KeyFeaturesChildren
                                 key={i}
@@ -130,6 +134,9 @@ const KeyFeatures = () => {
                     <div className="key-features-child key-features-existing"
                          onDrop={(e) => handleDrop(e, 'institute')}
                          onDragOver={handleDragOver}>
+                        <div className="key-features-child-heading">
+                            <h5>Your Key Features</h5>
+                        </div>
                         {keyFeaturesInstitute.map((keyFeatureInstitute, i) => (
                             <KeyFeaturesChildren
                                 key={i}

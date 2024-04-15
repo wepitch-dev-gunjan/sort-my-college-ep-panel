@@ -71,14 +71,20 @@ const Announcements = () =>{
                     <button className='a-edit' onClick={() => setAddAnnouncementPopup(true)}>Add New</button>
             </div>
             <div className="announcements-parent">
-                {announcements.map((announcement, i) => (
-                    <AnnouncementsChildren
-                    key={i} 
-                    update={announcement.update}
-                    announcement_id={announcement._id}
-                    
-                    />
-                ))}
+            {announcements.length === 0 ? (
+                    <div className="no-announcements-message">
+                        <p>You don't have any announcements yet, please click on 'Add New' to add an announcement.</p>
+                    </div>
+                ) : (
+                    announcements.map((announcement, i) => (
+                        <AnnouncementsChildren
+                            key={i}
+                            update={announcement.update}
+                            announcement_id={announcement._id}
+                            createdAt={(new Date(announcement.createdAt)).toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' }) + ' ' + (new Date(announcement.createdAt)).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}
+                        />
+                    ))
+                )}
                 {/* <button><TiPlus /></button> */}
             </div>
         </div>

@@ -9,7 +9,16 @@
     p{
         font-size: 1em;
     }
+    .ac-update-n-date{
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
 
+        .ac-date{
+            color: #777676;
+            font-size: 0.8em;
+        }
+    }
     .ac-edit-icons{
         display: flex;
         gap: 0.5em;

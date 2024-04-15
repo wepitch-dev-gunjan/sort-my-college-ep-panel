@@ -40,12 +40,16 @@ const AnnouncementsChildren = (props) => {
         }
     }
 
+
     return (
         <div className={`announcements-children ${isEditable ? 'editable' : ''}`}>
             {isEditable ? (
                 <input type="text" value={props.update} />
             ) : (
-                <p>{props.update}</p>
+                <div class="ac-update-n-date">
+                    <p>{props.update}</p>
+                    <p className='ac-date'>{props.createdAt}</p>
+                </div>
             )}
             <div className="ac-edit-icons">
                 {/* {!isEditable && !editAnnouncementsEnable ? (
