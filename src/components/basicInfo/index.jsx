@@ -67,8 +67,6 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
         about: [...prevProfile.about, ""],
       }));
     };
-    
-
     return content;
   }
 
@@ -77,6 +75,10 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
     newAboutInputs[index] = value;
     setAboutInputs(newAboutInputs);
     console.log(aboutInputs);
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      about: newAboutInputs, // Update the about field with newAboutInputs
+    }));
   };
 
   const addAboutInput = () => {
@@ -448,6 +450,9 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                   </p>
                   <p>
                     Saturday - <span>09:00 to 18:00</span>
+                  </p>
+                  <p>
+                    Sunday - <span>09:00 to 18:00</span>
                   </p>
                 </div>
               )}
