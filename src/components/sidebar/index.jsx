@@ -75,8 +75,8 @@ const Sidebar = () => {
       <div className="sidebar-container">
         {/* {profile.verified &&
           // !profile.verified && 
-          (
-          <> */}
+          ( */}
+          <>
             <SidebarMenuButton
               href="/"
               icon={LuLayoutDashboard}
@@ -131,9 +131,9 @@ const Sidebar = () => {
               expand={expand}
             />
 
-{/* 
+
           </>
-          )
+          {/* )
 
         } */}
         <hr />

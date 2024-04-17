@@ -73,7 +73,7 @@ const RecentLeads = () => {
         <div className="table payments-table">
           <div className="row">
             <div className="col">
-              <h4>ID</h4>
+              <h4>SNO</h4>
             </div>
             <div className="col">
               <h4>Date</h4>
@@ -93,7 +93,7 @@ const RecentLeads = () => {
             <div className="row" key={i}>
               <div className="col">
                 {" "}
-                <p>{query._id}</p>
+                <p>{i+1}</p>
               </div>
               <div className="col">
                 <p>{query.date}</p>

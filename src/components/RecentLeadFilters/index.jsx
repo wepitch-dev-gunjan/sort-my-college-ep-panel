@@ -15,6 +15,7 @@ const RecentLeadsFilters = () => {
         <InputLabel>Status</InputLabel>
         <Select name="status" label="Status" defaultValue="All">
           <MenuItem value="All">ALL</MenuItem>
+          <MenuItem value="UNSEEN">UNSEEN</MenuItem>
           <MenuItem value="REPLIED">REPLIED</MenuItem>
           <MenuItem value="PENDING">PENDING</MenuItem>
         </Select>
