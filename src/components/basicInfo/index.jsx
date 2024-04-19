@@ -10,7 +10,6 @@ import { styled } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Stack from "@mui/material/Stack";
 
-
 const ProSpan = styled("span")({
   display: "inline-block",
   height: "1em",
@@ -24,15 +23,14 @@ const ProSpan = styled("span")({
 });
 
 const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
-
   const [aboutInputs, setAboutInputs] = useState(profile.about || [""]);
 
-  const handleDateChange = (date) => {
-    setProfile((prev) => ({
-      ...prev,
-      date_of_birth: formatDate(date),
-    }));
-  };
+  // const handleDateChange = (date) => {
+  //   setProfile((prev) => ({
+  //     ...prev,
+  //     date_of_birth: formatDate(date),
+  //   }));
+  // };
 
   const formatDate = (date) => {
     return dayjs(date).format("YYYY-MM-DD");
@@ -152,38 +150,46 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
               <p>About the Institute</p>
             </div>
             <div className="info-value about-info-value">
-            {editProfileEnable ? (
+              {editProfileEnable ? (
                 <>
                   {aboutInputs.map((about, index) => (
                     <div className="about-sub-points" key={index}>
                       <input
                         type="text"
                         value={about}
-                        onChange={(e) => handleAboutInputChange(index, e.target.value)}
+                        onChange={(e) =>
+                          handleAboutInputChange(index, e.target.value)
+                        }
                       />
                       {index > 0 && (
-                        <button className="remove-about-point" onClick={() => removeAboutInput(index)}>Remove</button>
+                        <button
+                          className="remove-about-point"
+                          onClick={() => removeAboutInput(index)}
+                        >
+                          Remove
+                        </button>
                       )}
                     </div>
                   ))}
-                  <button className="add-about-point" onClick={addAboutInput}>Add</button>
+                  <button className="add-about-point" onClick={addAboutInput}>
+                    Add
+                  </button>
                   <p className="short-desc-institute">
                     Describe about the Institute in points
                   </p>
                 </>
               ) : (
                 <p>{profile.about.join(", ")}</p>
-
               )}
             </div>
           </div>
         </div>
-        {/* address not done yet */}
+        {/* address  */}
         <div className="row">
           <div className="col">
             <div className="info-field address-labels">
-             <p>Address</p>
-             </div>
+              <p>Address</p>
+            </div>
             <div className="info-value address-inputs">
               {editProfileEnable ? (
                 <>
@@ -194,8 +200,8 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       onChange={(e) =>
                         handleInputInsideInputChange(
                           e.target.value,
-                          'address',
-                          'building_number',
+                          "address",
+                          "building_number",
                           setProfile
                         )
                       }
@@ -209,8 +215,8 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       onChange={(e) =>
                         handleInputInsideInputChange(
                           e.target.value,
-                          'address',
-                          'area',
+                          "address",
+                          "area",
                           setProfile
                         )
                       }
@@ -224,8 +230,8 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       onChange={(e) =>
                         handleInputInsideInputChange(
                           e.target.value,
-                          'address',
-                          'city',
+                          "address",
+                          "city",
                           setProfile
                         )
                       }
@@ -239,8 +245,8 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       onChange={(e) =>
                         handleInputInsideInputChange(
                           e.target.value,
-                          'address',
-                          'state',
+                          "address",
+                          "state",
                           setProfile
                         )
                       }
@@ -248,13 +254,13 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                   }
                 </>
               ) : (
-               <>
-                <p>{`${profile.address?.building_number},`}</p>
-                <p>{`${profile.address?.area},`}</p>
-                <p>{`${profile.address?.city},`}</p>
-                <p>{`${profile.address?.state},`}</p>
-                <p>{`${profile.address?.pin_code},`}</p>
-               </>
+                <>
+                  <p>{`${profile.address?.building_number},`}</p>
+                  <p>{`${profile.address?.area},`}</p>
+                  <p>{`${profile.address?.city},`}</p>
+                  <p>{`${profile.address?.state},`}</p>
+                  <p>{`${profile.address?.pin_code},`}</p>
+                </>
               )}
             </div>
           </div>
@@ -268,28 +274,34 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             <div className="info-value">
               {editProfileEnable ? (
                 <>
-                <input
-                  type="text"
-                  value={profile.direction_url}
-                  onChange={(e) =>
-                    handleInput("direction_url", e.target.value, setProfile)
-                  }
-                />
-                <span className="input-info-small">Example: https://maps.app.goo.gl/hDKQS8UDo8RKvFW28</span>
+                  <input
+                    type="text"
+                    value={profile.direction_url}
+                    onChange={(e) =>
+                      handleInput("direction_url", e.target.value, setProfile)
+                    }
+                  />
+                  <span className="input-info-small">
+                    Example: https://maps.app.goo.gl/hDKQS8UDo8RKvFW28
+                  </span>
                 </>
-                
               ) : (
-                <p><a href={profile.direction_url}>{profile.direction_url}</a></p>
+                <p>
+                  <a href={profile.direction_url} target="blank">
+                    {" "}
+                    {profile.direction_url}
+                  </a>
+                </p>
               )}
-              
             </div>
           </div>
         </div>
+
         {/* year_established_in */}
         <div className="row">
           <div className="col">
             <div className="info-field">
-              <p>Year Established</p>
+              <p>Year Established In</p>
             </div>
             <div className="info-value">
               {editProfileEnable ? (
@@ -408,7 +420,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             </div>
           </div>
         </div>
-        {/* Institute Timings */}
+        {/* Institute Timings not done yet */}
         <div className="row">
           <div className="col">
             <div className="info-field">
@@ -419,11 +431,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                 <>
                   <div className="institute-timings-days">
                     <p>Monday - </p>
-                    {/* <DemoItem label={<Label componentName="TimePicker" valueType="time" />}>
-                            <TimePicker />
-                          </DemoItem> */}
                   </div>
-
                   <p>Tuesday - </p>
                   <p>Wednesday - </p>
                   <p>Thursday - </p>
@@ -467,19 +475,22 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             </div>
             <div className="info-value">
               {editProfileEnable ? (
-                <input
-                  type="text"
+                <select
                   value={profile.mode_of_study}
                   onChange={(e) =>
                     handleInput("mode_of_study", e.target.value, setProfile)
                   }
-                ></input>
+                >
+                  <option value="ONLINE">Online</option>
+                  <option value="OFFLINE">Offline</option>
+                </select>
               ) : (
                 <p>{profile.mode_of_study}</p>
               )}
             </div>
           </div>
         </div>
+
         {/* medium_of_study */}
         <div className="row">
           <div className="col">
@@ -489,13 +500,16 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             <div className="info-value">
               {editProfileEnable ? (
                 <>
-                  <input
-                    type="text"
+                  <select
                     value={profile.medium_of_study}
                     onChange={(e) =>
                       handleInput("medium_of_study", e.target.value, setProfile)
                     }
-                  />
+                  >
+                    <option value="English">English</option>
+                    <option value="HINDI">Hindi</option>
+                    <option value="Other">Other</option>
+                  </select>
                   <span className="input-info-small">Example: English</span>
                 </>
               ) : (
