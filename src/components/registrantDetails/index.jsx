@@ -49,8 +49,8 @@ const RegistrantDetails = ({ profile, editProfileEnable, setProfile }) => {
                   value={profile.phone_code}
                   onChange={(e) => handleInput('phone_code', e.target.value, setProfile)}
                 >
-                  <option value="+1">+1(USA)</option>
                   <option value="+91">+91(India)</option>
+                  <option value="+1">+1(USA)</option>
                 </select>
                 <input
                   type="tel"

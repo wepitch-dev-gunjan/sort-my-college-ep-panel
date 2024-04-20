@@ -3,12 +3,14 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./style.scss";
 import { DatePicker } from "@mui/x-date-pickers";
 import dayjs from "dayjs";
-import { handleInput, handleInputInsideInputChange } from "../../utilities";
+import { handleInput, handleInputInsideInputChange, allTimings, week } from "../../utilities";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { styled } from "@mui/material/styles";
 import Tooltip from "@mui/material/Tooltip";
 import Stack from "@mui/material/Stack";
+import Switch from '@mui/material/Switch';
+import IOSSwitch from "../iosSwitch";
 
 const ProSpan = styled("span")({
   display: "inline-block",
@@ -24,7 +26,8 @@ const ProSpan = styled("span")({
 
 const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
   const [aboutInputs, setAboutInputs] = useState(profile.about || [""]);
-
+  const [timings, setTimings] = useState(profile.timings)
+  const label = { inputProps: { 'aria-label': 'Switch demo' } };
   // const handleDateChange = (date) => {
   //   setProfile((prev) => ({
   //     ...prev,
@@ -36,6 +39,20 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
     return dayjs(date).format("YYYY-MM-DD");
   };
 
+  const handleTimingsChange = (day, field, timing) => {
+    const i = profile.timings.findIndex(item => item.day === day);
+    const updatedTimings = [...profile.timings]; // Copy the timings array
+    updatedTimings[i][field] = timing; // Update the specified field of the timing object
+    setProfile(prevProfile => ({ ...prevProfile, timings: updatedTimings })); // Update the profile object
+  };
+
+  const handleIsOpenChange = (day, value) => {
+    const i = profile.timings.findIndex(item => item.day === day);
+    const updatedTimings = [...profile.timings]; // Copy the timings array
+    updatedTimings[i]["is_open"] = value; // Update the specified field of the timing object
+    setProfile(prevProfile => ({ ...prevProfile, timings: updatedTimings }));
+  }
+  
   function Label({ componentName, valueType, isProOnly }) {
     const content = (
       <span>
@@ -179,7 +196,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                   </p>
                 </>
               ) : (
-                <p>{profile.about.join(", ")}</p>
+                <p>{profile.about?.join(", ")}</p>
               )}
             </div>
           </div>
@@ -196,7 +213,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                   {
                     <input
                       type="text"
-                      value={profile.address.building_number}
+                      value={profile.address?.building_number}
                       onChange={(e) =>
                         handleInputInsideInputChange(
                           e.target.value,
@@ -380,8 +397,8 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       handleInput("phone_code", e.target.value, setProfile)
                     }
                   >
-                    <option value="+1">+1(USA)</option>
                     <option value="+91">+91(India)</option>
+                    <option value="+1">+1(USA)</option>
                   </select>
                   <input
                     type="tel"
@@ -430,38 +447,51 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
               {editProfileEnable ? (
                 <>
                   <div className="institute-timings-days">
-                    <p>Monday - </p>
-                  </div>
-                  <p>Tuesday - </p>
-                  <p>Wednesday - </p>
-                  <p>Thursday - </p>
-                  <p>Friday - </p>
-                  <p>Saturday - </p>
-                  <p>Sunday - </p>
+                  {profile.timings.map((timing, index) => {
+                    console.log(timing.start_time)
+                    return (
+                    <div className="timing" key={index}>
+                      <div className="day">{timing.day}</div>
+                      <div className="start-time">
+                        <select
+                          className="day-start-time"
+                          value={timing.start_time}
+                          onChange={(e) => handleTimingsChange(timing.day, "start_time", e.target.value)}
+                        >
+                          {allTimings.map((time, i) => (
+                            <option value={time} key={i}>{time}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className="end-time">
+                      <select
+                          className="day-start-time"
+                          value={timing.end_time}
+                          onChange={(e) => handleTimingsChange(timing.day, "end_time", e.target.value)}
+                        >
+                          {allTimings.map((time, i) => (
+                            <option value={time} key={i}>{time}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <IOSSwitch sx={{ m: -1 }} defaultChecked={timing.is_open} onChange={e => handleIsOpenChange(timing.day, e.target.checked)} />
+                    </div>
+                  )})}
+                </div>
                 </>
               ) : (
                 <div className="institute-profile-timing-main">
-                  <p>
-                    Monday - <span>09:00 to 18:00</span>
-                  </p>
-                  <p>
-                    Tuesday - <span>09:00 to 18:00</span>
-                  </p>
-                  <p>
-                    Wednesday - <span>09:00 to 18:00</span>
-                  </p>
-                  <p>
-                    Thursday - <span>09:00 to 18:00</span>
-                  </p>
-                  <p>
-                    Friday - <span>09:00 to 18:00</span>
-                  </p>
-                  <p>
-                    Saturday - <span>09:00 to 18:00</span>
-                  </p>
-                  <p>
-                    Sunday - <span>09:00 to 18:00</span>
-                  </p>
+                  {profile.timings.map(timing => (
+                      <div className="timing" key={timing.day}>
+                       { timing.is_open && (
+                       <>
+                        <div className="day">{timing.day}</div>
+                        <div className="start-time">{timing.start_time}</div>
+                        <div className="end-time">{timing.end_time}</div>
+                       </> 
+                       )}
+                      </div>
+                    ))}
                 </div>
               )}
             </div>
@@ -506,9 +536,9 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       handleInput("medium_of_study", e.target.value, setProfile)
                     }
                   >
-                    <option value="English">English</option>
+                    <option value="ENGLISH">English</option>
                     <option value="HINDI">Hindi</option>
-                    <option value="Other">Other</option>
+                    <option value="OTHER">Other</option>
                   </select>
                   <span className="input-info-small">Example: English</span>
                 </>
@@ -518,8 +548,10 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             </div>
           </div>
         </div>
+
       </div>
     </div>
+
   );
 };
 

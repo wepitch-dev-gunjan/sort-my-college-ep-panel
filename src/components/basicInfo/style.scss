@@ -79,6 +79,23 @@
           }
           .institute-timings-days{
             display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.5em;
+
+            .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase .MuiSwitch-input{
+              left: 0;
+            }
+            .css-eiev1a-MuiSwitch-root .MuiSwitch-switchBase {
+              margin: 2px !important;
+            }
+
+            select.day-start-time, select.day-end-time{
+              width: max-content;
+            }
+            select.day-name{
+              width: fit-content;
+            }
           }
           select{
             width: 50%;
