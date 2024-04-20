@@ -464,7 +464,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                         </select>
                       </div>
                       <div className="end-time">
-                      <select
+                        <select
                           className="day-start-time"
                           value={timing.end_time}
                           onChange={(e) => handleTimingsChange(timing.day, "end_time", e.target.value)}
@@ -484,11 +484,12 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                   {profile.timings.map(timing => (
                       <div className="timing" key={timing.day}>
                        { timing.is_open && (
-                       <>
-                        <div className="day">{timing.day}</div>
-                        <div className="start-time">{timing.start_time}</div>
-                        <div className="end-time">{timing.end_time}</div>
-                       </> 
+                       <div className="institute-profile-timing-sub" >
+                        <div className="day"><p>{timing.day}: &nbsp;</p></div>
+                        <div className="start-time"><p>{timing.start_time}</p></div>
+                        <div> <p>&nbsp; - &nbsp;</p> </div>
+                        <div className="end-time"><p>{timing.end_time}</p></div>
+                       </div> 
                        )}
                       </div>
                     ))}

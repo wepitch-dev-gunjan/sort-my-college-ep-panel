@@ -24,6 +24,9 @@
     }
   }
   .institute-profile-timing-main{
+    .institute-profile-timing-sub{
+      display: flex;
+    }
     p{
       span{
         color: #111111c0;
@@ -79,9 +82,22 @@
           }
           .institute-timings-days{
             display: flex;
+            flex-direction: column;
             justify-content: flex-start;
-            align-items: center;
-            gap: 0.5em;
+            align-items: flex-start;
+            gap: 0.9em;
+            
+            .timing{
+              display: flex;
+              align-items: center;
+              justify-content: flex-start;
+              gap: 0.5em;
+
+              .day{
+                width: max-content;
+              }
+            }
+
 
             .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase .MuiSwitch-input{
               left: 0;
