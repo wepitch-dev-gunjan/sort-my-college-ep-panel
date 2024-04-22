@@ -437,7 +437,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             </div>
           </div>
         </div>
-        {/* Institute Timings not done yet */}
+        {/* Institute Timings */}
         <div className="row">
           <div className="col">
             <div className="info-field">
@@ -447,47 +447,49 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
               {editProfileEnable ? (
                 <>
                   <div className="institute-timings-days">
-                  {profile.timings.map((timing, index) => {
-                    console.log(timing.start_time)
-                    return (
-                    <div className="timing" key={index}>
-                      <div className="day">{timing.day}</div>
-                      <div className="start-time">
-                        <select
-                          className="day-start-time"
-                          value={timing.start_time}
-                          onChange={(e) => handleTimingsChange(timing.day, "start_time", e.target.value)}
-                        >
-                          {allTimings.map((time, i) => (
-                            <option value={time} key={i}>{time}</option>
-                          ))}
-                        </select>
+                    {profile.timings.map((timing, index) => {
+                      console.log(timing.start_time)
+                      return (
+                      <div className="timing" key={index}>
+                        <div className="day">
+                          {timing.day}
+                        </div>
+                        <div className="start-time">
+                          <select
+                            className="day-start-time"
+                            value={timing.start_time}
+                            onChange={(e) => handleTimingsChange(timing.day, "start_time", e.target.value)}
+                          >
+                            {allTimings.map((time, i) => (
+                              <option value={time} key={i}>{time}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="end-time">
+                          <select
+                            className="day-start-time"
+                            value={timing.end_time}
+                            onChange={(e) => handleTimingsChange(timing.day, "end_time", e.target.value)}
+                          >
+                            {allTimings.map((time, i) => (
+                              <option value={time} key={i}>{time}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <IOSSwitch sx={{ m: -1 }} defaultChecked={timing.is_open} onChange={e => handleIsOpenChange(timing.day, e.target.checked)} />
                       </div>
-                      <div className="end-time">
-                        <select
-                          className="day-start-time"
-                          value={timing.end_time}
-                          onChange={(e) => handleTimingsChange(timing.day, "end_time", e.target.value)}
-                        >
-                          {allTimings.map((time, i) => (
-                            <option value={time} key={i}>{time}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <IOSSwitch sx={{ m: -1 }} defaultChecked={timing.is_open} onChange={e => handleIsOpenChange(timing.day, e.target.checked)} />
-                    </div>
-                  )})}
+                    )})}
                 </div>
                 </>
               ) : (
                 <div className="institute-profile-timing-main">
                   {profile.timings.map(timing => (
-                      <div className="timing" key={timing.day}>
+                      <div className="timing current-profile" key={timing.day}>
                        { timing.is_open && (
                        <div className="institute-profile-timing-sub" >
-                        <div className="day"><p>{timing.day}: &nbsp;</p></div>
+                        <div className="day"><p>{timing.day} :</p></div>
                         <div className="start-time"><p>{timing.start_time}</p></div>
-                        <div> <p>&nbsp; - &nbsp;</p> </div>
+                        <div> <p> - </p> </div>
                         <div className="end-time"><p>{timing.end_time}</p></div>
                        </div> 
                        )}

@@ -32,6 +32,20 @@
         color: #111111c0;
       }
     }
+    .current-profile{
+      display: flex;
+      flex-direction: column;
+
+      .institute-profile-timing-sub{
+        display: flex;
+        gap: 0.5em;
+        width: 100%;
+
+        .day{
+          width: 25%;
+        }
+      }
+    }
   }
   .heading {
     border-bottom: 1px solid #1111111a;
@@ -92,19 +106,25 @@
               align-items: center;
               justify-content: flex-start;
               gap: 0.5em;
+              width: 100%;
+              
 
               .day{
-                width: max-content;
+                width: 40%;
               }
             }
 
-
+            // Switch button styles 
             .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase .MuiSwitch-input{
               left: 0;
             }
             .css-eiev1a-MuiSwitch-root .MuiSwitch-switchBase {
               margin: 2px !important;
             }
+            .css-eiev1a-MuiSwitch-root .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
+              background-color: #1F0A68;
+            }
+             // Switch button styles ends
 
             select.day-start-time, select.day-end-time{
               width: max-content;
