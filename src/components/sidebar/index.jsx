@@ -73,9 +73,9 @@ const Sidebar = () => {
         <RightLeftArrow expand={expand} />
       </div>
       <div className="sidebar-container">
-        {/* {profile.verified &&
+        {profile.verified &&
           // !profile.verified && 
-          ( */}
+          (
           <>
             <SidebarMenuButton
               href="/"
@@ -133,9 +133,7 @@ const Sidebar = () => {
 
 
           </>
-          {/* )
-
-        } */}
+          )}
         <hr />
 
         <SidebarMenuButton
