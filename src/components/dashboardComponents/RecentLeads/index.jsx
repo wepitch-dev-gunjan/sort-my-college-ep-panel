@@ -10,11 +10,10 @@ import {
   TextField,
 } from "@mui/material";
 import { MediaQueryContext } from "../../../context/MediaQueryContext";
-import { MdMenu } from "react-icons/md";
 import axios from "axios";
 import config from "@/config";
 import { UserContext } from "../../../context/UserContext";
-import RecentLeadsFilters from "../../RecentLeadFilters";
+import { DatePicker } from "@mui/x-date-pickers";
 const { backend_url } = config;
 const RecentLeads = () => {
   const [queries, setQueries] = useState([]);
@@ -22,11 +21,15 @@ const RecentLeads = () => {
   const dropdownRef = useRef(null); // Ref for dropdown element
   const { xSmallScreen } = useContext(MediaQueryContext);
   const { user } = useContext(UserContext);
+  const [selectDate, setSelectDate] = useState(null);
+  const [filterParams ,setFilterParams] =useState({
+   status : "",
+   date : null,
+  });
   useEffect(() => {
-    // Add event listener to detect clicks outside the dropdown
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false); // Close dropdown if clicked outside
+        setIsDropdownOpen(false);
       }
     };
     // Attach the event listener
@@ -57,11 +60,71 @@ const RecentLeads = () => {
   useEffect(() => {
     getQueriesData();
   }, []);
+
+  const handleDateChange = (date) => {
+    setSelectDate(date);
+  };
+  const handleFilterChange = (e) => {
+const {name , value} = e.target ;
+if(name === "status") {
+ const newValue = value === "All" ? "" : value;
+ setFilterParams((prevState) => ({
+  ...prevState,
+  [name]: newValue
+ })); 
+} 
+  };
+  const resetFilters = async () => {
+try{
+ setFilterParams({
+  status :"",
+  date : null,
+ });
+ getQueriesData();
+}
+catch(error){
+console.log(error);
+}
+  }
   const pathName = window.location.pathname;
   return (
     <div className="RecentPayments-container">
       <h1>Recent Leads</h1>
-      <>{pathName === "/leads" ? <RecentLeadsFilters /> : null}</>
+      {/* filters */}
+      <>{pathName === "/leads" ? 
+       <div className="main_Container">
+       <DatePicker
+            label="Select Date"
+            value={selectDate}
+            onChange={handleDateChange}
+            renderInput={(params) => <TextField {...params} />}
+            sx={{ marginLeft: "16px" }}
+          />
+        <FormControl style={{ width: "150px" }}>
+          <InputLabel>Status</InputLabel>
+          <Select 
+          name="status" 
+          value = {filterParams.status}
+          label="Status" 
+          onChange={handleFilterChange}
+          defaultValue="All">
+            <MenuItem value="All">ALL</MenuItem>
+            <MenuItem value="UNSEEN">UNSEEN</MenuItem>
+            <MenuItem value="REPLIED">REPLIED</MenuItem>
+            <MenuItem value="PENDING">PENDING</MenuItem>
+          </Select>
+        </FormControl>
+        <div className="btn_main">
+          <Button sx={{ height: "55px" }} variant="contained">
+            Apply Filters
+          </Button>
+          <Button sx={{ height: "55px" }} variant="contained"
+          onClick = {resetFilters}>
+            Reset Filters
+          </Button>
+        </div>
+      </div>
+      : null}</>
 
       <div className="payments-top">
         {/* <h1>Recent Leads</h1> */}
@@ -89,42 +152,48 @@ const RecentLeads = () => {
             </div>
             {/* <div><h4>Query</h4></div> */}
           </div>
-          {queries.map((query, i) => (
-            <div className="row" key={i}>
-              <div className="col">
-                {" "}
-                <p>{i+1}</p>
-              </div>
-              <div className="col">
-                <p>{query.date}</p>
-              </div>
-              <div className="col">
-                <p>{query.name}</p>
-              </div>
-              <div className="col">
-                <p>{query.phone_number}</p>
-              </div>
-              {/* <div className= "col"><p>{query.query}</p></div> */}
-              <div
-                className={`col ${
-                  query.status === "Cancelled"
-                    ? "red"
-                    : query.status === "Replied"
-                    ? "green"
-                    : query.status === "Pending"
-                    ? "blue"
-                    : ""
-                }`}
-              >
-                <p>{query.status}</p>
-              </div>
-              <div className="link">
-                <Link to={`/allQueries/${query._id}`}>
-                  <p>View </p>
-                </Link>
-              </div>
+          {queries.length === 0 ? (
+            <p> No Queries Found</p>
+          ) : (
+            <div className="queries">
+              {queries.map((query, i) => (
+                <div className="row" key={i}>
+                  <div className="col">
+                    {" "}
+                    <p>{i + 1}</p>
+                  </div>
+                  <div className="col">
+                    <p>{query.date}</p>
+                  </div>
+                  <div className="col">
+                    <p>{query.name}</p>
+                  </div>
+                  <div className="col">
+                    <p>{query.phone_number}</p>
+                  </div>
+                  {/* <div className= "col"><p>{query.query}</p></div> */}
+                  <div
+                    className={`col ${
+                      query.status === "Cancelled"
+                        ? "red"
+                        : query.status === "Replied"
+                        ? "green"
+                        : query.status === "Pending"
+                        ? "blue"
+                        : ""
+                    }`}
+                  >
+                    <p>{query.status}</p>
+                  </div>
+                  <div className="link">
+                    <Link to={`/allQueries/${query._id}`}>
+                      <p>View </p>
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
