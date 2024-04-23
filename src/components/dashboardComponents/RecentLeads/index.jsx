@@ -14,7 +14,9 @@ import axios from "axios";
 import config from "@/config";
 import { UserContext } from "../../../context/UserContext";
 import { DatePicker } from "@mui/x-date-pickers";
+
 const { backend_url } = config;
+
 const RecentLeads = () => {
   const [queries, setQueries] = useState([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -22,10 +24,11 @@ const RecentLeads = () => {
   const { xSmallScreen } = useContext(MediaQueryContext);
   const { user } = useContext(UserContext);
   const [selectDate, setSelectDate] = useState(null);
-  const [filterParams ,setFilterParams] =useState({
-   status : "",
-   date : null,
+  const [filterParams, setFilterParams] = useState({
+    status: "",
+    date: null,
   });
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -39,95 +42,116 @@ const RecentLeads = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
   const toggleDropdown = () => {
     setIsDropdownOpen((prevState) => !prevState);
   };
+
   const getQueriesData = async () => {
     try {
       const response = await axios.get(`${backend_url}/ep/enquiries`, {
         headers: {
           Authorization: user.token,
         },
+        params: {
+          ...filterParams,
+          date: selectDate ? selectDate.toISOString() : null, // Convert date to ISO string
+        },
       });
       let { data } = response;
       console.log(data);
       setQueries(data);
     } catch (error) {
-      console.log("error");
-      console.log(error);
+      console.error("Error fetching queries:", error);
     }
   };
+
   useEffect(() => {
     getQueriesData();
-  }, []);
+  }, [filterParams, selectDate]); // Trigger fetch on filter or date change
 
   const handleDateChange = (date) => {
     setSelectDate(date);
+    console.log(date)
   };
+
   const handleFilterChange = (e) => {
-const {name , value} = e.target ;
-if(name === "status") {
- const newValue = value === "All" ? "" : value;
- setFilterParams((prevState) => ({
-  ...prevState,
-  [name]: newValue
- })); 
-} 
+    const { name, value } = e.target;
+    if (name === "status") {
+      const newValue = value === "All" ? "" : value;
+      setFilterParams((prevState) => ({
+        ...prevState,
+        [name]: newValue,
+      }));
+      console.log(filterParams)
+    }
   };
+
   const resetFilters = async () => {
-try{
- setFilterParams({
-  status :"",
-  date : null,
- });
- getQueriesData();
-}
-catch(error){
-console.log(error);
-}
-  }
+    try {
+      setFilterParams({
+        status: "",
+        date: null, // Reset date filter
+      });
+      setSelectDate(null); // Reset selectDate state
+      getQueriesData();
+    } catch (error) {
+      console.error("Error resetting filters:", error);
+    }
+  };
+
   const pathName = window.location.pathname;
+
   return (
     <div className="RecentPayments-container">
       <h1>Recent Leads</h1>
       {/* filters */}
-      <>{pathName === "/leads" ? 
-       <div className="main_Container">
-       <DatePicker
-            label="Select Date"
-            value={selectDate}
-            onChange={handleDateChange}
-            renderInput={(params) => <TextField {...params} />}
-            sx={{ marginLeft: "16px" }}
-          />
-        <FormControl style={{ width: "150px" }}>
-          <InputLabel>Status</InputLabel>
-          <Select 
-          name="status" 
-          value = {filterParams.status}
-          label="Status" 
-          onChange={handleFilterChange}
-          defaultValue="All">
-            <MenuItem value="All">ALL</MenuItem>
-            <MenuItem value="UNSEEN">UNSEEN</MenuItem>
-            <MenuItem value="REPLIED">REPLIED</MenuItem>
-            <MenuItem value="PENDING">PENDING</MenuItem>
-          </Select>
-        </FormControl>
-        <div className="btn_main">
-          <Button sx={{ height: "55px" }} variant="contained">
-            Apply Filters
-          </Button>
-          <Button sx={{ height: "55px" }} variant="contained"
-          onClick = {resetFilters}>
-            Reset Filters
-          </Button>
-        </div>
-      </div>
-      : null}</>
+      <>
+        {pathName === "/leads" ? (
+          <div className="main_Container">
+            <DatePicker
+              label="Select Date"
+              value={selectDate}
+              onChange={handleDateChange}
+              renderInput={(params) => <TextField {...params} />}
+              sx={{ marginLeft: "16px" }}
+            />
+            <FormControl style={{ width: "150px" }}>
+              <InputLabel>Status</InputLabel>
+              <Select
+                name="status"
+                value={filterParams.status}
+                label="Status"
+                onChange={handleFilterChange}
+                defaultValue="All"
+              >
+                <MenuItem value="All">ALL</MenuItem>
+                <MenuItem value="Unseen">UNSEEN</MenuItem>
+                <MenuItem value="Replied">REPLIED</MenuItem>
+                <MenuItem value="Pending">PENDING</MenuItem>
+              </Select>
+            </FormControl>
+            <div className="btn_main">
+              <Button
+                sx={{ height: "55px" }}
+                onClick={getQueriesData}
+                variant="contained"
+              >
+                Apply Filters
+              </Button>
+              <Button
+                sx={{ height: "55px" }}
+                variant="contained"
+                onClick={resetFilters}
+              >
+                Reset Filters
+              </Button>
+            </div>
+          </div>
+        ) : null}
+      </>
 
       <div className="payments-top">
-        {/* <h1>Recent Leads</h1> */}
         <Link to="/queries">
           <div className="see-all-button">SEE ALL</div>
         </Link>
@@ -150,16 +174,14 @@ console.log(error);
             <div className="col">
               <h4>Status</h4>
             </div>
-            {/* <div><h4>Query</h4></div> */}
           </div>
           {queries.length === 0 ? (
-            <p> No Queries Found</p>
+            <p>No Queries Found</p>
           ) : (
             <div className="queries">
               {queries.map((query, i) => (
-                <div className="row" key={i}>
+                <div className="row leads-table-entries" key={i}>
                   <div className="col">
-                    {" "}
                     <p>{i + 1}</p>
                   </div>
                   <div className="col">
@@ -171,14 +193,13 @@ console.log(error);
                   <div className="col">
                     <p>{query.phone_number}</p>
                   </div>
-                  {/* <div className= "col"><p>{query.query}</p></div> */}
                   <div
                     className={`col ${
-                      query.status === "Cancelled"
+                      query.status === "Unseen"
                         ? "red"
                         : query.status === "Replied"
                         ? "green"
-                        : query.status === "Pending"
+                        : query.status === "Seen"
                         ? "blue"
                         : ""
                     }`}
@@ -187,7 +208,7 @@ console.log(error);
                   </div>
                   <div className="link">
                     <Link to={`/allQueries/${query._id}`}>
-                      <p>View </p>
+                      <p>View</p>
                     </Link>
                   </div>
                 </div>
@@ -201,3 +222,4 @@ console.log(error);
 };
 
 export default RecentLeads;
+
