@@ -32,23 +32,22 @@ const QueryDetail = () => {
     }
   };
   const changeStatus = async () => {
-    // try {
-    //   const { data } = await axios.put(
-    //     `${backend_url}/ep/singleEnqury/${enquiry_id}`,
-    //     {},
-    //     {
-    //       headers: {
-    //         Authorization: user.token,
-    //       },
-    //     }
-    //   );
-    //   console.log(data);
-    //   setEnquiry(data);
-    //   // setRerender((prev) => !prev);
-    // } catch (error) {
-    //   console.error(error);
-    // }
-    setQueryPopup((prev) => !prev);
+    try {
+      const { data } = await axios.put(
+        `${backend_url}/ep/singleEnqury/${enquiry_id}`,
+        {},
+        {
+          headers: {
+            Authorization: user.token,
+          },
+        }
+      );
+      console.log(data);
+      setEnquiry(data);
+      setQueryPopup((prev) => !prev);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {
