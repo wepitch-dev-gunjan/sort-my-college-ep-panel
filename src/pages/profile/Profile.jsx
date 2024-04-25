@@ -34,8 +34,8 @@ const Profile = () => {
 
       const response = await axios.put(endpointUrl, profile, {
         headers: {
-          Authorization: user.token,
-        },
+          Authorization: user.token
+        }
       });
       setProfile(response.data);
       setInitialUserProfileBackup(response.data);
@@ -73,7 +73,7 @@ const Profile = () => {
         <div className="profile-info">
           <div className="top">
             {/* <h1>{profile.name}</h1> */}
-            <h1>Siliguri Institute of Technology</h1>
+            <h1>{profile.name}</h1>
             {/* <h3>{profile.designation}</h3> */}
           </div>
           <div className="middle">

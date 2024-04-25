@@ -33,7 +33,6 @@ export const dataURLtoFile = (dataURL) => {
 };
 
 export const allTimings = [
-  "12:00 am",
   "01:00 am",
   "02:00 am",
   "03:00 am",
@@ -57,6 +56,7 @@ export const allTimings = [
   "09:00 pm",
   "10:00 pm",
   "11:00 pm",
+  "12:00 am"
 ];
 
 export const week = [
@@ -68,3 +68,30 @@ export const week = [
   "SATURDAY",
   "SUNDAY",
 ]
+
+export const filterTime = (inputTime) => {
+
+  // Find the index of the input time in the array
+  const index = allTimings.findIndex(time => time === inputTime);
+
+  // If input time is not found, return the original array
+  if (index === -1) {
+    return allTimings;
+  }
+
+  // Return a new array starting from the index after the input time
+  return allTimings.slice(index + 1);
+}
+
+export const convertTo24HourFormat = (timeString) => {
+  let [hourStr, period] = timeString.split(' ');
+  let [hour, minute] = hourStr.split(':').map(Number);
+
+  if (period === 'pm' && hour !== 12) {
+    hour += 12;
+  } else if (period === 'am' && hour === 12) {
+    hour = 0;
+  }
+
+  return hour;
+}
