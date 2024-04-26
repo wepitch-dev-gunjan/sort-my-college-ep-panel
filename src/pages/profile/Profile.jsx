@@ -34,13 +34,13 @@ const Profile = () => {
 
       const response = await axios.put(endpointUrl, profile, {
         headers: {
-          Authorization: user.token
-        }
+          Authorization: user.token,
+        },
       });
       setProfile(response.data);
       setInitialUserProfileBackup(response.data);
       setEditProfileEnable(false);
-      toast("Profile successfully saved");
+      toast.success("Profile successfully saved");
     } catch (error) {
       // Handle errors if the request fails
       toast(error.message);

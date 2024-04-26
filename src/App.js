@@ -16,6 +16,7 @@ import { NotificationContext } from "./context/NotificationContext";
 import { useRef } from "react";
 import useClickOutside from "./customHooks/useClickOutside";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ProfileContext } from "./context/ProfileContext";
 import AddProfilePic from "./components/profilePic/addProfilePic";
 import AddCoverImage from "./components/coverImage/addCoverImage";
