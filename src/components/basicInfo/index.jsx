@@ -115,32 +115,6 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             </div>
           </div>
         </div>
-        {/* about */}
-        {/* <div className="row">
-          <div className="col">
-            <div className="info-field">
-              <p>About the Institute</p>
-            </div>
-            <div className="info-value">
-              {editProfileEnable ? (
-                <>
-                  <input
-                    type="text"
-                    value={profile.about}
-                    onChange={(e) =>
-                      handleInput("about", e.target.value, setProfile)
-                    }
-                  ></input>
-                  <p className="short-desc-institute">
-                    Describe about the Institute in points
-                  </p>
-                </>
-              ) : (
-                <p>{profile.about}</p>
-              )}
-            </div>
-          </div>
-        </div> */}
         {/* about new*/}
         <div className="row">
           <div className="col">
@@ -305,7 +279,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
               {editProfileEnable ? (
                 <input
                   type="number"
-                  value={profile.year_established_in}
+                  value={profile.year_established_in ? new Date(profile.year_established_in).getFullYear() : ""}
                   onChange={(e) =>
                     handleInput(
                       "year_established_in",
@@ -315,8 +289,8 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                   }
                 />
               ) : (
-                <p>{profile.year_established_in}</p>
-              )}
+               <p>{profile.year_established_in ? new Date(profile.year_established_in).getFullYear() : ""}</p>
+               )}
             </div>
           </div>
         </div>

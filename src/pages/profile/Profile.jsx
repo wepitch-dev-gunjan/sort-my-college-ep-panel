@@ -17,11 +17,16 @@ const { backend_url } = config;
 
 const Profile = () => {
   const { user } = useContext(UserContext);
-  const { profile, setProfile } = useContext(ProfileContext);
-  const [initialUserProfileBackup, setInitialUserProfileBackup] =
-    useState(profile);
-  const { editProfileEnable, setEditProfileEnable } =
-    useContext(ProfileContext);
+  const {
+   profile,
+   setProfile,
+   documentsUpdated,
+   editProfileEnable,
+   setEditProfileEnable,
+ } = useContext(ProfileContext);
+ const [initialUserProfileBackup, setInitialUserProfileBackup] =
+   useState(profile);
+
 
   const [coverImage] = useState(
     "https://media.istockphoto.com/id/1322277517/photo/wild-grass-in-the-mountains-at-sunset.jpg?s=612x612&w=0&k=20&c=6mItwwFFGqKNKEAzv0mv6TaxhLN3zSE43bWmFN--J5w="

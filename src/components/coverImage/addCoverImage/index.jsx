@@ -46,7 +46,7 @@ const AddCoverImage = forwardRef((props, ref) => {
         const formData = new FormData();
         formData.append('image', file); // Append the File object to FormData
 
-        await axios.post(`${backend_url}/counsellor/cover-image`, formData, {
+        await axios.post(`${backend_url}/ep/cover-image`, formData, {
           headers: {
             Authorization: user.token,
             'Content-Type': 'multipart/form-data',
