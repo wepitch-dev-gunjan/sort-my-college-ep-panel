@@ -13,7 +13,29 @@ body {
   overflow-y: scroll;
   height: 100%;
   background-color: var(--primary-light);
-
+.add_course_btn{
+ display: flex;
+ justify-content: space-between;
+ width: 100%;
+ position: sticky;
+ top: 0;
+ background-color: #f7f4ff;
+ z-index: 1;
+ padding: 30px 30px 10px 30px;
+button{
+ background-color: #1f0a68;
+ border-radius: 40px;
+ color: #ffffff;
+ font-size: 1em;
+ padding: 0.1em 1.3em 0.1em 1.3em;
+ border: 2px solid #1f0a68;
+ &:hover {
+  background-color: #f7f4ff;
+  color: #1f0a68;
+  transition: all 0.3s ease;
+}
+}
+}
   .card-parent {
     display: flex;
     flex-wrap: wrap;
