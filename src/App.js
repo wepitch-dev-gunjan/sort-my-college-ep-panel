@@ -31,11 +31,12 @@ import Courses from "./pages/courses";
 import Faculties from "./pages/faculties";
 import KeyFeatures from "./pages/keyFeatures";
 import AddFaculty from "./components/addFaculty";
-import AddCourse from "./components/buttons/addCourse";
+import AddCourse from "./components/addCourse";
 import Announcements from "./pages/announcements";
 import AddAnnouncementPopup from "./components/addAnnouncementPopup";
 import QueryDetail from "./pages/queryDetail";
 import QueryReplied from "./components/queryDetailReplied";
+import { CourseContext } from "./context/CourseContext";
 
 function App() {
   const addProfilePicRef = useRef(null);
@@ -55,17 +56,18 @@ function App() {
     setDeleteData,
     addfaculty,
     setAddfaculty,
-    addCourse,
-    setAddCourse,
     setCourses,
     setQueryPopup,
     queryPopup,
   } = useContext(ProfileContext);
 
+  const { addCourseEnable, setAddCourseEnable } = useContext(CourseContext);
+
   const { askQuestionEnable, setAskQuestionEnable } = useContext(HelpContext);
 
   const addCoverImageRef = useRef(null);
   const askQuestionRef = useRef(null);
+  const addCourseRef = useRef(null);
 
   const { notificationsEnable, setNotificationsEnable, notificationsRef } =
     useContext(NotificationContext);
@@ -96,6 +98,10 @@ function App() {
     setNotificationsEnable(false);
   });
 
+  useClickOutside(addCourseRef, () => {
+    setAddCourseEnable(false);
+  });
+
   return (
     <div>
       {profilePicEditMode && (
@@ -124,9 +130,9 @@ function App() {
           <AddFaculty setAddfaculty={setAddfaculty} />
         </div>
       )}
-      {addCourse && (
+      {addCourseEnable && (
         <div className="addCourseBtn">
-          <AddCourse setAddCourse={setAddCourse} setCourses={setCourses} />
+          <AddCourse ref={addCourseRef} />
         </div>
       )}
 

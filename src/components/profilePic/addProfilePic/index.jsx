@@ -39,7 +39,7 @@ const AddProfilePic = forwardRef((props, ref) => {
         const formData = new FormData();
         formData.append('image', file); // Append the File object to FormData
 
-        await axios.post(`${backend_url}/ep/profile_pic`, formData, {
+        await axios.post(`${backend_url}/ep/profile-pic`, formData, {
           headers: {
             Authorization: user.token,
             'Content-Type': 'multipart/form-data',

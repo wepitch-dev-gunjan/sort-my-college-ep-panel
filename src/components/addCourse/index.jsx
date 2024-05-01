@@ -1,90 +1,71 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { forwardRef, useContext, useEffect, useRef, useState } from "react";
 import config from "@/config";
 import axios from "axios";
-import ImageUploader from "../../ImageUploder";
+import ImageUploader from "../ImageUploder";
 import "./style.scss";
-import { DatePicker } from "@mui/x-date-pickers-pro";
-import useClickOutside from "../../../customHooks/useClickOutside";
-import { UserContext } from "../../../context/UserContext";
+import { UserContext } from "../../context/UserContext";
 import { TextField } from "@mui/material";
+import { CourseContext } from "../../context/CourseContext";
+import CustomDatePicker from "../customDatePicker";
 const { backend_url } = config;
 
-const AddCourse = ({ setAddCourse, setCourses }) => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const { user } = useContext(UserContext);
-  const Ref = useRef(null);
+const AddCourse = forwardRef((props, ref) => {
+  const datepicker = useRef(null)
+  const { setAddCourseEnable } = useContext(CourseContext)
 
-  const [formData, setFormData] = useState({
+  const [course, setCourse] = useState({
     name: "",
     image: "",
     type: "",
     academic_session: { start_year: null, end_year: null },
     course_fee: "",
     course_duration_in_days: "",
-  });
-
+  })
+  const { user } = useContext(UserContext);
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setCourse(prev => ({ ...prev, [name]: value }));
     // Clear errorrrr message when user starts typing in the field
     setErrors({ ...errors, [name]: "" });
   };
 
   const handleDateChange = (field, value) => {
-    setFormData({
-      ...formData,
-      academic_session: { ...formData.academic_session, [field]: value },
-    });
+    setAddCourseEnable(prev => !prev)
+    setCourse(prev => ({
+      ...prev,
+      academic_session: { ...prev.academic_session, [field]: value },
+    }));
   };
 
   const handleAddCourse = async () => {
-    // // Validate form fields
-    // const validationErrors = {};
-    // if (!formData.name.trim()) {
-    //   validationErrors.name = "Please fill in the name field";
-    // }
-    // if (!formData.type) {
-    //   validationErrors.type = "Please select a type";
-    // }
-    // if (!formData.academic_session.start_year || !formData.academic_session.end_year) {
-    //   validationErrors.academic_session = "Please fill in both start and end years";
-    // }
-    // if (!formData.course_fee.trim()) {
-    //   validationErrors.course_fee = "Please fill in the course fee";
-    // }
-    // if (!formData.course_duration_in_days.trim()) {
-    //   validationErrors.course_duration_in_days = "Please fill in the course duration";
-    // }
 
-    // if (Object.keys(validationErrors).length > 0) {
-    //   setErrors(validationErrors);
-    //   return; // Stop further execution
-    // }
+    const formData = new FormData();
+    for (const key in course) {
+      formData.append(key, course[key]);
+    }
 
     try {
-      const response = await axios.post(`${backend_url}/ep/courses`, formData, {
+      const { data } = await axios.post(`${backend_url}/ep/courses`, formData, {
         headers: {
           Authorization: user.token,
         },
       });
-      console.log("Course added successfully:", response.data);
-      setAddCourse(false);
+      console.log("Course added successfully:", data);
+      setCourse(false);
     } catch (error) {
       console.error("Error adding course:", error);
     }
   };
 
   const handleCancel = () => {
-    setAddCourse(false);
+    setAddCourseEnable(false);
   };
-
-  useClickOutside(Ref, () => handleCancel());
 
   return (
     <div className="addcourse-container">
-      <div className="course_section">
+      <div ref={ref} className="course_section">
         <div className="main-container">
           <div className="img_uploder">
             <ImageUploader />
@@ -99,7 +80,7 @@ const AddCourse = ({ setAddCourse, setCourses }) => {
                   placeholder="enter Course Name"
                   type="text"
                   name="name"
-                  value={formData.name}
+                  value={course.name}
                   onChange={handleChange}
                 />
                 {errors.name && <div className="error">{errors.name}</div>}
@@ -112,7 +93,7 @@ const AddCourse = ({ setAddCourse, setCourses }) => {
               <div className="course_input">
                 <select
                   name="type"
-                  value={formData.type}
+                  value={course.type}
                   onChange={handleChange}
                 >
                   <option value="">Select Type</option>
@@ -127,17 +108,19 @@ const AddCourse = ({ setAddCourse, setCourses }) => {
                 <label htmlFor="">Academic Session:</label>
               </div>
               <div className="course_input" style={{ width: "300px" }}>
-                <DatePicker
+                <CustomDatePicker
+                  ref={datepicker}
                   label="Start Year"
                   views={["year"]}
-                  value={formData.academic_session.start_year}
+                  value={course.academic_session.start_year}
                   onChange={(value) => handleDateChange("start_year", value)}
                   renderInput={(props) => <TextField {...props} />}
                 />
-                <DatePicker
+                <CustomDatePicker
+                  ref={datepicker}
                   label="End Year"
                   views={["year"]}
-                  value={formData.academic_session.end_year}
+                  value={course.academic_session.end_year}
                   onChange={(value) => handleDateChange("end_year", value)}
                   renderInput={(props) => <TextField {...props} />}
                 />
@@ -155,7 +138,7 @@ const AddCourse = ({ setAddCourse, setCourses }) => {
                   placeholder="Enter Fees"
                   type="number"
                   name="course_fee"
-                  value={formData.course_fee}
+                  value={course.course_fee}
                   onChange={handleChange}
                 />
                 {errors.course_fee && (
@@ -172,7 +155,7 @@ const AddCourse = ({ setAddCourse, setCourses }) => {
                   placeholder="Enter Duration"
                   type="number"
                   name="course_duration_in_days"
-                  value={formData.course_duration_in_days}
+                  value={course.course_duration_in_days}
                   onChange={handleChange}
                 />
                 {errors.course_duration_in_days && (
@@ -201,6 +184,6 @@ const AddCourse = ({ setAddCourse, setCourses }) => {
       </div>
     </div>
   );
-};
+});
 
 export default AddCourse;

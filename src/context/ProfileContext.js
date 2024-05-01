@@ -33,7 +33,6 @@ export const ProfileProvider = ({ children }) => {
   const [coverImageEditMode, setCoverImageEditMode] = useState(false);
   const [deleteData, setDeleteData] = useState(false);
   const [addfaculty, setAddfaculty] = useState(false);
-  const [addCourse, setAddCourse] = useState(false);
   const [editKeyFeatureEnable, setEditKeyFeatureEnable] = useState(false);
   const [announcements, setAnnouncements] = useState([]);
   const [editAnnouncementsEnable, setEditAnnouncementsEnable] = useState(false);
@@ -56,8 +55,6 @@ export const ProfileProvider = ({ children }) => {
         setDeleteData,
         addfaculty,
         setAddfaculty,
-        addCourse,
-        setAddCourse,
         editKeyFeatureEnable,
         setEditKeyFeatureEnable,
         announcements,

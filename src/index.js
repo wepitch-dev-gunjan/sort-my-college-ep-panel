@@ -14,6 +14,7 @@ import { DashboardProvider } from "./context/DashboardContext";
 import { FollowerProvider } from "./context/FollowerContext";
 import { HelpProvider } from "./context/HelpContext";
 import { SocketProvider } from "./context/SocketContext";
+import { CourseProvider } from "./context/CourseContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -23,17 +24,19 @@ root.render(
         <UserProvider>
           <DashboardProvider>
             <ProfileProvider>
-              <SocketProvider>
-                <HelpProvider>
-                  <FollowerProvider>
-                    <NotificationProvider>
-                      <FeedbackProvider>
-                        <App />
-                      </FeedbackProvider>
-                    </NotificationProvider>
-                  </FollowerProvider>
-                </HelpProvider>
-              </SocketProvider>
+              <CourseProvider>
+                <SocketProvider>
+                  <HelpProvider>
+                    <FollowerProvider>
+                      <NotificationProvider>
+                        <FeedbackProvider>
+                          <App />
+                        </FeedbackProvider>
+                      </NotificationProvider>
+                    </FollowerProvider>
+                  </HelpProvider>
+                </SocketProvider>
+              </CourseProvider>
             </ProfileProvider>
           </DashboardProvider>
         </UserProvider>
