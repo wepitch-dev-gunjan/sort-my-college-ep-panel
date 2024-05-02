@@ -57,23 +57,30 @@ const AddCourse = forwardRef((props, ref) => {
   };
 
   const handleAddCourse = async () => {
-    const formData = new FormData();
-    for (const key in course) {
-      formData.append(key, course[key]);
-    }
-    console.log(formData);
-    try {
-      const { data } = await axios.post(`${backend_url}/ep/courses`,formData,{
-        headers: {
-          Authorization: user.token,
-        },
-      });
-      console.log("Course added successfully:", data);
-      setCourse(false);
-    } catch (error) {
-      console.error("Error adding course:", error);
-    }
-  };
+   try {
+     const { data } = await axios.post(
+       `${backend_url}/ep/courses`, course,
+       {
+         headers: {
+           Authorization: user.token,
+         },
+       }
+     );
+     console.log("Course added successfully:", data);
+     setAddCourseEnable(false);
+     setCourse({  // Clear the course state after successful addition
+       name: "",
+       image: "",
+       type: "",
+       academic_session: { start_year: null, end_year: null },
+       course_fee: "",
+       course_duration_in_days: "",
+     });
+   } catch (error) {
+     console.error("Error adding course:", error);
+   }
+ };
+ 
 
   const handleCancel = () => {
     setAddCourseEnable(false);

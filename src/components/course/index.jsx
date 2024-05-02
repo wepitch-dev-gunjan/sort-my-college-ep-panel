@@ -80,7 +80,7 @@ const Course = ({ course }) => {
   return (
     <div className="Course-container">
       <div className="card-body">
-        {editCourseEnable ? (
+        {/* {editCourseEnable ? (
           <div className="input_field">
             <input className="img" type="file" name="image" />
           </div>
@@ -88,7 +88,7 @@ const Course = ({ course }) => {
           <div className="images">
             <img src={editedCourse.image} alt="Course Image" />
           </div>
-        )}
+        )} */}
         {editCourseEnable ? (
           <>
             <input
