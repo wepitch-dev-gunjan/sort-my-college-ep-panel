@@ -63,7 +63,7 @@ const AddCourse = forwardRef((props, ref) => {
     }
     console.log(formData);
     try {
-      const { data } = await axios.post(`${backend_url}/ep/courses`, formData, {
+      const { data } = await axios.post(`${backend_url}/ep/courses`,formData,{
         headers: {
           Authorization: user.token,
         },
@@ -114,27 +114,18 @@ const AddCourse = forwardRef((props, ref) => {
                 {/* <label htmlFor="">Type:</label> */}
               </div>
               <div className="course_input">
-                {/* <select
-                  name="type"
-                  value={course.type}
-                  onChange={handleChange}
-                >
-                  <option value="">Select Type</option>
-                  <option value="UG">UG</option>
-                  <option value="PG">PG</option>
-                </select> */}
-                <FormControl fullWidth>
-                  <InputLabel>Type</InputLabel>
-                  <Select
-                    name=" type"
-                    value={course.type}
-                    label="Age"
-                    onChange={handleChange}
-                  >
-                    <MenuItem value="UG">UG</MenuItem>
-                    <MenuItem value="PG">PG</MenuItem>
-                  </Select>
-                </FormControl>
+               <FormControl fullWidth>
+  <InputLabel>Type</InputLabel>
+  <Select
+    name="type"
+    value={course.type}
+    onChange={handleChange}
+  >
+    <MenuItem value="UG">UG</MenuItem>
+    <MenuItem value="PG">PG</MenuItem>
+  </Select>
+</FormControl>
+
                 {errors.type && <div className="error">{errors.type}</div>}
               </div>
             </div>
@@ -144,19 +135,19 @@ const AddCourse = forwardRef((props, ref) => {
               </div>
               <div className="course_input">
                 <CustomDatePicker
-                  ref={datepicker}
+                  // ref={datepicker}
                   label="Start Year"
                   views={["year"]}
                   value={course.academic_session.start_year}
-                  onChange={(value) => handleDateChange("start_year", value)}
+                  // onChange={(value) => handleDateChange("start_year", value)}
                   renderInput={(props) => <TextField {...props} />}
                 />
                 <CustomDatePicker
-                  ref={datepicker}
+                  // ref={datepicker}
                   label="End Year"
                   views={["year"]}
                   value={course.academic_session.end_year}
-                  onChange={(value) => handleDateChange("end_year", value)}
+                  // onChange={(value) => handleDateChange("end_year", value)}
                   renderInput={(props) => <TextField {...props} />}
                 />
                 {errors.academic_session && (
