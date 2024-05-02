@@ -1,0 +1,16 @@
+.followers-main{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 40px;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 2.3em;
+    background-color: #F5F2FD;
+    h1{
+        font-size: 3em;
+    }
+     p{
+        font-size: 0.9em;
+     }
+}

@@ -37,6 +37,8 @@ import AddAnnouncementPopup from "./components/addAnnouncementPopup";
 import QueryDetail from "./pages/queryDetail";
 import QueryReplied from "./components/queryDetailReplied";
 import { CourseContext } from "./context/CourseContext";
+import Followers from "./pages/followers";
+import Reviews from "./pages/reviews";
 
 function App() {
   const addProfilePicRef = useRef(null);
@@ -187,6 +189,8 @@ function App() {
                 />
 
                 <Route path="/announcements" element={<Announcements />} />
+                <Route path="/followers" element={<Followers />} />
+                <Route path="/reviews" element={<Reviews />} />
 
                 {/* <Route
                   path="/help/faq-and-troubleshooting/ask-a-question"
