@@ -57,30 +57,27 @@ const AddCourse = forwardRef((props, ref) => {
   };
 
   const handleAddCourse = async () => {
-   try {
-     const { data } = await axios.post(
-       `${backend_url}/ep/courses`, course,
-       {
-         headers: {
-           Authorization: user.token,
-         },
-       }
-     );
-     console.log("Course added successfully:", data);
-     setAddCourseEnable(false);
-     setCourse({  // Clear the course state after successful addition
-       name: "",
-       image: "",
-       type: "",
-       academic_session: { start_year: null, end_year: null },
-       course_fee: "",
-       course_duration_in_days: "",
-     });
-   } catch (error) {
-     console.error("Error adding course:", error);
-   }
- };
- 
+    try {
+      const { data } = await axios.post(`${backend_url}/ep/courses`, course, {
+        headers: {
+          Authorization: user.token,
+        },
+      });
+      console.log("Course added successfully:", data);
+      setAddCourseEnable(false);
+      setCourse({
+        // Clear the course state after successful addition
+        name: "",
+        image: "",
+        type: "",
+        academic_session: { start_year: null, end_year: null },
+        course_fee: "",
+        course_duration_in_days: "",
+      });
+    } catch (error) {
+      console.error("Error adding course:", error);
+    }
+  };
 
   const handleCancel = () => {
     setAddCourseEnable(false);
@@ -99,8 +96,9 @@ const AddCourse = forwardRef((props, ref) => {
                 {/* <label htmlFor="">Name:</label> */}
               </div>
               <div className="course_input">
-                <TextField fullWidth
-                  placeholder="    enter Course Name"
+                <TextField
+                  fullWidth
+                  placeholder="    Enter Course Name"
                   type="text"
                   name="name"
                   value={course.name}
@@ -121,17 +119,17 @@ const AddCourse = forwardRef((props, ref) => {
                 {/* <label htmlFor="">Type:</label> */}
               </div>
               <div className="course_input">
-               <FormControl fullWidth>
-  <InputLabel>Type</InputLabel>
-  <Select
-    name="type"
-    value={course.type}
-    onChange={handleChange}
-  >
-    <MenuItem value="UG">UG</MenuItem>
-    <MenuItem value="PG">PG</MenuItem>
-  </Select>
-</FormControl>
+                <FormControl fullWidth>
+                  <InputLabel>Type</InputLabel>
+                  <Select
+                    name="type"
+                    value={course.type}
+                    onChange={handleChange}
+                  >
+                    <MenuItem value="UG">UG</MenuItem>
+                    <MenuItem value="PG">PG</MenuItem>
+                  </Select>
+                </FormControl>
 
                 {errors.type && <div className="error">{errors.type}</div>}
               </div>
@@ -142,18 +140,20 @@ const AddCourse = forwardRef((props, ref) => {
               </div>
               <div className="course_input">
                 <CustomDatePicker
-                  // ref={datepicker}
+                  ref={datepicker}
+                  name = "start_year"
                   label="Start Year"
                   views={["year"]}
                   value={course.academic_session.start_year}
-                  // onChange={(value) => handleDateChange("start_year", value)}
+                  onChange={handleChange}
                   renderInput={(props) => <TextField {...props} />}
                 />
                 <CustomDatePicker
-                  // ref={datepicker}
+                  ref={datepicker}
                   label="End Year"
                   views={["year"]}
                   value={course.academic_session.end_year}
+                  // onChange={handleChange}
                   // onChange={(value) => handleDateChange("end_year", value)}
                   renderInput={(props) => <TextField {...props} />}
                 />
@@ -167,7 +167,8 @@ const AddCourse = forwardRef((props, ref) => {
                 {/* <label htmlFor="">Course Fee:</label> */}
               </div>
               <div className="course_input">
-                <TextField fullWidth
+                <TextField
+                  fullWidth
                   placeholder="    Enter Fees"
                   type="number"
                   name="course_fee"
@@ -191,7 +192,8 @@ const AddCourse = forwardRef((props, ref) => {
                 {/* <label htmlFor="">Course Duration:</label> */}
               </div>
               <div className="course_input">
-                <TextField fullWidth
+                <TextField
+                  fullWidth
                   placeholder="   Enter Duration"
                   type="number"
                   name="course_duration_in_days"

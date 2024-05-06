@@ -17,31 +17,33 @@ const Course = ({ course }) => {
 
   // handle Edit Save put API
   const handleSave = async () => {
+   console.log("hayy")
     try {
       // Create a new FormData object
       const formData = new FormData();
-
       // Append each property of editcourse to the FormData object
       for (const key in editedCourse) {
+       console.log(editedCourse[key])
         formData.append(key, editedCourse[key]);
       }
+      
 
       // Make the Axios PUT request with FormData as the request body
       const { data } = await axios.put(
         `${backend_url}/ep/courses/${course._id}`,
-        formData,
+        editedCourse,
         {
           headers: {
             Authorization: user.token,
-            'Content-Type': 'multipart/form-data', // Make sure to set the content type
+            // 'Content-Type': 'multipart/form-data', // Make sure to set the content type
           }
         }
       );
-
+console.log(editedCourse)
       console.log("Course Edited Succesfully ");
-      setEditedCourse((prev) =>
-        prev.map((item) => (item._id === editedCourse._id ? data : item))
-      );
+      // setEditedCourse((prev) =>
+      //   prev.map((item) => (item._id === editedCourse._id ? data : item))
+      // );
       setEditCourseEnable(false);
       toast.success("Course edited successfully");
     } catch (error) {
@@ -49,7 +51,6 @@ const Course = ({ course }) => {
       console.log("Error while editing course", error);
     }
   };
-
   // cancel edit course
   const handleCancel = () => {
     setEditedCourse(course);
@@ -62,11 +63,13 @@ const Course = ({ course }) => {
   };
   // Changes The Input
   const handleInputChange = (e) => {
+   console.log("m hu yha")
     const { name, value } = e.target;
     setEditedCourse((prev) => ({
       ...prev,
       [name]: value
     }));
+    console.log(editedCourse)
   };
   const handleDateChange = (field, value) => {
     setEditedCourse((prev) => ({
@@ -134,7 +137,7 @@ const Course = ({ course }) => {
                 onChange={handleInputChange}
               />
             </div>
-            {/* academic Session */}
+            {/* academic Session
             <label htmlFor="academic_session">Session:</label>
             <DatePicker
               label="Start Year"
@@ -156,7 +159,7 @@ const Course = ({ course }) => {
               renderInput={(props) => (
                 <input {...props} className="card-text" />
               )}
-            />
+            /> */}
 
             <div className="icons">
               <button className="edit_btn" onClick={handleSave}>
