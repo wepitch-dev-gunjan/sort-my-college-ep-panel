@@ -111,7 +111,7 @@ const FacultyDetails = ({
         </button>
       </div>
       {data.length === 0 ? (
-        <p> no faculty Found</p>
+        <p> You don't have any Faculties at the moment! Please click on 'Add' button to add a faculty member.</p>
       ) : (
         <div className="profile-faculty-main">
           {data.map((data,i) => (

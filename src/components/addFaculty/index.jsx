@@ -11,13 +11,15 @@ const { backend_url } = config;
 
 const AddFaculty = ({ setAddfaculty }) => {
  const { user } = useContext(UserContext);
-   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+ const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    console.log(values.name)
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("experience_in_years", values.experience_in_years);
     formData.append("qualifications", values.qualifications);
     formData.append("graduated_from", values.graduated_from);
-    formData.append("image", values.image); // Append the image file to the FormData
+    formData.append("display_pic", values.display_pic); // Append the image file to the FormData
+
 
     try {
       const response = await axios.post(
@@ -25,7 +27,7 @@ const AddFaculty = ({ setAddfaculty }) => {
         formData,
         {
           headers: {
-            // "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
+            "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
             Authorization : user.token,
           },
         }
@@ -57,7 +59,7 @@ const AddFaculty = ({ setAddfaculty }) => {
             experience_in_years: "",
             qualifications: "",
             graduated_from: "",
-            image: null,
+            display_pic: null,
           }}
           validationSchema={Yup.object({
             name: Yup.string().required("Name is required"),
@@ -78,8 +80,15 @@ const AddFaculty = ({ setAddfaculty }) => {
                   <div className="img_uploder">
                     {/* <ImageUploader /> */}
                     <ImageUploader
-                      onImageUpload={(file) => setFieldValue("image", file)}
+                    type="file"
+                      name="display_pic"
+                      id="display_pic"
+                      onImageUpload={(file) => setFieldValue("display_pic", file)}
+
                     />
+                    {/* <input id="display_pic" name="display_pic" type="file" onChange={(event) => {
+                      setFieldValue("file", event.currentTarget.files[0]);
+                    }} /> */}
                   </div>
                   <div className="faculty-data">
                     <div className="right-Section">
