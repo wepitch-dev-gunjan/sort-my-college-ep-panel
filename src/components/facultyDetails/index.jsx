@@ -170,14 +170,16 @@ const FacultyDetails = ({
                 ) : (
                   <div className="info">
                     <p>
-                      <span className="span">{data.name}</span>
+                      <span className="span"> <span className="smltxt" >Name: </span> {data.name}</span>
                     </p>
                     <p>
-                      {data.experience_in_years}{" "}
-                      <sup className="spans">+ Years of Experience</sup>{" "}
+                      <span className="smltxt" >Experience: </span>
+                      {data.experience_in_years}+ years
+                      {/* {" "} */}
+                      {/* <sup className="spans">+ Years of Experience</sup>{" "} */}
                     </p>
-                    <p>{data.graduated_from}</p>
-                    <p>{data.qualifications}</p>
+                    <p> <span className="smltxt"> Graduated from: </span>{data.graduated_from}</p>
+                    <p> <span className="smltxt" >Qualifications: </span>{data.qualifications}</p>
                     <div className="faculty-buttons">
                       <button
                         className="buttons"

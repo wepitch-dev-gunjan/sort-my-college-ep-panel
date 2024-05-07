@@ -76,11 +76,15 @@
         gap: 5px;
 
         .info {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3em;
+
           .faculty-input {
             font-size: 1.3rem;
           }
           p {
-            font-size: 1.2rem;
+            font-size: 0.9rem;
             color: #1111119c;
             .span {
               font-weight: bold;
@@ -88,6 +92,9 @@
             }
             .spans {
               font-size: small;
+            }
+            .smltxt{
+              font-size: 0.9em;
             }
           }
         }
