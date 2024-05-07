@@ -80,15 +80,11 @@ const AddFaculty = ({ setAddfaculty }) => {
                   <div className="img_uploder">
                     {/* <ImageUploader /> */}
                     <ImageUploader
-                    type="file"
-                      name="display_pic"
-                      id="display_pic"
-                      onImageUpload={(file) => setFieldValue("display_pic", file)}
-
-                    />
-                    {/* <input id="display_pic" name="display_pic" type="file" onChange={(event) => {
-                      setFieldValue("file", event.currentTarget.files[0]);
-                    }} /> */}
+                        type="file"
+                        name="display_pic"
+                        id="display_pic"
+                        onImageUpload={(file) => setFieldValue("display_pic", file)}
+                      />
                   </div>
                   <div className="faculty-data">
                     <div className="right-Section">

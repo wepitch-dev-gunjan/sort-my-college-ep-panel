@@ -11,7 +11,7 @@ function previewFile(file, callback) {
   reader.readAsDataURL(file);
 }
 
-const ImageUploader = () => {
+const ImageUploader = ({ onImageUpload }) => {
   const toaster = useToaster();
   const [uploading, setUploading] = useState(false);
   const [fileInfo, setFileInfo] = useState(null);
@@ -20,8 +20,11 @@ const ImageUploader = () => {
     setUploading(true);
     previewFile(file.blobFile, (value) => {
       setFileInfo(value);
+      // Pass the image data to the parent component
+      onImageUpload(file.blobFile);
     });
   };
+  
 
   const handleSuccess = (response, file) => {
     setUploading(false);
