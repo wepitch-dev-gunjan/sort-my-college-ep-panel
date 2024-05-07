@@ -57,7 +57,7 @@
       box-shadow: rgba(50, 50, 93, 0.137) 0px 2px 5px -1px,
         rgba(0, 0, 0, 0.2) 0px 1px 3px -1px;
       .p-faculty-left {
-        width: 50%;
+        width: 40%;
         display: flex;
 
         .img {
@@ -67,6 +67,7 @@
           width: 100%;
           height: auto;
           border-radius: 13px;
+          object-fit: cover;
         }
       }
       .p-faculty-right {
