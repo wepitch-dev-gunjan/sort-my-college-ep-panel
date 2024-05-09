@@ -51,10 +51,11 @@ const { user } = useContext(UserContext);
       navigate(`/${pathName}`);
     }
   };
+  const DeletePathName = pathName ==="faculties" ? " faculty" : "course"
   return (
     <div ref={askQuestionRef} className="delete-main">
       <div className="delete-container">
-        <h3 className="h3">Are You Sure You Want To Delete this {pathName}</h3>
+        <h3 className="h3">Are You Sure You Want To Delete this {DeletePathName}</h3>
         <div className="btn">
           <button onClick={handleDelete}>Yes</button>
           <button onClick={handlePopUp}>No</button>
