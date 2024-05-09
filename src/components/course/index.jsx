@@ -52,7 +52,7 @@ const Course = ({ course }) => {
   };
   // cancel edit course
   const handleCancel = () => {
-    setEditedCourse(course);
+   setEditCourseEnable(false);
   };
   const Delete = (id) => {
     const path = window.location.pathname;
@@ -79,7 +79,7 @@ const Course = ({ course }) => {
       }
     }));
   };
-  
+
   return (
     <div className="Course-container">
       <div className="card-body">

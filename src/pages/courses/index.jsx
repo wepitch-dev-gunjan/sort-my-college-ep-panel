@@ -5,12 +5,14 @@ import { UserContext } from "../../context/UserContext";
 import config from "@/config";
 import Course from "../../components/course";
 import { CourseContext } from "../../context/CourseContext";
+import { ProfileContext } from "../../context/ProfileContext";
 const { backend_url } = config;
 
 const Courses = () => {
   const { user } = useContext(UserContext);
   const { addCourseEnable, setAddCourseEnable } = useContext(CourseContext);
   const [courses, setCourses] = useState([]);
+  const { deleteData, setDeleteData } = useContext(ProfileContext);
 
   const fetchCourses = async () => {
     try {
@@ -27,7 +29,7 @@ const Courses = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, [addCourseEnable]);
+  }, [addCourseEnable,deleteData]);
 
   const handlePopUp = () => {
     setAddCourseEnable((prev) => !prev);
