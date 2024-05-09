@@ -21,9 +21,9 @@ const { user } = useContext(UserContext);
     setId(parts[parts.length - 1]);
     setPathName(parts[1]);
     console.log(currentPath);
+    
   }, []);
-  console.log(id);
-  console.log(pathName);
+
 
   const handlePopUp = () => {
     setDeleteData(!deleteData);
@@ -42,7 +42,8 @@ const { user } = useContext(UserContext);
       });
 
       setDeleteData((prev) => !prev);
-      navigate(`/${pathName}`);
+      navigate(`${pathName}`)
+
 
       console.log(`${pathName} Deleted Succesfully`);
     } catch (error) {

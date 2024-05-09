@@ -18,25 +18,29 @@
       font-size: 15px;
       gap: 10px;
       .edit_btn {
-        border: 1px solid #1f0a68;
-        color: black;
-        padding: 8px;
-        border-radius: 10px;
-        background-color: white;
+       background-color: #1f0a68;
+       border-radius: 40px;
+       color: #ffffff;
+       font-size: 1em;
+       padding: 0.1em 1.3em 0.1em 1.3em;
+       border: 2px solid #1f0a68;
         &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+         background-color: #f7f4ff;
+         color: #1f0a68;
+         transition: all 0.3s ease;
         }
       }
       .delete_btn {
-        border: 1px solid #1f0a68;
-        color: black;
-        padding: 8px;
-        border-radius: 10px;
-        background-color: white;
+       background-color: #1f0a68;
+            border-radius: 40px;
+            color: #ffffff;
+            font-size: 1em;
+            padding: 0.1em 1.3em 0.1em 1.3em;
+            border: 2px solid #1f0a68;
         &:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+         background-color: #f7f4ff;
+         color: #1f0a68;
+         transition: all 0.3s ease;
         }
       }
     }

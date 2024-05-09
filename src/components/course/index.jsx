@@ -2,7 +2,7 @@ import { DatePicker } from "rsuite";
 import { toast } from "react-toastify";
 import axios from "axios";
 import './style.scss';
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../context/ProfileContext";
 import { UserContext } from "../../context/UserContext";
 import config from '@/config';
@@ -17,7 +17,6 @@ const Course = ({ course }) => {
 
   // handle Edit Save put API
   const handleSave = async () => {
-   console.log("hayy")
     try {
       // Create a new FormData object
       const formData = new FormData();
@@ -39,13 +38,13 @@ const Course = ({ course }) => {
           }
         }
       );
-console.log(editedCourse)
       console.log("Course Edited Succesfully ");
       // setEditedCourse((prev) =>
       //   prev.map((item) => (item._id === editedCourse._id ? data : item))
       // );
+  
       setEditCourseEnable(false);
-      toast.success("Course edited successfully");
+      // toast.success("Course edited successfully");
     } catch (error) {
       toast.error(error.message);
       console.log("Error while editing course", error);
@@ -63,7 +62,7 @@ console.log(editedCourse)
   };
   // Changes The Input
   const handleInputChange = (e) => {
-   console.log("m hu yha")
+ 
     const { name, value } = e.target;
     setEditedCourse((prev) => ({
       ...prev,
@@ -80,6 +79,7 @@ console.log(editedCourse)
       }
     }));
   };
+  
   return (
     <div className="Course-container">
       <div className="card-body">

@@ -27,7 +27,7 @@ const Courses = () => {
 
   useEffect(() => {
     fetchCourses();
-  }, []);
+  }, [addCourseEnable]);
 
   const handlePopUp = () => {
     setAddCourseEnable((prev) => !prev);
