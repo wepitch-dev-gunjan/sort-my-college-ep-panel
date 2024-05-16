@@ -15,61 +15,65 @@ const Course = ({ course }) => {
   const { deleteData, setDeleteData } = useContext(ProfileContext);
   const { user } = useContext(UserContext);
 
-  // handle Edit Save put API
   const handleSave = async () => {
     try {
-      // Create a new FormData object
+
       const formData = new FormData();
-      // Append each property of editcourse to the FormData object
+
       for (const key in editedCourse) {
        console.log(editedCourse[key])
         formData.append(key, editedCourse[key]);
       }
       
-
-      // Make the Axios PUT request with FormData as the request body
       const { data } = await axios.put(
         `${backend_url}/ep/courses/${course._id}`,
         editedCourse,
         {
           headers: {
             Authorization: user.token,
-            // 'Content-Type': 'multipart/form-data', // Make sure to set the content type
           }
         }
       );
+
+      console.log("Start Year:", editedCourse.academic_session);
+
       console.log("Course Edited Succesfully ");
+
       // setEditedCourse((prev) =>
       //   prev.map((item) => (item._id === editedCourse._id ? data : item))
       // );
   
       setEditCourseEnable(false);
-      // toast.success("Course edited successfully");
+
     } catch (error) {
       toast.error(error.message);
       console.log("Error while editing course", error);
     }
   };
-  // cancel edit course
+
+
   const handleCancel = () => {
    setEditCourseEnable(false);
   };
+
   const Delete = (id) => {
     const path = window.location.pathname;
     const newPath = `${path}/${id}`;
     window.history.pushState({ path: newPath }, "", newPath);
     setDeleteData((prev) => !prev);
   };
-  // Changes The Input
+
+
   const handleInputChange = (e) => {
  
-    const { name, value } = e.target;
+  const { name, value } = e.target;
     setEditedCourse((prev) => ({
       ...prev,
       [name]: value
     }));
     console.log(editedCourse)
   };
+
   const handleDateChange = (field, value) => {
     setEditedCourse((prev) => ({
       ...prev,
@@ -178,17 +182,9 @@ const Course = ({ course }) => {
             <p className="card-text">
               Duration: {editedCourse.course_duration_in_days}
             </p>
-            <p className="card-text">
-              Session:{" "}
-              {editedCourse.academic_session?.start_year &&
-                editedCourse.academic_session?.start_year.substring(
-                  0,
-                  4
-                )}{" "}
-              -{" "}
-              {editedCourse.academic_session?.end_year &&
-                editedCourse.academic_session?.end_year.substring(0, 4)}
-            </p>
+            <p className="card-text">Session: {editedCourse.academic_session && editedCourse.academic_session.start_year && new Date(editedCourse.academic_session.start_year).getFullYear()} - {editedCourse.academic_session && editedCourse.academic_session.end_year && new Date(editedCourse.academic_session.end_year).getFullYear()}</p>
+
+
 
             <div className="icons">
               <button

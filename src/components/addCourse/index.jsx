@@ -10,25 +10,18 @@ import axios from "axios";
 import ImageUploader from "../ImageUploder";
 import "./style.scss";
 import { UserContext } from "../../context/UserContext";
-import TextField from "@mui/material/TextField";
 import { CourseContext } from "../../context/CourseContext";
 import CustomDatePicker from "../customDatePicker";
 import { FaBookReader } from "react-icons/fa";
 import { MdAttachMoney } from "react-icons/md";
 import { GiDuration } from "react-icons/gi";
+import { TextField, FormControl, InputLabel, MenuItem, Select, Button, InputAdornment } from "@mui/material";
 
-import {
-  FormControl,
-  InputAdornment,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
 const { backend_url } = config;
 
 const AddCourse = forwardRef((props, ref) => {
-  const datepicker = useRef(null);
   const { setAddCourseEnable } = useContext(CourseContext);
+  const { user } = useContext(UserContext);
 
   const [course, setCourse] = useState({
     name: "",
@@ -38,15 +31,24 @@ const AddCourse = forwardRef((props, ref) => {
     course_fee: "",
     course_duration_in_days: "",
   });
-  const { user } = useContext(UserContext);
   const [errors, setErrors] = useState({});
-
+  
   const handleChange = (e) => {
-   const { name, value } = e.target || {};
-       setCourse((prev) => ({ ...prev, [name]: value }));
+    const { name, value } = e.target;
+    if (name === "start_year" || name === "end_year") {
+      setCourse((prev) => ({
+        ...prev,
+        academic_session: {
+          ...prev.academic_session,
+          [name]: value ? parseInt(value) : null, // Parse the value to an integer
+        },
+      }));
+    } else {
+      setCourse((prev) => ({ ...prev, [name]: value }));
+    }
     setErrors({ ...errors, [name]: "" });
-    console.log("COURSE", course)
   };
+  
 
   const handleDateChange = (field, value) => {
     setAddCourseEnable((prev) => !prev);
@@ -70,10 +72,7 @@ const AddCourse = forwardRef((props, ref) => {
         name: "",
         image: "",
         type: "",
-        academic_session: { 
-         start_year: null,
-          end_year: null 
-         },
+        academic_session: { start_year: null, end_year: null },
         course_fee: "",
         course_duration_in_days: "",
       });
@@ -90,9 +89,6 @@ const AddCourse = forwardRef((props, ref) => {
     <div className="addcourse-container">
       <div className="course_section">
         <div className="main-container">
-          {/* <div className="img_uploder">
-            <ImageUploader />
-          </div> */}
           <div className="course-data">
             <div className="right-Section">
               <div className="course_details">
@@ -142,24 +138,21 @@ const AddCourse = forwardRef((props, ref) => {
                 {/* <label htmlFor="">Academic Session:</label> */}
               </div>
               <div className="course_input">
-                <CustomDatePicker
-                  // ref={datepicker}
-                  name = "academic_session.start_year"
-                  label="Start Year"
-                  views={["year"]}
-                  value={course.academic_session.start_year}
+              <TextField
+                  fullWidth
+                  placeholder="Enter Start Year"
+                  type="number"
+                  name="start_year"
+                  value={course.academic_session.start_year || ''}
                   onChange={handleChange}
-                  renderInput={(props) => <TextField {...props} />}
                 />
-                <CustomDatePicker
-                  // ref={datepicker}
-                  name = "academic_session.end_year"
-                  label="End Year"
-                  views={["year"]}
-                  value={course.academic_session.end_year}
+                <TextField
+                  fullWidth
+                  placeholder="Enter End Year"
+                  type="number"
+                  name="end_year"
+                  value={course.academic_session.end_year || ''}
                   onChange={handleChange}
-                  // onChange={(value) => handleDateChange("end_year", value)}
-                  renderInput={(props) => <TextField {...props} />}
                 />
                 {errors.academic_session && (
                   <div className="error">{errors.academic_session}</div>
