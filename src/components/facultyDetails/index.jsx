@@ -53,9 +53,10 @@ const FacultyDetails = ({
   useEffect(() => {
     getFacultyDetails();
   }, [deleteData , setAddfaculty]);
+
   const addfacultybtn = () => {
     setAddfaculty((prev) => !prev);
-  };
+  }; 
 
   const handleDeleteFaculty = (id) => {
     const path = window.location.pathname;

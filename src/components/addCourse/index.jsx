@@ -42,9 +42,10 @@ const AddCourse = forwardRef((props, ref) => {
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCourse((prev) => ({ ...prev, [name]: value }));
+   const { name, value } = e.target || {};
+       setCourse((prev) => ({ ...prev, [name]: value }));
     setErrors({ ...errors, [name]: "" });
+    console.log("COURSE", course)
   };
 
   const handleDateChange = (field, value) => {
@@ -142,8 +143,8 @@ const AddCourse = forwardRef((props, ref) => {
               </div>
               <div className="course_input">
                 <CustomDatePicker
-                  ref={datepicker}
-                  name = "acedemic_session.start_year"
+                  // ref={datepicker}
+                  name = "academic_session.start_year"
                   label="Start Year"
                   views={["year"]}
                   value={course.academic_session.start_year}
@@ -151,7 +152,8 @@ const AddCourse = forwardRef((props, ref) => {
                   renderInput={(props) => <TextField {...props} />}
                 />
                 <CustomDatePicker
-                  ref={datepicker}
+                  // ref={datepicker}
+                  name = "academic_session.end_year"
                   label="End Year"
                   views={["year"]}
                   value={course.academic_session.end_year}
