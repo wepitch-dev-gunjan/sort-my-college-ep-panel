@@ -6,12 +6,14 @@ import { HelpContext } from "../../context/HelpContext";
 import { ProfileContext } from "../../context/ProfileContext";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../context/UserContext";
+import Spinner from "../spinner/Index";
 const { backend_url } = config;
 
 const DocumentDelete = ({ deleteData, setDeleteData }) => {
   const { askQuestionRef } = useContext(HelpContext);
   const navigate = useNavigate();
 const { user } = useContext(UserContext);
+const [loading ,setLoading] =useState(false);
   const [id, setId] = useState("");
   const [pathName, setPathName] = useState("");
 
@@ -35,18 +37,20 @@ const { user } = useContext(UserContext);
   // delete Courses
   const handleDelete = async () => {
     try {
+     setLoading((prev) => !prev);
       await axios.delete(`${backend_url}/ep/${pathName}/${id}` ,{
        headers :{
         Authorization : user.token,
        },
       });
-
+setLoading((prev) => !prev);
       setDeleteData((prev) => !prev);
       navigate(`${pathName}`)
 
 
       console.log(`${pathName} Deleted Succesfully`);
     } catch (error) {
+     setLoading((prev) => !prev);
       console.log("error Deleting Course", error);
       navigate(`/${pathName}`);
     }
@@ -57,7 +61,7 @@ const { user } = useContext(UserContext);
       <div className="delete-container">
         <h3 className="h3">Are You Sure You Want To Delete this {DeletePathName}</h3>
         <div className="btn">
-          <button onClick={handleDelete}>Yes</button>
+          <button onClick={handleDelete}>{loading ?<Spinner />: "Yes"}</button>
           <button onClick={handlePopUp}>No</button>
         </div>
       </div>

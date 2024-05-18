@@ -43,7 +43,7 @@ const Courses = () => {
       </div>
       <hr />
       {courses.length === 0 ? (
-        <p>No course found</p>
+        <p>You don't have any courses at the moment! Please click on 'Add' button to add a course .</p>
       ) : (
         <div className="row card-parent">
           {courses.map((course) => (
