@@ -12,8 +12,8 @@ const { backend_url } = config;
 const DocumentDelete = ({ deleteData, setDeleteData }) => {
   const { askQuestionRef } = useContext(HelpContext);
   const navigate = useNavigate();
-const { user } = useContext(UserContext);
-const [loading ,setLoading] =useState(false);
+  const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
   const [id, setId] = useState("");
   const [pathName, setPathName] = useState("");
 
@@ -23,9 +23,9 @@ const [loading ,setLoading] =useState(false);
     setId(parts[parts.length - 1]);
     setPathName(parts[1]);
     console.log(currentPath);
-    
   }, []);
-
+  console.log(id);
+  console.log(pathName);
 
   const handlePopUp = () => {
     setDeleteData(!deleteData);
@@ -37,31 +37,35 @@ const [loading ,setLoading] =useState(false);
   // delete Courses
   const handleDelete = async () => {
     try {
-     setLoading((prev) => !prev);
-      await axios.delete(`${backend_url}/ep/${pathName}/${id}` ,{
-       headers :{
-        Authorization : user.token,
-       },
+      setLoading((prev) => !prev);
+      await axios.delete(`${backend_url}/ep/${pathName}/${id}`, {
+        headers: {
+          Authorization: user.token,
+        },
       });
-setLoading((prev) => !prev);
-      setDeleteData((prev) => !prev);
-      navigate(`${pathName}`)
+      setLoading((prev) => !prev);
 
+      setDeleteData((prev) => !prev);
+      navigate(`/${pathName}`);
 
       console.log(`${pathName} Deleted Succesfully`);
     } catch (error) {
-     setLoading((prev) => !prev);
+      setLoading((prev) => !prev);
       console.log("error Deleting Course", error);
       navigate(`/${pathName}`);
     }
   };
-  const DeletePathName = pathName ==="faculties" ? " faculty" : "course"
+  const DeletePathName = pathName === "faculties" ? " faculty" : "course";
   return (
     <div ref={askQuestionRef} className="delete-main">
       <div className="delete-container">
-        <h3 className="h3">Are You Sure You Want To Delete this {DeletePathName}</h3>
+        <h3 className="h3">
+          Are You Sure You Want To Delete this {DeletePathName}
+        </h3>
         <div className="btn">
-          <button onClick={handleDelete}>{loading ?<Spinner />: "Yes"}</button>
+          <button onClick={handleDelete}>
+            {loading ? <Spinner /> : "Yes"}
+          </button>
           <button onClick={handlePopUp}>No</button>
         </div>
       </div>
