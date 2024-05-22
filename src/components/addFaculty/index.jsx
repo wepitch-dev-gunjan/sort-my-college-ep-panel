@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ImageUploader from "../ImageUploder";
@@ -11,6 +11,7 @@ const { backend_url } = config;
 
 const AddFaculty = ({ setAddfaculty }) => {
  const { user } = useContext(UserContext);
+
  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     console.log(values.name)
     const formData = new FormData();
@@ -19,8 +20,6 @@ const AddFaculty = ({ setAddfaculty }) => {
     formData.append("qualifications", values.qualifications);
     formData.append("graduated_from", values.graduated_from);
     formData.append("display_pic", values.display_pic); // Append the image file to the FormData
-
-
     try {
       const response = await axios.post(
         `${backend_url}/ep/addfaculties`,

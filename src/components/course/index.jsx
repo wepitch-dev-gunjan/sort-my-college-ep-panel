@@ -141,8 +141,8 @@ const Course = ({ course }) => {
                 onChange={handleInputChange}
               />
             </div>
-            {/* academic Session
-            <label htmlFor="academic_session">Session:</label>
+            {/* academic Session */}
+            {/* <label htmlFor="academic_session">Session:</label>
             <DatePicker
               label="Start Year"
               views={["year"]} // Only allow selecting the year
@@ -180,11 +180,11 @@ const Course = ({ course }) => {
             <p className="card-text">Category: {editedCourse.type}</p>
             <p className="card-text">Fees: {editedCourse.course_fee}</p>
             <p className="card-text">
-              Duration: {editedCourse.course_duration_in_days}
+              Duration: {editedCourse.course_duration_in_days} 
             </p>
             <p className="card-text">Session: {editedCourse.academic_session && editedCourse.academic_session.start_year && new Date(editedCourse.academic_session.start_year).getFullYear()} - {editedCourse.academic_session && editedCourse.academic_session.end_year && new Date(editedCourse.academic_session.end_year).getFullYear()}</p>
 
-
+        
 
             <div className="icons">
               <button

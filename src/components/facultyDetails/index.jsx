@@ -19,7 +19,7 @@ const FacultyDetails = ({
   // setAddfaculty,
 }) => {
   const [profileSubCount, setProfileSubCount] = useState(2);
-  const { setAddfaculty, deleteData, setDeleteData } =
+  const { addfaculty,setAddfaculty, deleteData, setDeleteData } =
     useContext(ProfileContext);
   const { user } = useContext(UserContext);
   const [editMode, setEditMode] = useState(false);
@@ -52,7 +52,7 @@ const FacultyDetails = ({
   };
   useEffect(() => {
     getFacultyDetails();
-  }, [deleteData , setAddfaculty]);
+  }, [deleteData , addfaculty]);
 
   const addfacultybtn = () => {
     setAddfaculty((prev) => !prev);
