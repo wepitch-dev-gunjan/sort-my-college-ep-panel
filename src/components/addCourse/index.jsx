@@ -15,13 +15,23 @@ import CustomDatePicker from "../customDatePicker";
 import { FaBookReader } from "react-icons/fa";
 import { MdAttachMoney } from "react-icons/md";
 import { GiDuration } from "react-icons/gi";
-import { TextField, FormControl, InputLabel, MenuItem, Select, Button, InputAdornment } from "@mui/material";
+import {
+  TextField,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Button,
+  InputAdornment,
+} from "@mui/material";
+import Spinner from "../spinner/Index";
 
 const { backend_url } = config;
 
 const AddCourse = forwardRef((props, ref) => {
   const { setAddCourseEnable } = useContext(CourseContext);
   const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
 
   const [course, setCourse] = useState({
     name: "",
@@ -32,7 +42,7 @@ const AddCourse = forwardRef((props, ref) => {
     course_duration_in_days: "",
   });
   const [errors, setErrors] = useState({});
-  
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "start_year" || name === "end_year") {
@@ -48,7 +58,6 @@ const AddCourse = forwardRef((props, ref) => {
     }
     setErrors({ ...errors, [name]: "" });
   };
-  
 
   const handleDateChange = (field, value) => {
     setAddCourseEnable((prev) => !prev);
@@ -60,12 +69,16 @@ const AddCourse = forwardRef((props, ref) => {
 
   const handleAddCourse = async () => {
     try {
+      setLoading((prev) => !prev);
+
       const { data } = await axios.post(`${backend_url}/ep/courses`, course, {
         headers: {
           Authorization: user.token,
         },
       });
       console.log("Course added successfully:", data);
+      setLoading((prev) => !prev);
+
       setAddCourseEnable(false);
       setCourse({
         // Clear the course state after successful addition
@@ -77,6 +90,8 @@ const AddCourse = forwardRef((props, ref) => {
         course_duration_in_days: "",
       });
     } catch (error) {
+      setLoading((prev) => !prev);
+
       console.error("Error adding course:", error);
     }
   };
@@ -138,12 +153,12 @@ const AddCourse = forwardRef((props, ref) => {
                 {/* <label htmlFor="">Academic Session:</label> */}
               </div>
               <div className="course_input">
-              <TextField
+                <TextField
                   fullWidth
                   placeholder="Enter Start Year"
                   type="number"
                   name="start_year"
-                  value={course.academic_session.start_year || ''}
+                  value={course.academic_session.start_year || ""}
                   onChange={handleChange}
                 />
                 <TextField
@@ -151,7 +166,7 @@ const AddCourse = forwardRef((props, ref) => {
                   placeholder="Enter End Year"
                   type="number"
                   name="end_year"
-                  value={course.academic_session.end_year || ''}
+                  value={course.academic_session.end_year || ""}
                   onChange={handleChange}
                 />
                 {errors.academic_session && (
@@ -215,7 +230,7 @@ const AddCourse = forwardRef((props, ref) => {
                 onClick={handleAddCourse}
                 style={{ backgroundColor: "#1F0A69" }}
               >
-                Submit
+                {loading ? <Spinner /> : "Submit"}
               </button>
               <button
                 className="cancel"

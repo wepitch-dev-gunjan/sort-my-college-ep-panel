@@ -10,10 +10,10 @@ import { UserContext } from "../../context/UserContext";
 const { backend_url } = config;
 
 const AddFaculty = ({ setAddfaculty }) => {
- const { user } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
- const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    console.log(values.name)
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    console.log(values.name);
     const formData = new FormData();
     formData.append("name", values.name);
     formData.append("experience_in_years", values.experience_in_years);
@@ -26,8 +26,8 @@ const AddFaculty = ({ setAddfaculty }) => {
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
-            Authorization : user.token,
+            // "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
+            Authorization: user.token,
           },
         }
       );
@@ -58,7 +58,7 @@ const AddFaculty = ({ setAddfaculty }) => {
             experience_in_years: "",
             qualifications: "",
             graduated_from: "",
-            display_pic: null,
+            image: null,
           }}
           validationSchema={Yup.object({
             name: Yup.string().required("Name is required"),
@@ -79,11 +79,8 @@ const AddFaculty = ({ setAddfaculty }) => {
                   <div className="img_uploder">
                     {/* <ImageUploader /> */}
                     <ImageUploader
-                        type="file"
-                        name="display_pic"
-                        id="display_pic"
-                        onImageUpload={(file) => setFieldValue("display_pic", file)}
-                      />
+                      onImageUpload={(file) => setFieldValue("image", file)}
+                    />
                   </div>
                   <div className="faculty-data">
                     <div className="right-Section">
