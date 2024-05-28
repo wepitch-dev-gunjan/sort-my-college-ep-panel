@@ -182,8 +182,13 @@ const Course = ({ course }) => {
             <p className="card-text">
               Duration: {editedCourse.course_duration_in_days} 
             </p>
-            <p className="card-text">Session: {editedCourse.academic_session && editedCourse.academic_session.start_year && new Date(editedCourse.academic_session.start_year).getFullYear()} - {editedCourse.academic_session && editedCourse.academic_session.end_year && new Date(editedCourse.academic_session.end_year).getFullYear()}</p>
+            
+            {/* <p
+             className="card-text">Session: {editedCourse.academic_session && editedCourse.academic_session.start_year && new Date(editedCourse.academic_session.start_year).getFullYear()} - {editedCourse.academic_session && editedCourse.academic_session.end_year && new Date(editedCourse.academic_session.end_year).getFullYear()}
+            </p> */}
 
+<p className = "card-text"> session : {editedCourse.academic_session && editedCourse.academic_session.start_year.slice(0,4)} - {editedCourse.academic_session.end_year.slice(0,4)}
+             </p>
         
 
             <div className="icons">

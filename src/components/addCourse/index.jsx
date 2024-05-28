@@ -44,20 +44,22 @@ const AddCourse = forwardRef((props, ref) => {
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "start_year" || name === "end_year") {
-      setCourse((prev) => ({
-        ...prev,
-        academic_session: {
-          ...prev.academic_session,
-          [name]: value ? parseInt(value) : null, // Parse the value to an integer
-        },
-      }));
-    } else {
-      setCourse((prev) => ({ ...prev, [name]: value }));
-    }
-    setErrors({ ...errors, [name]: "" });
-  };
+   const { name, value } = e.target;
+   if (name === "start_year" || name === "end_year") {
+     setCourse((prev) => ({
+       ...prev,
+       academic_session: {
+         ...prev.academic_session,
+         [name]: value, // Store as string
+       },
+     }));
+   } else {
+     setCourse((prev) => ({ ...prev, [name]: value }));
+   }
+   setErrors({ ...errors, [name]: "" });
+ };
+ 
+ 
 
   const handleDateChange = (field, value) => {
     setAddCourseEnable((prev) => !prev);
