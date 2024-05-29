@@ -26,7 +26,7 @@ const AddFaculty = ({ setAddfaculty }) => {
         formData,
         {
           headers: {
-            // "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
+            "Content-Type": "multipart/form-data", // Set Content-Type as multipart/form-data for image uploading
             Authorization: user.token,
           },
         }
@@ -79,8 +79,11 @@ const AddFaculty = ({ setAddfaculty }) => {
                   <div className="img_uploder">
                     {/* <ImageUploader /> */}
                     <ImageUploader
-                      onImageUpload={(file) => setFieldValue("image", file)}
-                    />
+                        type="file"
+                        name="display_pic"
+                        id="display_pic"
+                        onImageUpload={(file) => setFieldValue("display_pic", file)}
+                      />
                   </div>
                   <div className="faculty-data">
                     <div className="right-Section">
