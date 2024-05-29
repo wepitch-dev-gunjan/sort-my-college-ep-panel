@@ -15,6 +15,8 @@ import CustomDatePicker from "../customDatePicker";
 import { FaBookReader } from "react-icons/fa";
 import { MdAttachMoney } from "react-icons/md";
 import { GiDuration } from "react-icons/gi";
+import { FaRupeeSign } from "react-icons/fa";
+
 import {
   TextField,
   FormControl,
@@ -191,7 +193,7 @@ const AddCourse = forwardRef((props, ref) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <MdAttachMoney />
+                        <FaRupeeSign />
                       </InputAdornment>
                     ),
                   }}
