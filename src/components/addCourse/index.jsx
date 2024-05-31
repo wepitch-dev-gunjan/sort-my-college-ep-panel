@@ -210,7 +210,7 @@ const AddCourse = forwardRef((props, ref) => {
               <div className="course_input">
                 <TextField
                   fullWidth
-                  placeholder="   Enter Duration"
+                  placeholder="   Enter duration in days"
                   type="number"
                   name="course_duration_in_days"
                   value={course.course_duration_in_days}
