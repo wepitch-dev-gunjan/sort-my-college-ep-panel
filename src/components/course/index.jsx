@@ -8,7 +8,6 @@ import { UserContext } from "../../context/UserContext";
 import config from '@/config';
 const { backend_url } = config;
 
-
 const Course = ({ course }) => {
   const [editedCourse, setEditedCourse] = useState(course);
   const [editCourseEnable, setEditCourseEnable] = useState(false);
@@ -17,11 +16,10 @@ const Course = ({ course }) => {
 
   const handleSave = async () => {
     try {
-
       const formData = new FormData();
 
       for (const key in editedCourse) {
-       console.log(editedCourse[key])
+        console.log(editedCourse[key])
         formData.append(key, editedCourse[key]);
       }
       
@@ -37,23 +35,17 @@ const Course = ({ course }) => {
 
       console.log("Start Year:", editedCourse.academic_session);
 
-      console.log("Course Edited Succesfully ");
+      console.log("Course Edited Successfully");
 
-      // setEditedCourse((prev) =>
-      //   prev.map((item) => (item._id === editedCourse._id ? data : item))
-      // );
-  
       setEditCourseEnable(false);
-
     } catch (error) {
       toast.error(error.message);
       console.log("Error while editing course", error);
     }
   };
 
-
   const handleCancel = () => {
-   setEditCourseEnable(false);
+    setEditCourseEnable(false);
   };
 
   const Delete = (id) => {
@@ -63,15 +55,13 @@ const Course = ({ course }) => {
     setDeleteData((prev) => !prev);
   };
 
-
   const handleInputChange = (e) => {
- 
-  const { name, value } = e.target;
+    const { name, value } = e.target;
     setEditedCourse((prev) => ({
       ...prev,
       [name]: value
     }));
-    console.log(editedCourse)
+    console.log(editedCourse);
   };
 
   const handleDateChange = (field, value) => {
@@ -87,15 +77,6 @@ const Course = ({ course }) => {
   return (
     <div className="Course-container">
       <div className="card-body">
-        {/* {editCourseEnable ? (
-          <div className="input_field">
-            <input className="img" type="file" name="image" />
-          </div>
-        ) : (
-          <div className="images">
-            <img src={editedCourse.image} alt="Course Image" />
-          </div>
-        )} */}
         {editCourseEnable ? (
           <>
             <input
@@ -107,20 +88,19 @@ const Course = ({ course }) => {
             />
             <br />
             <div className="category_div">
-              {/* category */}
               <label htmlFor="type">Category:</label>
-              <input
-                type="text"
+              <select
                 name="type"
                 className="card-text"
                 value={editedCourse.type}
                 onChange={handleInputChange}
-              />
+              >
+                <option value="UG">UG</option>
+                <option value="PG">PG</option>
+              </select>
             </div>
             <div className="course_div">
-              {/* fees */}
               <label htmlFor="course_fee">Fees:</label>
-
               <input
                 type="text"
                 name="course_fee"
@@ -130,9 +110,7 @@ const Course = ({ course }) => {
               />
             </div>
             <div className="duration_div">
-              {/* Duration */}
               <label htmlFor="course_duration_in_days">Duration:</label>
-
               <input
                 type="text"
                 name="course_duration_in_days"
@@ -141,30 +119,23 @@ const Course = ({ course }) => {
                 onChange={handleInputChange}
               />
             </div>
-            {/* academic Session */}
-            {/* <label htmlFor="academic_session">Session:</label>
-            <DatePicker
-              label="Start Year"
-              views={["year"]} // Only allow selecting the year
-              value={editedCourse.academic_session.start_year}
-              onChange={(value) =>
-                handleDateChange("start_year", value)
-              }
-              renderInput={(props) => (
-                <input {...props} className="card-text" />
-              )}
-            />
-
-            <DatePicker
-              label="End Year"
-              views={["year"]} // Only allow selecting the year
-              value={editedCourse.academic_session.end_year}
-              onChange={(value) => handleDateChange("end_year", value)}
-              renderInput={(props) => (
-                <input {...props} className="card-text" />
-              )}
-            /> */}
-
+            <div className="academic_session">
+              <label htmlFor="academic_session_start_year">Session:</label>
+              <input
+                type="text"
+                name="academic_session_start_year"
+                className="card-text"
+                value={editedCourse.academic_session?.start_year?.slice(0, 4) || ''}
+                onChange={(e) => handleDateChange('start_year', e.target.value)}
+              />
+              <input
+                type="text"
+                name="academic_session_end_year"
+                className="card-text"
+                value={editedCourse.academic_session?.end_year?.slice(0, 4) || ''}
+                onChange={(e) => handleDateChange('end_year', e.target.value)}
+              />
+            </div>
             <div className="icons">
               <button className="edit_btn" onClick={handleSave}>
                 Save
@@ -180,17 +151,15 @@ const Course = ({ course }) => {
             <p className="card-text">Category: {editedCourse.type}</p>
             <p className="card-text">Fees: {editedCourse.course_fee}</p>
             <p className="card-text">
-              Duration: {editedCourse.course_duration_in_days} 
+              Duration: {editedCourse.course_duration_in_days}
             </p>
-            
-            {/* <p
-             className="card-text">Session: {editedCourse.academic_session && editedCourse.academic_session.start_year && new Date(editedCourse.academic_session.start_year).getFullYear()} - {editedCourse.academic_session && editedCourse.academic_session.end_year && new Date(editedCourse.academic_session.end_year).getFullYear()}
-            </p> */}
-
-<p className = "card-text"> session : {editedCourse.academic_session && editedCourse.academic_session.start_year.slice(0,4)} - {editedCourse.academic_session.end_year.slice(0,4)}
-             </p>
-        
-
+            <p className="card-text">
+              Session: {editedCourse.academic_session && editedCourse.academic_session.start_year
+                ? editedCourse.academic_session.start_year.slice(0, 4)
+                : "N/A"} - {editedCourse.academic_session && editedCourse.academic_session.end_year
+                  ? editedCourse.academic_session.end_year.slice(0, 4)
+                  : "N/A"}
+            </p>
             <div className="icons">
               <button
                 className="edit_btn"
