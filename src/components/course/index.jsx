@@ -115,9 +115,19 @@ const Course = ({ course }) => {
                 type="text"
                 name="course_duration_in_days"
                 className="card-text"
-                value={editedCourse.course_duration_in_days}
+                value={editedCourse.course_duration}
                 onChange={handleInputChange}
               />
+              <select
+                name="duration_unit"
+                className="card-text"
+                value={editedCourse.duration_unit}
+                onChange={handleInputChange}
+              >
+                <option value="days">Days</option>
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+              </select>
             </div>
             <div className="academic_session">
               <label htmlFor="academic_session_start_year">Session:</label>
@@ -151,7 +161,7 @@ const Course = ({ course }) => {
             <p className="card-text">Category: {editedCourse.type}</p>
             <p className="card-text">Fees: {editedCourse.course_fee}</p>
             <p className="card-text">
-              Duration: {editedCourse.course_duration_in_days}
+              Duration: {editedCourse.course_duration} {editedCourse.duration_unit}
             </p>
             <p className="card-text">
               Session: {editedCourse.academic_session && editedCourse.academic_session.start_year
