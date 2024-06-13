@@ -1,35 +1,35 @@
 import { DatePicker } from "rsuite";
 import { toast } from "react-toastify";
 import axios from "axios";
-import './style.scss';
+import "./style.scss";
 import { useContext, useEffect, useState } from "react";
 import { ProfileContext } from "../../context/ProfileContext";
 import { UserContext } from "../../context/UserContext";
-import config from '@/config';
+import config from "@/config";
+import ProfilePic from "../profilePic";
 const { backend_url } = config;
-
-const Course = ({ course }) => {
+const Course = ({ course, image }) => {
   const [editedCourse, setEditedCourse] = useState(course);
   const [editCourseEnable, setEditCourseEnable] = useState(false);
   const { deleteData, setDeleteData } = useContext(ProfileContext);
   const { user } = useContext(UserContext);
-
+  const {profile} =useContext(ProfileContext);
   const handleSave = async () => {
     try {
       const formData = new FormData();
 
       for (const key in editedCourse) {
-        console.log(editedCourse[key])
+        console.log(editedCourse[key]);
         formData.append(key, editedCourse[key]);
       }
-      
+
       const { data } = await axios.put(
         `${backend_url}/ep/courses/${course._id}`,
         editedCourse,
         {
           headers: {
             Authorization: user.token,
-          }
+          },
         }
       );
 
@@ -59,7 +59,7 @@ const Course = ({ course }) => {
     const { name, value } = e.target;
     setEditedCourse((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
     console.log(editedCourse);
   };
@@ -69,8 +69,8 @@ const Course = ({ course }) => {
       ...prev,
       academic_session: {
         ...prev.academic_session,
-        [field]: value
-      }
+        [field]: value,
+      },
     }));
   };
 
@@ -135,15 +135,19 @@ const Course = ({ course }) => {
                 type="text"
                 name="academic_session_start_year"
                 className="card-text"
-                value={editedCourse.academic_session?.start_year?.slice(0, 4) || ''}
-                onChange={(e) => handleDateChange('start_year', e.target.value)}
+                value={
+                  editedCourse.academic_session?.start_year?.slice(0, 4) || ""
+                }
+                onChange={(e) => handleDateChange("start_year", e.target.value)}
               />
               <input
                 type="text"
                 name="academic_session_end_year"
                 className="card-text"
-                value={editedCourse.academic_session?.end_year?.slice(0, 4) || ''}
-                onChange={(e) => handleDateChange('end_year', e.target.value)}
+                value={
+                  editedCourse.academic_session?.end_year?.slice(0, 4) || ""
+                }
+                onChange={(e) => handleDateChange("end_year", e.target.value)}
               />
             </div>
             <div className="icons">
@@ -157,18 +161,27 @@ const Course = ({ course }) => {
           </>
         ) : (
           <>
+        <div className="logo">
+        <img src ={profile.profile_pic} />
+        </div>
             <h5 className="card-title">{editedCourse.name}</h5>
             <p className="card-text">Category: {editedCourse.type}</p>
             <p className="card-text">Fees: {editedCourse.course_fee}</p>
             <p className="card-text">
-              Duration: {editedCourse.course_duration} {editedCourse.duration_unit}
+              Duration: {editedCourse.course_duration}{" "}
+              {editedCourse.duration_unit}
             </p>
             <p className="card-text">
-              Session: {editedCourse.academic_session && editedCourse.academic_session.start_year
+              Session:{" "}
+              {editedCourse.academic_session &&
+              editedCourse.academic_session.start_year
                 ? editedCourse.academic_session.start_year.slice(0, 4)
-                : "N/A"} - {editedCourse.academic_session && editedCourse.academic_session.end_year
-                  ? editedCourse.academic_session.end_year.slice(0, 4)
-                  : "N/A"}
+                : "N/A"}{" "}
+              -{" "}
+              {editedCourse.academic_session &&
+              editedCourse.academic_session.end_year
+                ? editedCourse.academic_session.end_year.slice(0, 4)
+                : "N/A"}
             </p>
             <div className="icons">
               <button

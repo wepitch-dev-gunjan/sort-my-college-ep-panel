@@ -6,11 +6,15 @@
   transition: all 0.3s ease;
   .card-body {
     padding: 9px;
-    .images img {
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-    }
+    .logo {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     img {
+       border-radius: 50%;
+       width: 80px;
+     }
+   }
     .icons {
       display: flex;
       justify-content: flex-end;
