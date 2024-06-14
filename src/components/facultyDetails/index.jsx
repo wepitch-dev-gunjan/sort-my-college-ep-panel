@@ -70,8 +70,8 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile, faculty }) => 
                 value={editedFaculty?.name || ""}
                 onChange={handleInputChange}
               />
-            <div className="info_experience">
-            <label htmlFor="type">Experience:</label>
+         <div className="info-graduate">
+         <label htmlFor="type">Experience:</label>
               <input
                 className="faculty-input"
                 type="number"
@@ -79,7 +79,9 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile, faculty }) => 
                 value={editedFaculty?.experience_in_years || ""}
                 onChange={handleInputChange}
               />
-               </div>
+         </div>
+            
+            
              <div className="info-graduate">
              <label htmlFor="type">Graduated from:</label>
              <input
@@ -117,12 +119,11 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile, faculty }) => 
                   <img src={editedFaculty.display_pic} />
                 </div>
               <h5 className="smltxt">{editedFaculty?.name}</h5>
-            <p className="smltxt">Experience: </p>
-            {editedFaculty?.experience_in_years}+ years
-            <p className="smltxt"> Graduated from: </p>
-            {editedFaculty?.graduated_from}
-            <p className="smltxt">Qualifications: </p>
-            {editedFaculty?.qualifications}
+
+       <p className="smltxt">Experience: {editedFaculty?.experience_in_years}+ years</p>
+      
+            <p className="smltxt"> Graduated from: {editedFaculty?.graduated_from}</p>
+            <p className="smltxt">Qualifications: {editedFaculty?.qualifications}</p>
             <div className="faculty-buttons">
               <button className="buttons" onClick={() => setEditFacultyEnable(true)}>
                 Edit
