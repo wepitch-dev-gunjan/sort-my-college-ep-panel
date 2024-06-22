@@ -8,6 +8,11 @@
  
  .profile-faculty-main {
    padding: 9px;
+   .info_faculty{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+   }
     .p-faculty-left {
         width: 40%;
         display: flex;

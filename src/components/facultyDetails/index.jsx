@@ -63,7 +63,8 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile, faculty }) => 
             <div className="p-faculty-left">
               <input className="img" type="file" name="" id="" />
             </div>
-              <input
+             <div className="info_faculty">
+             <input
                 className="faculty-title"
                 type="text"
                 name="name"
@@ -111,6 +112,7 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile, faculty }) => 
                   Cancel
                 </button>
               </div>
+             </div>
            
           </>
         ) : (
@@ -118,12 +120,15 @@ const FacultyDetails = ({ profile, editProfileEnable, setProfile, faculty }) => 
            <div className="p-faculty-left">
                   <img src={editedFaculty.display_pic} />
                 </div>
-              <h5 className="smltxt">{editedFaculty?.name}</h5>
+                <div className="info_faculty">
+                <h5 className="smltxt">{editedFaculty?.name}</h5>
 
-       <p className="smltxt">Experience: {editedFaculty?.experience_in_years}+ years</p>
-      
-            <p className="smltxt"> Graduated from: {editedFaculty?.graduated_from}</p>
-            <p className="smltxt">Qualifications: {editedFaculty?.qualifications}</p>
+<p className="smltxt">Experience: {editedFaculty?.experience_in_years}+ years</p>
+
+     <p className="smltxt"> Graduated from: {editedFaculty?.graduated_from}</p>
+     <p className="smltxt">Qualifications: {editedFaculty?.qualifications}</p>
+                </div>
+           
             <div className="faculty-buttons">
               <button className="buttons" onClick={() => setEditFacultyEnable(true)}>
                 Edit
