@@ -60,7 +60,7 @@ const DocumentDelete = ({ deleteData, setDeleteData }) => {
     <div ref={askQuestionRef} className="delete-main">
       <div className="delete-container">
         <h3 className="h3">
-          Are You Sure You Want To Delete this {DeletePathName}
+          Are you sure you want to delete this {DeletePathName} ?
         </h3>
         <div className="btn">
           <button onClick={handleDelete}>

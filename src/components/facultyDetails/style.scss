@@ -1,7 +1,7 @@
 
 .FacultyDetails-container {
  background-color: #fff;
- width: 30%;
+ width: 24%;
  border-radius: 8px;
  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
  transition: all 0.3s ease;
@@ -14,7 +14,8 @@
     gap: 10px;
    }
     .p-faculty-left {
-        width: 40%;
+        width: 100%;
+        height: 300px;
         display: flex;
         .img {
           height: auto;

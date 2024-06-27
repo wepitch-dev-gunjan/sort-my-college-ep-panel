@@ -68,7 +68,7 @@ const AddCourse = forwardRef((props, ref) => {
     if (!course.type) newErrors.type = "Course type is required";
     // if (!course.academic_session.start_year) newErrors.start_year = "Start year is required";
     if (!course.academic_session.end_year) newErrors.end_year = "Academic Session is required";
-    if (!course.course_fee) newErrors.course_fee = "Course fee is required";
+    // if (!course.course_fee) newErrors.course_fee = "Course fee is required";
     if (!course.course_duration) newErrors.course_duration = "Course duration is required";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -154,7 +154,7 @@ const AddCourse = forwardRef((props, ref) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <FaBookReader />
+                        {/* <FaBookReader /> */}
                       </InputAdornment>
                     ),
                   }}
@@ -222,7 +222,7 @@ const AddCourse = forwardRef((props, ref) => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <FaRupeeSign />
+                        {/* <FaRupeeSign /> */}
                       </InputAdornment>
                     ),
                   }}
@@ -238,7 +238,7 @@ const AddCourse = forwardRef((props, ref) => {
               </div>
               <div className="course_input">
                 <FormControl fullWidth>
-                  <InputLabel>Unit</InputLabel>
+                  <InputLabel></InputLabel>
                   <Select
                     name="duration_unit"
                     value={durationUnit}
