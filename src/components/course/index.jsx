@@ -14,6 +14,8 @@ const Course = ({ course, image }) => {
   const { deleteData, setDeleteData } = useContext(ProfileContext);
   const { user } = useContext(UserContext);
   const {profile} =useContext(ProfileContext);
+  const [durationUnit, setDurationUnit] = useState(editedCourse.duration_unit || 'days');
+  const [durationRange, setDurationRange] = useState(getDurationRange(durationUnit));
   const handleSave = async () => {
     try {
       const formData = new FormData();
@@ -43,7 +45,6 @@ const Course = ({ course, image }) => {
       console.log("Error while editing course", error);
     }
   };
-
   const handleCancel = () => {
     setEditCourseEnable(false);
   };
@@ -73,7 +74,30 @@ const Course = ({ course, image }) => {
       },
     }));
   };
+  const handleDurationUnitChange = (e) => {
+   const { value } = e.target;
+   setEditedCourse((prev) => ({
+    ...prev,
+    duration_unit: value,
+    course_duration: 1 // Reset duration to 1 when unit changes
+  }));
+   setDurationUnit(value);
+   handleInputChange(e); // update the parent component state
+   setDurationRange(getDurationRange(value));
+ };
 
+ function getDurationRange(unit) {
+   switch (unit) {
+     case 'days':
+       return Array.from({ length: 30 }, (_, i) => i + 1);
+     case 'months':
+       return Array.from({ length: 12 }, (_, i) => i + 1);
+     case 'years':
+       return Array.from({ length: 5 }, (_, i) => i + 1);
+     default:
+       return [];
+   }
+ }
   return (
     <div className="Course-container">
       <div className="card-body">
@@ -110,25 +134,30 @@ const Course = ({ course, image }) => {
               />
             </div>
             <div className="duration_div">
-              <label htmlFor="course_duration_in_days">Duration:</label>
-              <input
-                type="text"
-                name="course_duration_in_days"
-                className="card-text"
-                value={editedCourse.course_duration}
-                onChange={handleInputChange}
-              />
-              <select
-                name="duration_unit"
-                className="card-text"
-                value={editedCourse.duration_unit}
-                onChange={handleInputChange}
-              >
-                <option value="days">Days</option>
-                <option value="months">Months</option>
-                <option value="years">Years</option>
-              </select>
-            </div>
+      <label htmlFor="course_duration">Duration:</label>
+      <select
+        name="course_duration"
+        className="card-text"
+        value={editedCourse.course_duration}
+        onChange={handleInputChange}
+      >
+        {durationRange.map((val) => (
+          <option key={val} value={val}>
+            {val}
+          </option>
+        ))}
+      </select>
+      <select
+        name="duration_unit"
+        className="card-text"
+        value={durationUnit}
+        onChange={handleDurationUnitChange}
+      >
+        <option value="days">Days</option>
+        <option value="months">Months</option>
+        <option value="years">Years</option>
+      </select>
+    </div>
             <div className="academic_session">
               <label htmlFor="academic_session_start_year">Session:</label>
               <input
