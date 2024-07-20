@@ -125,10 +125,10 @@ const RecentLeads = () => {
                 onChange={handleFilterChange}
                 defaultValue="All"
               >
-                <MenuItem value="All">ALL</MenuItem>
-                <MenuItem value="Unseen">UNSEEN</MenuItem>
-                <MenuItem value="Replied">REPLIED</MenuItem>
-                <MenuItem value="Pending">PENDING</MenuItem>
+                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="Unseen">Unseen</MenuItem>
+                <MenuItem value="Replied">Replied</MenuItem>
+                <MenuItem value="Pending">Not Replied</MenuItem>
               </Select>
             </FormControl>
             <div className="btn_main">
@@ -168,9 +168,9 @@ const RecentLeads = () => {
             <div className="col">
               <h4>Name</h4>
             </div>
-            <div className="col">
+            {/* <div className="col">
               <h4>Phone Number</h4>
-            </div>
+            </div> */}
             <div className="col">
               <h4>Status</h4>
             </div>
@@ -190,9 +190,9 @@ const RecentLeads = () => {
                   <div className="col">
                     <p>{query.name}</p>
                   </div>
-                  <div className="col">
+                  {/* <div className="col">
                     <p>{query.phone_number}</p>
-                  </div>
+                  </div> */}
                   <div
                     className={`col ${
                       query.status === "Unseen"
