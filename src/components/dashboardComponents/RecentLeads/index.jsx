@@ -168,11 +168,11 @@ const RecentLeads = () => {
             <div className="col">
               <h4>Name</h4>
             </div>
-            {/* <div className="col">
-              <h4>Phone Number</h4>
-            </div> */}
             <div className="col">
               <h4>Status</h4>
+            </div>
+            <div className="col">
+              <h4>View Profile</h4>
             </div>
           </div>
           {queries.length === 0 ? (
