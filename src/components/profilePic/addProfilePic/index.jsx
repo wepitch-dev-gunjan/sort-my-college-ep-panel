@@ -90,7 +90,7 @@ const AddProfilePic = forwardRef((props, ref) => {
             onClick={() => fileRef.current.click()}
           >
             <IoCloudUploadOutline size='100' />
-            Drag & Drop here
+            Drag & Drop here there
             <p>or</p>
             <div className="browse-button">
               Browse File

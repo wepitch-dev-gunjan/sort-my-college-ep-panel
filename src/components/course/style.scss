@@ -8,16 +8,18 @@
     padding: 9px;
     .logo {
      display: flex;
-     justify-content: center;
+     justify-content:start;
      align-items: center;
+     padding-left: 10px;
      img {
-       border-radius: 50%;
-       width: 80px;
+       border-radius: 10%;
+       width: 100px;
      }
    }
     .icons {
       display: flex;
       justify-content: flex-end;
+      //width: 250px;
       padding: 8px;
       font-size: 15px;
       gap: 10px;
@@ -25,6 +27,7 @@
        background-color: #1f0a68;
        border-radius: 40px;
        color: #ffffff;
+      width: 100px;
        font-size: 1em;
        padding: 0.1em 1.3em 0.1em 1.3em;
        border: 2px solid #1f0a68;
@@ -38,6 +41,7 @@
        background-color: #1f0a68;
             border-radius: 40px;
             color: #ffffff;
+            width: 100px;
             font-size: 1em;
             padding: 0.1em 1.3em 0.1em 1.3em;
             border: 2px solid #1f0a68;
@@ -51,14 +55,19 @@
   }
 
   .card-title {
-    font-size: 1.2rem;
+    display:flex;
+    padding-left: 10px;
+    padding-bottom: 3px;
+    font-size: 1.4rem;
     font-weight: bold;
-    margin-bottom: 10px;
-    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-top: 10px;
   }
 
   .card-text {
-    font-size: 1rem;
+    display: flex;
+    padding-left: 10px;
+    font-size: 0.9rem;
     color: #666;
     line-height: 1.5;
   }
@@ -79,6 +88,7 @@
     button {
       background-color: #1f0a68;
       border-radius: 40px;
+      width: 120px;
       color: #ffffff;
       font-size: 1em;
       padding: 0.1em 1.3em 0.1em 1.3em;

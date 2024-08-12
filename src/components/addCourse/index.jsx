@@ -160,14 +160,14 @@ const AddCourse = forwardRef((props, ref) => {
                   }}
                 />
               </div>
-                {errors.name && <div className="error">{errors.name}</div>}
+              {errors.name && <div className="error">{errors.name}</div>}
             </div>
             <div className="right-Section">
               <div className="course_details">
                 {/* <label htmlFor="">Type:</label> */}
               </div>
               <div className="course_input">
-                <FormControl fullWidth>
+                {/* <FormControl fullWidth>
                   <InputLabel>Type</InputLabel>
                   <Select
                     name="type"
@@ -177,10 +177,25 @@ const AddCourse = forwardRef((props, ref) => {
                     <MenuItem value="UG">UG</MenuItem>
                     <MenuItem value="PG">PG</MenuItem>
                   </Select>
-                </FormControl>
+                </FormControl> */}
 
+                <FormControl fullWidth>
+                  <InputLabel></InputLabel>
+                  <Select
+                    name="type"
+                    value={course.type}
+                    onChange={handleChange}
+                    displayEmpty
+                  >
+                    <MenuItem value="" disabled>
+                      Type
+                    </MenuItem>
+                    <MenuItem value="UG">UG</MenuItem>
+                    <MenuItem value="PG">PG</MenuItem>
+                  </Select>
+                </FormControl>
               </div>
-                {errors.type && <div className="error">{errors.type}</div>}
+              {errors.type && <div className="error">{errors.type}</div>}
             </div>
             <div className="right-Section">
               <div className="course_details">
@@ -205,7 +220,9 @@ const AddCourse = forwardRef((props, ref) => {
                   onChange={handleChange}
                 />
               </div>
-                {errors.end_year && <div className="error">{errors.end_year}</div>}
+              {errors.end_year && (
+                <div className="error">{errors.end_year}</div>
+              )}
             </div>
             <div className="right-Section">
               <div className="course_details">
@@ -228,9 +245,9 @@ const AddCourse = forwardRef((props, ref) => {
                   }}
                 />
               </div>
-                {errors.course_fee && (
-                  <div className="error">{errors.course_fee}</div>
-                )}
+              {errors.course_fee && (
+                <div className="error">{errors.course_fee}</div>
+              )}
             </div>
             <div className="right-Section">
               <div className="course_details">
@@ -249,7 +266,7 @@ const AddCourse = forwardRef((props, ref) => {
                     <MenuItem value="years">Years</MenuItem>
                   </Select>
                 </FormControl>
-                <FormControl fullWidth>
+                {/* <FormControl fullWidth>
                   <InputLabel>Duration</InputLabel>
                   <Select
                     name="course_duration"
@@ -257,14 +274,35 @@ const AddCourse = forwardRef((props, ref) => {
                     onChange={handleChange}
                   >
                     {durationRange.map((val) => (
-                      <MenuItem key={val} value={val}>{val}</MenuItem>
+                      <MenuItem key={val} value={val}>
+                        {val}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl> */}
+
+                <FormControl fullWidth>
+                  <InputLabel></InputLabel>
+                  <Select
+                    name="course_duration"
+                    value={course.course_duration}
+                    onChange={handleChange}
+                    displayEmpty
+                  >
+                    <MenuItem value="" disabled>
+                      Duration
+                    </MenuItem>
+                    {durationRange.map((val) => (
+                      <MenuItem key={val} value={val}>
+                        {val}
+                      </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
               </div>
-                {errors.course_duration && (
-                  <div className="error">{errors.course_duration}</div>
-                )}
+              {errors.course_duration && (
+                <div className="error">{errors.course_duration}</div>
+              )}
             </div>
             <div className="btn">
               <button

@@ -277,20 +277,39 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             </div>
             <div className="info-value">
               {editProfileEnable ? (
+                // <input
+                //   type="number"
+                //   value={profile.year_established_in ? new Date(profile.year_established_in).getFullYear() : ""}
+                //   onChange={(e) =>
+                //     handleInput(
+                //       "year_established_in",
+                //       e.target.value,
+                //       setProfile
+                //     )
+                //   }
+                // />
+
                 <input
                   type="number"
-                  value={profile.year_established_in ? new Date(profile.year_established_in).getFullYear() : ""}
-                  onChange={(e) =>
-                    handleInput(
-                      "year_established_in",
-                      e.target.value,
-                      setProfile
-                    )
-                  }
+                  value={profile.year_established_in || ""}
+                  onChange={(e) => {
+                    const year = e.target.value;
+
+                    if (year === "") {
+                      handleInput("year_established_in", "", setProfile);
+                    } else if (!(year > new Date().getFullYear())) {
+                      handleInput("year_established_in", year, setProfile);
+                    }
+                  }}
+                  placeholder=""
                 />
               ) : (
-               <p>{profile.year_established_in ? new Date(profile.year_established_in).getFullYear() : ""}</p>
-               )}
+                <p>
+                  {profile.year_established_in
+                    ? new Date(profile.year_established_in).getFullYear()
+                    : ""}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -403,23 +422,37 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                 <>
                   <div className="institute-timings-days">
                     {profile.timings.map((timing, index) => {
-                      console.log(timing.start_time)
+                      console.log(timing.start_time);
                       return (
-                        <InstituteTiming key={index} timing={timing} profile={profile} setProfile={setProfile} />
-                      )
+                        <InstituteTiming
+                          key={index}
+                          timing={timing}
+                          profile={profile}
+                          setProfile={setProfile}
+                        />
+                      );
                     })}
                   </div>
                 </>
               ) : (
                 <div className="institute-profile-timing-main">
-                  {profile.timings.map(timing => (
+                  {profile.timings.map((timing) => (
                     <div className="timing current-profile" key={timing.day}>
                       {timing.is_open && (
-                        <div className="institute-profile-timing-sub" >
-                          <div className="day"><p>{timing.day} :</p></div>
-                          <div className="start-time"><p>{timing.start_time}</p></div>
-                          <div> <p> - </p> </div>
-                          <div className="end-time"><p>{timing.end_time}</p></div>
+                        <div className="institute-profile-timing-sub">
+                          <div className="day">
+                            <p>{timing.day} :</p>
+                          </div>
+                          <div className="start-time">
+                            <p>{timing.start_time}</p>
+                          </div>
+                          <div>
+                            {" "}
+                            <p> - </p>{" "}
+                          </div>
+                          <div className="end-time">
+                            <p>{timing.end_time}</p>
+                          </div>
                         </div>
                       )}
                     </div>
@@ -480,10 +513,8 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             </div>
           </div>
         </div>
-
       </div>
     </div>
-
   );
 };
 
