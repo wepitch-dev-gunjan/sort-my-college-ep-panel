@@ -1,4 +1,4 @@
-.followers-main{
+.followers-main {
     display: flex;
     width: 100%;
     height: 100%;
@@ -7,10 +7,87 @@
     flex-direction: column;
     gap: 2.3em;
     background-color: #F5F2FD;
-    h1{
+
+    h1 {
         font-size: 3em;
     }
-     p{
+
+    p {
         font-size: 0.9em;
-     }
+    }
+    .search-container{
+        display: flex;
+        gap: 10px;
+
+        .search-input {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: #F5F2FD;
+            box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
+        }
+        .reset-button{
+            width: 20%;
+            border: 1px solid #1F0A68;
+            border-radius: 5px;
+
+        }
+    }
+
+
+
+    .followers-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .follower-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            // border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #F5F2FD;
+            gap: 15px;
+            box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 4px;
+
+            .follower-pic {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                object-fit: cover;
+                margin-right: 15px;
+            }
+
+            .follower-info {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                width: 100%;
+
+                .follower-name {
+                    font-weight: bold;
+                    font-size: 18px;
+                    width: 20%;
+                }
+
+                .follower-email {
+                    color: #666;
+                }
+
+                .follower-email, .follower-phone, .follower-education,
+                .follower-gender{
+                    width: 20%;
+                }
+            }
+        }
+    }
+
+    .error {
+        color: red;
+        font-weight: bold;
+    }
 }
