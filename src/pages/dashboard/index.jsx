@@ -13,10 +13,14 @@ import Leads from "../leads";
 const { backend_url } = config;
 
 const Dashboard = () => {
-  const { dashboardData } = useContext(DashboardContext);
   const { smallScreen } = useContext(MediaQueryContext);
-  const { profile } = useContext(ProfileContext);
   const { user } = useContext(UserContext);
+  const [dashboardData, setDashboardData] = useState({
+    followers: 0,
+    notRepliedQueries: 0,
+    unseenQueries: 0,
+    totalQueries: 0,
+  });
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
@@ -30,49 +34,39 @@ const Dashboard = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   const incrementActivityPoint = async () => {
-  //     // console.log("last_checkin_date:", profile.last_checkin_date);
-  //     const lastCheckinDate = new Date(profile.last_checkin_date)
-  //       .toString()
-  //       .slice(0, 10);
-  //     // changed toISOString to toString line22 line24
-  //     const currentDate = new Date().toString().slice(0, 10); // Corrected to get current date properly
-  //     console.log(currentDate);
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const { data } = await axios.get(
+          `${backend_url}/ep/dashboard-data`, 
+          {
+            headers: {
+              Authorization: user.token,
+            },
+          }
+        );
+        setDashboardData(data);
+      } catch (error) {
+        console.error("Error fetching dashboard data:", error);
+      }
+    };
 
-  //     if (lastCheckinDate !== currentDate) {
-  //       const { data } = await axios.put(
-  //         `${backend_url}/counsellor/activity/increment-activity-points`,
-  //         null,
-  //         {
-  //           headers: {
-  //             Authorization: user.token,
-  //           },
-  //         }
-  //       );
-  //       console.log(data);
-  //     }
-  //   };
-  //   incrementActivityPoint();
-  // }, []);
+    fetchDashboardData();
+  }, [user]);
 
-  console.log(dashboardData);
   return (
     <div className="all-dashboard">
       <div className="Dashboard-container">
         <div className="business-dashbaord">
           <h1>Institute Dashboard</h1>
           <div className="widgets-container">
-            <Widget heading="Followers" value="442" />
-            <Widget heading="Not Replied Queries" value="123" />
-            <Widget heading="Unseen Queries" value="84" />
-            <Widget heading="Total Queries" value="8376" />
+            <Widget heading="Followers" value={dashboardData.followers} />
+            <Widget heading="Not Replied Queries" value={dashboardData.notRepliedQueries} />
+            <Widget heading="Unseen Queries" value={dashboardData.unseenQueries} />
+            <Widget heading="Total Queries" value={dashboardData.totalQueries} />
           </div>
         </div>
 
-        {/* recent payments */}
-        {/* {isSmallScreen ? null : <RecentPayments />} */}
-        {/* <RecentPayments /> */}
         <div className="dashboard-recent-payments-main">
           <div className="seeall">
             <Link to="/leads" element={<Leads />}>
@@ -83,7 +77,6 @@ const Dashboard = () => {
           <RecentLeads />
         </div>
       </div>
-      {/* <div className="summary">{!smallScreen && <summary />}</div> */}
     </div>
   );
 };
