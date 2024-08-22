@@ -352,7 +352,7 @@ const RecentLeads = () => {
               <MenuItem value="All">All</MenuItem>
               <MenuItem value="Unseen">Unseen</MenuItem>
               <MenuItem value="Replied">Replied</MenuItem>
-              <MenuItem value="Pending">Not Replied</MenuItem>
+              <MenuItem value="Seen">Not Replied</MenuItem>
             </Select>
           </FormControl>
           <div className="btn_main">
