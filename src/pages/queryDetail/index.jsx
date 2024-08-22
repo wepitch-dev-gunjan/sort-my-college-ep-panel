@@ -65,7 +65,7 @@ const QueryDetail = () => {
             </div>
             <div className="data">
               <div className="fields">Phone Number : </div>
-              <div>{enquiry.enquirer.phone_number}</div>
+              <div>+{enquiry.enquirer.phone_number}</div>
             </div>
             <div className="data">
               <div className="fields">Course Type : </div>
