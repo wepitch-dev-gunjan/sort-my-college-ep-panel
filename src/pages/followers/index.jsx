@@ -14,36 +14,33 @@ const Followers = () => {
   const [error, setError] = useState("");
 
   const fetchFollowers = async (search = "") => {
+    setLoading(true); // Set loading to true before making requests
     try {
-      const { data } = await axios.get(
-        `${backend_url}/ep/followers`,
-        {
-          headers: {
-            Authorization: user.token,
-          },
-          params: { search },
-        }
-      );
+      const { data } = await axios.get(`${backend_url}/ep/followers`, {
+        headers: {
+          Authorization: user.token,
+        },
+        params: { search },
+      });
       setFollowers(data);
-      setLoading(false);
+      setError(""); // Clear error if data is successfully fetched
     } catch (err) {
-      if (search.trim() === "") {
-        // Fetch all followers if the search term is empty
-        const { data } = await axios.get(
-          `${backend_url}/ep/followers`,
-          {
-            headers: {
-              Authorization: user.token,
-            },
-          }
-        );
-        setFollowers(data);
+      if (err.response && err.response.status === 404) {
+        // Handle specific case when no followers or no matching followers are found
+        if (search.trim() === "") {
+          setError("You don't have any followers yet! Please check back again.");
+        } else {
+          setError("No followers found for the given search term.");
+        }
+        setFollowers([]); // Clear followers list
       } else {
-        setError("No followers found for the given search term");
+        setError("An error occurred while fetching followers. Please try again.");
       }
-      setLoading(false);
+    } finally {
+      setLoading(false); // Set loading to false after requests are completed
     }
   };
+
 
   useEffect(() => {
     fetchFollowers(searchTerm);
@@ -77,8 +74,6 @@ const Followers = () => {
         <p>Loading followers...</p>
       ) : error ? (
         <p className="error">{error}</p>
-      ) : followers.length === 0 ? (
-        <p>You don't have any followers yet! Please check back again.</p>
       ) : (
         <div className="followers-list">
           {followers.map((follower) => (
@@ -90,7 +85,6 @@ const Followers = () => {
               />
               <div className="follower-info">
                 <p className="follower-name">{follower.name}</p>
-                {/* <p className="follower-email">{follower.email}</p> */}
                 <p className="follower-phone">+{follower.phone_number}</p>
                 <p className="follower-education">{follower.education_level}</p>
                 <p className="follower-gender">{follower.gender}</p>
@@ -101,6 +95,7 @@ const Followers = () => {
       )}
     </div>
   );
+
 };
 
 export default Followers;
