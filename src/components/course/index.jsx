@@ -123,7 +123,7 @@ const Course = ({ course, image }) => {
                 <option value="PG">PG</option>
               </select>
             </div>
-            <div className="course_div">
+            {/* <div className="course_div">
               <label htmlFor="course_fee">Fees:</label>
               <input
                 type="text"
@@ -132,32 +132,44 @@ const Course = ({ course, image }) => {
                 value={editedCourse.course_fee}
                 onChange={handleInputChange}
               />
-            </div>
+            </div> */}
+            {editedCourse.course_fee && (
+              <div className="course_div">
+                <label htmlFor="course_fee">Fees:</label>
+                <input
+                  type="text"
+                  name="course_fee"
+                  className="card-text"
+                  value={editedCourse.course_fee}
+                  onChange={handleInputChange}
+                />
+              </div>
+            )}
             <div className="duration_div">
-      <label htmlFor="course_duration">Duration:</label>
-      <select
-        name="course_duration"
-        className="card-text"
-        value={editedCourse.course_duration}
-        onChange={handleInputChange}
-      >
-        {durationRange.map((val) => (
-          <option key={val} value={val}>
-            {val}
-          </option>
-        ))}
-      </select>
-      <select
-        name="duration_unit"
-        className="card-text"
-        value={durationUnit}
-        onChange={handleDurationUnitChange}
-      >
-        <option value="days">Days</option>
-        <option value="months">Months</option>
-        <option value="years">Years</option>
-      </select>
-    </div>
+              <label htmlFor="course_duration">Duration:</label>
+              <select
+                name="course_duration"
+                className="card-text"
+                value={editedCourse.course_duration}
+                onChange={handleInputChange}
+              >
+                {durationRange.map((val) => (
+                  <option key={val} value={val}>
+                    {val}
+                  </option>
+                ))}
+              </select>
+              <select
+                name="duration_unit"
+                className="card-text"
+                value={durationUnit}
+                onChange={handleDurationUnitChange}
+              >
+                <option value="days">Days</option>
+                <option value="months">Months</option>
+                <option value="years">Years</option>
+              </select>
+            </div>
             <div className="academic_session">
               <label htmlFor="academic_session_start_year">Session:</label>
               <input
@@ -190,12 +202,17 @@ const Course = ({ course, image }) => {
           </>
         ) : (
           <>
-        <div className="logo">
-        <img src ={profile.profile_pic} />
-        </div>
+            <div className="logo">
+              <img src={profile.profile_pic} />
+            </div>
             <h5 className="card-title">{editedCourse.name}</h5>
             <p className="card-text">Category: {editedCourse.type}</p>
-            <p className="card-text">Fees: {editedCourse.course_fee}</p>
+            {/* <p className="card-text">Feesss: {editedCourse.course_fee}</p> */}
+
+            {editedCourse.course_fee && (
+              <p className="card-text">Fees: {editedCourse.course_fee}</p>
+            )}
+
             <p className="card-text">
               Duration: {editedCourse.course_duration}{" "}
               {editedCourse.duration_unit}
