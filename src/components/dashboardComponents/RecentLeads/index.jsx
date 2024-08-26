@@ -163,8 +163,8 @@ const RecentLeads = () => {
             </Button>
           </div>
           <div className="noofenquiries">
-          <p>No. of Leads: { queries.length }</p>
-        </div>
+            <p>No. of Leads: {queries.length}</p>
+          </div>
         </div>
       )}
 
@@ -181,6 +181,9 @@ const RecentLeads = () => {
             </div>
             <div className="col">
               <h4>Date</h4>
+            </div>
+            <div className="col">
+              <h4>Time</h4>
             </div>
             <div className="col">
               <h4>Name</h4>
@@ -203,6 +206,9 @@ const RecentLeads = () => {
                   </div>
                   <div className="col">
                     <p>{query.date}</p>
+                  </div>
+                  <div className="col">
+                    <p>{query.createdAt}</p>
                   </div>
                   <div className="col">
                     <p>{query.name}</p>
