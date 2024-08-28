@@ -141,9 +141,10 @@ const RecentLeads = () => {
               onChange={handleFilterChange}
             >
               <MenuItem value="All">All</MenuItem>
+              <MenuItem value="Seen">Seen</MenuItem>
               <MenuItem value="Unseen">Unseen</MenuItem>
               <MenuItem value="Replied">Replied</MenuItem>
-              <MenuItem value="Pending">Not Replied</MenuItem>
+              <MenuItem value="Not Replied">Not Replied</MenuItem>
             </Select>
           </FormControl>
           <div className="btn_main">
@@ -221,6 +222,8 @@ const RecentLeads = () => {
                         ? "green"
                         : query.status === "Pending"
                         ? "blue"
+                        : query.status === "Not Replied"
+                        ? "red"
                         : ""
                     }`}
                   >
