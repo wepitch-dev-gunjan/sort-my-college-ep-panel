@@ -224,6 +224,20 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       }
                     />
                   }
+                  {
+                    <input
+                      type="integer"
+                      value={profile.address.pin_code}
+                      onChange={(e) =>
+                        handleInputInsideInputChange(
+                          e.target.value,
+                          "address",
+                          "pin_code",
+                          setProfile
+                        )
+                      }
+                    />
+                  }
                 </>
               ) : (
                 <>

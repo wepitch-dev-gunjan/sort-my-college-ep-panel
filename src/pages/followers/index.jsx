@@ -85,7 +85,14 @@ const Followers = () => {
               />
               <div className="follower-info">
                 <p className="follower-name">{follower.name}</p>
-                <p className="follower-phone">+{follower.phone_number}</p>
+                {/* <p className="follower-phone">+{follower.phone_number}</p> */}
+                <p className="follower-date">
+                  {new Date(follower.createdAt).toLocaleDateString("en-GB", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                  })}
+                </p>
                 <p className="follower-education">{follower.education_level}</p>
                 <p className="follower-gender">{follower.gender}</p>
               </div>

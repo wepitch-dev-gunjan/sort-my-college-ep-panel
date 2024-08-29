@@ -82,6 +82,11 @@
                 .follower-gender{
                     width: 20%;
                 }
+                 .follower-date {
+                     width: 15%;
+                     font-size: 0.85em;
+                     
+                 }
             }
         }
     }
@@ -91,3 +96,141 @@
         font-weight: bold;
     }
 }
+
+// .followers-main {
+//     display: flex;
+//     width: 100%;
+//     height: 100%;
+//     padding: 40px;
+//     justify-content: flex-start;
+//     flex-direction: column;
+//     gap: 2.3em;
+//     background-color: #f5f2fd;
+
+//     h1 {
+//         font-size: 2.5em; // Adjusted slightly for a cleaner look
+//         font-weight: 600;
+//         color: #1f0a68;
+//         margin-bottom: 10px;
+//     }
+
+//     p {
+//         font-size: 0.95em;
+//         line-height: 1.4;
+//         color: #333;
+//     }
+
+//     .search-container {
+//         display: flex;
+//         gap: 10px;
+//         align-items: center;
+//         margin-bottom: 20px;
+
+//         .search-input {
+//             width: 75%;
+//             padding: 12px;
+//             border: 1px solid #ddd;
+//             border-radius: 5px;
+//             font-size: 16px;
+//             background-color: #ffffff;
+//             transition: border-color 0.3s;
+//             box-shadow: 0px 4px 8px -2px rgba(9, 30, 66, 0.25),
+//                 0px 0px 0px 1px rgba(9, 30, 66, 0.08);
+
+//             &:focus {
+//                 border-color: #1f0a68;
+//                 outline: none;
+//             }
+//         }
+
+//         .reset-button {
+//             width: 20%;
+//             padding: 10px;
+//             background-color: #1f0a68;
+//             color: #fff;
+//             font-weight: 500;
+//             border: none;
+//             border-radius: 5px;
+//             cursor: pointer;
+//             transition: background-color 0.3s;
+
+//             &:hover {
+//                 background-color: #14074a;
+//             }
+//         }
+//     }
+
+//     .followers-list {
+//         display: flex;
+//         flex-direction: column;
+//         gap: 15px;
+
+//         .follower-item {
+//             display: flex;
+//             align-items: center;
+//             padding: 15px;
+//             border-radius: 8px;
+//             background-color: #ffffff;
+//             gap: 20px;
+//             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.18);
+//             transition: transform 0.2s, box-shadow 0.2s;
+
+//             &:hover {
+//                 transform: translateY(-2px);
+//                 box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+//             }
+
+//             .follower-pic {
+//                 width: 60px;
+//                 height: 60px;
+//                 border-radius: 50%;
+//                 object-fit: cover;
+//                 border: 2px solid #1f0a68;
+//             }
+
+//             .follower-info {
+//                 display: flex;
+//                 align-items: center;
+//                 justify-content: space-between;
+//                 width: 100%;
+
+//                 .follower-name {
+//                     font-weight: bold;
+//                     font-size: 18px;
+//                     width: 20%;
+//                     color: #1f0a68;
+//                 }
+
+//                 .follower-email {
+//                     color: #666;
+//                 }
+
+//                 .follower-email,
+//                 .follower-phone,
+//                 .follower-education,
+//                 .follower-gender {
+//                     width: 20%;
+//                     font-size: 0.9em;
+//                     color: #555;
+//                 }
+
+//                 .follower-date {
+//                     width: 15%;
+//                     font-size: 0.85em;
+//                     color: #888;
+//                 }
+//             }
+//         }
+//     }
+
+//     .error {
+//         color: #d9534f;
+//         font-weight: bold;
+//         font-size: 1.1em;
+//         padding: 10px;
+//         border: 1px solid #d9534f;
+//         background-color: #fbe3e3;
+//         border-radius: 5px;
+//         margin-top: 10px;
+//     }
+// }
