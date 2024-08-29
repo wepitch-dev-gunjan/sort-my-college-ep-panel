@@ -226,16 +226,24 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                   }
                   {
                     <input
-                      type="integer"
+                      type="text"
+                      maxLength={6}
+                      pattern="\d{6}"
                       value={profile.address.pin_code}
-                      onChange={(e) =>
-                        handleInputInsideInputChange(
-                          e.target.value,
-                          "address",
-                          "pin_code",
-                          setProfile
-                        )
-                      }
+                      onChange={(e) => {
+                        const { value } = e.target;
+                        // Remove non-digit characters
+                        const numericValue = value.replace(/\D/g, "");
+                        // Update the profile state with the numeric value if it has 6 digits or less
+                        if (numericValue.length <= 6) {
+                          handleInputInsideInputChange(
+                            numericValue,
+                            "address",
+                            "pin_code",
+                            setProfile
+                          );
+                        }
+                      }}
                     />
                   }
                 </>
