@@ -498,6 +498,9 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                     handleInput("mode_of_study", e.target.value, setProfile)
                   }
                 >
+                  <option value="" disabled>
+                    Mode
+                  </option>
                   <option value="ONLINE">Online</option>
                   <option value="OFFLINE">Offline</option>
                 </select>
@@ -523,6 +526,9 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       handleInput("medium_of_study", e.target.value, setProfile)
                     }
                   >
+                    <option value="" disabled>
+                      Medium
+                    </option>
                     <option value="ENGLISH">English</option>
                     <option value="HINDI">Hindi</option>
                     <option value="OTHER">Other</option>
