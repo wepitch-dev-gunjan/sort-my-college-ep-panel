@@ -1,3 +1,207 @@
+// .BasicInfo-container {
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   background-color: var(--background-light);
+//   padding: 24px;
+//   border: 1px solid #1111111a;
+//   border-radius: 20px;
+//   gap: 24px;
+//   .specializations{
+//     li{
+//       list-style-type: none;
+//     }
+//   }
+//   .profile-branches-main{
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1em;
+
+//     .pb-sub{
+//       span{
+//         color: #111111ab;
+//       }
+//     }
+//   }
+//   .institute-profile-timing-main{
+//     .institute-profile-timing-sub{
+//       display: flex;
+//     }
+//     p{
+//       span{
+//         color: #111111c0;
+//       }
+//     }
+//     .current-profile{
+//       display: flex;
+//       flex-direction: column;
+
+//       .institute-profile-timing-sub{
+//         display: flex;
+//         gap: 0.5em;
+//         width: 100%;
+
+//         .day{
+//           width: 25%;
+//         }
+//       }
+//     }
+//   }
+//   .heading {
+//     border-bottom: 1px solid #1111111a;
+//     padding-bottom: 12px;
+//     h2{
+//      font-size: var(--fs-m);
+//     }
+//   }
+//   .info {
+//     display: flex;
+//     flex-direction: column;
+//     gap: 1.5em;
+//     .row {
+//       display: flex;
+//       justify-content: start;
+//       .col {
+//         width: 100%;
+//         display: flex;
+//         .info-field {
+//           width: 100%;
+//           font-weight: 700;
+//           p{
+//            font-size: var(--fs-sm);
+//           }
+//         }
+//         .address-labels, 
+//         .address-inputs{
+//           display: flex;
+//           flex-direction: column;
+//           gap: 1em;
+//           padding: 1.5em 0 1em 0; 
+//         }
+//         .info-value {
+//           width: 100%;
+//           font-size: var(--fs-sm);
+//           .gender-radio{
+//             display: flex;
+//             gap: 24px;
+//             .gender-text{
+//               display: flex;
+//               gap: 8px;
+//             }
+//           }
+//           input {
+//             z-index: 999;
+//             width: 100%;
+//             border-bottom: 1px solid #11111154;
+//           }
+//           .institute-timings-days{
+//             display: flex;
+//             flex-direction: column;
+//             justify-content: flex-start;
+//             align-items: flex-start;
+//             gap: 0.9em;
+            
+//             .timing{
+//               display: flex;
+//               align-items: center;
+//               justify-content: flex-start;
+//               gap: 0.5em;
+//               width: 100%;
+              
+
+//               .day{
+//                 width: 40%;
+//               }
+//             }
+
+//             // Switch button styles 
+//             .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase .MuiSwitch-input{
+//               left: 0;
+//             }
+//             .css-eiev1a-MuiSwitch-root .MuiSwitch-switchBase {
+//               margin: 2px !important;
+//             }
+//             .css-eiev1a-MuiSwitch-root .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
+//               background-color: #1F0A68;
+//             }
+//              // Switch button styles ends
+
+//             select.day-start-time, select.day-end-time{
+//               width: max-content;
+//             }
+//             select.day-name{
+//               width: fit-content;
+//             }
+//           }
+//           select{
+//             width: 50%;
+//             font-size: 0.9em;
+//             padding: 0.5em;
+//             border: 1px solid #00000060;
+//           }
+//           .input-info-small{
+//             font-size: 0.8em;
+//             color: #111111de;
+//           }
+//           textarea{
+//             width: 100%;
+//             height: 200px;
+//             resize: none;
+//             border: 1px solid #1111115d;
+//             padding: 1em;
+//           }
+//           p.short-desc-institute{
+//             font-size: 0.9em;
+//           }
+//         }
+//         .about-info-value{
+//           display: flex;
+//           flex-direction: column;
+//           gap: 0.5em;
+          
+//           .about-sub-points{
+//             display: flex;
+//             flex-direction: column;
+//             gap: 0.3em;
+//             align-items: flex-end;   
+//           }
+//           input[type="text"] {
+//             width: 100%;
+//           }
+//           .add-about-point{
+//             background-color: #1F0A68;
+//             color: #ffffff;
+//             padding: 0.5em;
+//             border-radius: 5px;
+//             width: 30%;
+//           }
+//           .remove-about-point{
+//             background: none;
+//             color: red;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// .BasicInfo-container .info .row .col .info-value input{
+//   width: 100px;
+// }
+
+// .BasicInfo-container .info .row .col .info-value input {
+//   width: 100px;
+// }
+
+// .BasicInfo-container .info .row .col .info-value input[type="email"] {
+//   width: 100%;
+//   max-width: 300px;
+//   box-sizing: border-box;
+
+// }
+
+
+
 .BasicInfo-container {
   width: 100%;
   display: flex;
@@ -7,175 +211,218 @@
   border: 1px solid #1111111a;
   border-radius: 20px;
   gap: 24px;
-  .specializations{
-    li{
+
+  .specializations {
+    li {
       list-style-type: none;
     }
   }
-  .profile-branches-main{
+
+  .profile-branches-main {
     display: flex;
     flex-direction: column;
     gap: 1em;
 
-    .pb-sub{
-      span{
+    .pb-sub {
+      span {
         color: #111111ab;
       }
     }
   }
-  .institute-profile-timing-main{
-    .institute-profile-timing-sub{
+
+  .institute-profile-timing-main {
+    .institute-profile-timing-sub {
       display: flex;
     }
-    p{
-      span{
+
+    p {
+      span {
         color: #111111c0;
       }
     }
-    .current-profile{
+
+    .current-profile {
       display: flex;
       flex-direction: column;
 
-      .institute-profile-timing-sub{
+      .institute-profile-timing-sub {
         display: flex;
         gap: 0.5em;
         width: 100%;
 
-        .day{
+        .day {
           width: 25%;
         }
       }
     }
   }
+
   .heading {
     border-bottom: 1px solid #1111111a;
     padding-bottom: 12px;
-    h2{
-     font-size: var(--fs-m);
+
+    h2 {
+      font-size: var(--fs-m);
     }
   }
+
   .info {
     display: flex;
     flex-direction: column;
     gap: 1.5em;
+
     .row {
       display: flex;
       justify-content: start;
+
       .col {
         width: 100%;
         display: flex;
+
         .info-field {
           width: 100%;
           font-weight: 700;
-          p{
-           font-size: var(--fs-sm);
+
+          p {
+            font-size: var(--fs-sm);
           }
         }
-        .address-labels, 
-        .address-inputs{
+
+        .address-labels,
+        .address-inputs {
           display: flex;
           flex-direction: column;
           gap: 1em;
-          padding: 1.5em 0 1em 0; 
+          padding: 1.5em 0 1em 0;
         }
+
         .info-value {
           width: 100%;
           font-size: var(--fs-sm);
-          .gender-radio{
-            display: flex;
-            gap: 24px;
-            .gender-text{
-              display: flex;
-              gap: 8px;
-            }
-          }
-          input {
-            z-index: 999;
+
+          input,
+          textarea,
+          select {
             width: 100%;
+            max-width: 100%;
+            background: transparent;
+            padding: 2px;
+            margin: 0;
             border-bottom: 1px solid #11111154;
           }
-          .institute-timings-days{
+
+          .institute-timings-days {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             align-items: flex-start;
             gap: 0.9em;
-            
-            .timing{
+
+            .timing {
               display: flex;
               align-items: center;
               justify-content: flex-start;
               gap: 0.5em;
               width: 100%;
-              
 
-              .day{
+              .day {
                 width: 40%;
+              }
+
+              // Switch button styles
+              .MuiSwitch-root {
+                display: flex;
+                align-items: center;
+
+                .MuiSwitch-switchBase {
+                  margin: 0 !important; // Adjust if necessary, avoid !important if possible
+                }
+
+                .MuiSwitch-input {
+                  left: 0;
+                }
+
+                .MuiSwitch-track {
+                  background-color: #e0e0e0; // Default track color
+                }
+                .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
+                  background-color: #1F0A68; // Track color when checked
+                }
               }
             }
 
-            // Switch button styles 
-            .css-5ryogn-MuiButtonBase-root-MuiSwitch-switchBase .MuiSwitch-input{
-              left: 0;
-            }
-            .css-eiev1a-MuiSwitch-root .MuiSwitch-switchBase {
-              margin: 2px !important;
-            }
-            .css-eiev1a-MuiSwitch-root .MuiSwitch-switchBase.Mui-checked+.MuiSwitch-track {
-              background-color: #1F0A68;
-            }
-             // Switch button styles ends
-
-            select.day-start-time, select.day-end-time{
+            select.day-start-time,
+            select.day-end-time {
               width: max-content;
             }
-            select.day-name{
+
+            select.day-name {
               width: fit-content;
             }
           }
-          select{
+
+          select {
             width: 50%;
             font-size: 0.9em;
             padding: 0.5em;
             border: 1px solid #00000060;
           }
-          .input-info-small{
+
+          .input-info-small {
             font-size: 0.8em;
             color: #111111de;
           }
-          textarea{
+
+          textarea {
             width: 100%;
             height: 200px;
             resize: none;
             border: 1px solid #1111115d;
             padding: 1em;
           }
-          p.short-desc-institute{
+
+          p.short-desc-institute {
             font-size: 0.9em;
           }
         }
-        .about-info-value{
+
+        .about-info-value {
           display: flex;
           flex-direction: column;
           gap: 0.5em;
+
+          .about-sub-points {
+              display: flex;
+              flex-direction: column;
+              gap: 0.3em;
+              align-items: flex-end;
           
-          .about-sub-points{
-            display: flex;
-            flex-direction: column;
-            gap: 0.3em;
-            align-items: flex-end;   
-          }
+              textarea {
+                width: 100%; // Full width
+                resize: none; // Prevent resizing
+                height: 50px; // Adjust the height as needed for compactness
+                padding: 5px; // Add some padding for better appearance
+                line-height: 1.2; // Adjust line height for compact text spacing
+                rows: 3; // Set initial rows to 3 for initial size
+                font-size: 1em; // Adjust font size as needed
+                border-radius: 4px; // Rounded corners for a polished look
+                border: 1px solid #ccc; // Light border for clarity
+              }
+            }
+
           input[type="text"] {
             width: 100%;
           }
-          .add-about-point{
+
+          .add-about-point {
             background-color: #1F0A68;
             color: #ffffff;
             padding: 0.5em;
             border-radius: 5px;
             width: 30%;
           }
-          .remove-about-point{
+
+          .remove-about-point {
             background: none;
             color: red;
           }
@@ -183,8 +430,4 @@
       }
     }
   }
-}
-
-.BasicInfo-container .info .row .col .info-value input{
-  width: 100px;
 }

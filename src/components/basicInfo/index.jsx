@@ -126,13 +126,21 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                 <>
                   {aboutInputs.map((about, index) => (
                     <div className="about-sub-points" key={index}>
-                      <input
+                      {/* <input
                         type="text"
                         value={about}
                         onChange={(e) =>
                           handleAboutInputChange(index, e.target.value)
                         }
+                      /> */}
+                      <textarea
+                        value={about}
+                        onChange={(e) =>
+                          handleAboutInputChange(index, e.target.value)
+                        }
+                        rows={3} // Set initial rows to 1 to make it smaller
                       />
+
                       {index > 0 && (
                         <button
                           className="remove-about-point"
@@ -275,9 +283,11 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                       handleInput("direction_url", e.target.value, setProfile)
                     }
                   />
-                  <span className="input-info-small">
-                    Example: https://maps.app.goo.gl/hDKQS8UDo8RKvFW28
-                  </span>
+                  <div>
+                    <span className="input-info-small">
+                      Example: https://maps.app.goo.gl/hDKQS8UDo8RKvFW28
+                    </span>
+                  </div>
                 </>
               ) : (
                 <p>
