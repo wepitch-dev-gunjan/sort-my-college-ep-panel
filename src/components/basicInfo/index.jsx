@@ -513,6 +513,7 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
                   </option>
                   <option value="ONLINE">Online</option>
                   <option value="OFFLINE">Offline</option>
+                  <option value="ONLINE, OFFLINE">Both</option>
                 </select>
               ) : (
                 <p>{profile.mode_of_study}</p>
