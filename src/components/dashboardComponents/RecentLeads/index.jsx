@@ -229,7 +229,7 @@ const RecentLeads = () => {
                   >
                     <p>{query.status}</p>
                   </div>
-                  <div className="link">
+                  <div className="link col view-btn">
                     <Link to={`/allQueries/${query._id}`}>
                       <p>View</p>
                     </Link>
