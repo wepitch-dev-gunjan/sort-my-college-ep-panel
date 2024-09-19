@@ -49,11 +49,11 @@ const Help = () => {
         </div>
         </div>
       </div>
-      <Tooltip title="Chat" placement='left'>
+      {/* <Tooltip title="Chat" placement='left'>
       <div className="chat-help" onClick={() => setChatEnable(prev => !prev)}>
         <MdOutlineChat size={32} color='white'/>
       </div>
-      </Tooltip>
+      </Tooltip> */}
     </div>
   );
 };
