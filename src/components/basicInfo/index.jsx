@@ -552,6 +552,18 @@ const BasicInfo = ({ profile, editProfileEnable, setProfile }) => {
             </div>
           </div>
         </div>
+        <div>
+          <p>
+            By clicking on save, you are confirming that you have read,
+            understood, and agreed to SortMyCollege{" "}
+            <a
+              href="https://sortmycollege.com/wp-content/uploads/2024/09/Terms-Conditions-for-Institutes.pdf"
+              target="_blank"
+            >
+              Terms and Conditions .
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
